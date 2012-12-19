@@ -10,7 +10,7 @@ SEPARATOR = '>'
 JOINT = "\n#{SEPARATOR}\n"
 
 if ARGV.size <= 0 || %w[-h --help].include?(ARGV[0])
-  puts "ruby #{__FILE__} LEN_MAX < multisegment_lines.dat"
+  puts "#{ENV['MY_RUBY'] || "ruby"} #{__FILE__} LEN_MAX < multisegment_lines.dat"
   exit 0
 end
 
