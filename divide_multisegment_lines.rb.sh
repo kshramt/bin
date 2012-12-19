@@ -1,3 +1,3 @@
 #!/bin/sh -u
-main=${0%.*}.rb
+main=${0%.*}
 ${MY_RUBY} ${main} "$@"
