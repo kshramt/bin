@@ -15,7 +15,7 @@ pairs = Dir['*']\
   .delete_if(&:one?)\
   .map{|names| names\
     .each_cons(2)\
-    .map{|parent, child| "#{parent} -> #{child};"}}\
+    .map{|parent, child| "#{parent.inspect} -> #{child.inspect};"}}\
   .join("\n")
 
 system <<-EOS
