@@ -1,3 +1,6 @@
+#!/bin/sh -uxv
+exec ${MY_RUBY} "$0" "$@"
+
 #!/usr/bin/ruby
 raise "graphvis is not installed." unless system "dot -V"
 

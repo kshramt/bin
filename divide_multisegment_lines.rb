@@ -1,3 +1,9 @@
+#!/bin/sh -uxv
+exec ${MY_RUBY} "$0" "@"
+
+
+#!/usr/bin/ruby
+
 # = Input format
 #   1.0 2
 #   3 4.0
