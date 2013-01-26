@@ -1,9 +1,27 @@
 #!/usr/bin/ruby
-puts 'digraph {'
+raise "graphvis is not installed." unless system "dot -V"
+
+format = ARGV.first || 'svg'
+if %w[-h --help].include? format
+  puts "#{$PROGRAM_NAME} [FORMAT = svg]"
+  puts "  FORMAT: pdf, svg"
+  exit
+end
+raise "Unknown formt: #{format}" unless ['pdf', 'svg'].include? format
+
 pairs = Dir['*']\
   .map{|dir| dir\
     .split('-')}\
   .delete_if(&:one?)\
-  .each{|dirs| dirs\
-    .each_cons(2){|pair| puts "#{pair[0].inspect} -> #{pair[1].inspect};"}}
-puts '}'
+  .map{|names| names\
+    .each_cons(2)\
+    .map{|parent, child| "#{parent} -> #{child};"}}\
+  .join("\n")
+
+system <<-EOS
+dot -T#{format} <<-EOF
+digraph {
+#{pairs}
+}
+EOF
+EOS
