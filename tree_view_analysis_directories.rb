@@ -1,8 +1,8 @@
-#!/bin/sh -uxv
+#!/bin/sh -u
 exec ${MY_RUBY} -x "$0" "$@"
 
 #!/usr/bin/ruby
-raise "graphvis is not installed." unless system "dot -V"
+raise "graphvis is not installed." unless system "dot -V > #{::File::NULL} 2>&1"
 
 format = ARGV.first || 'svg'
 if %w[-h --help].include? format

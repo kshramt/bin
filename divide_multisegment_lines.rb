@@ -1,6 +1,5 @@
-#!/bin/sh -uxv
-exec ${MY_RUBY} -x "$0" "@"
-
+#!/bin/sh -u
+exec ${MY_RUBY} -x "$0" "$@"
 
 #!/usr/bin/ruby
 
