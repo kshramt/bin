@@ -9,6 +9,11 @@ unless ARGV.size == 3
 end
 
 r, g, b = ARGV.map(&:to_f)
+
+raise "r is out of range: #{r}" unless (0..255).cover?(r)
+raise "g is out of range: #{g}" unless (0..255).cover?(g)
+raise "b is out of range: #{b}" unless (0..255).cover?(b)
+
 mini, maxi = [r, g, b].minmax
 delta = (maxi - mini)
 h = if mini >= maxi
