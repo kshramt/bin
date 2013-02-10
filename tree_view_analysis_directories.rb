@@ -1,4 +1,4 @@
-#!/bin/sh -uxv
+#!/bin/sh -u
 exec ${MY_RUBY} -x "$0" "$@"
 
 #!/usr/bin/ruby
