@@ -4,7 +4,7 @@ if [ ! -x "${1}" ]; then
     exit 1
 fi
 
-if "$@" 2> /dev/null; then
+if [[ "$@" ]]; then
     echo FAIL: "${1}" 1>&2
     exit 1
 else
