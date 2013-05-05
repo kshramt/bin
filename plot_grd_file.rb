@@ -36,8 +36,8 @@ CPT_DEFAULT = 'rainbow'
 op = OptionParser.new()
 opts = {}
 op.on('-f', '--file=FILE', 'A grd file name to plot.'){|v| opts[:f] = v}
-op.on('-n', '--n_contour=N_CONTOUR', "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]"){|v| opts[:n] = v.to_i}
-op.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]"){|v| opts[:c] = v}
+op.on('-n', '--n_contour=N_CONTOUR', "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]."){|v| opts[:n] = v.to_i}
+op.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]."){|v| opts[:c] = v}
 op.parse!
 HELP = op.help
 
