@@ -72,33 +72,33 @@ GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
 GMT gmtset PLOT_DEGREE_FORMAT D
 
-GMT makecpt \
-    -C${CPT} \
-    -T${ZS} \
+GMT makecpt \\
+    -C${CPT} \\
+    -T${ZS} \\
     > ${CPT_FILE}
 
 {
-    GMT psbasemap \
-        -JX15c \
-        -R${RANGES} \
-        -B${TICK_INTERVAL} \
-        -U \
+    GMT psbasemap \\
+        -JX15c \\
+        -R${RANGES} \\
+        -B${TICK_INTERVAL} \\
+        -U \\
         -K
-    GMT grdimage \
-        ${GRD_FILE} \
-        -JX \
-        -R \
-        -C${CPT_FILE} \
-        -Sb \
-        -U \
-        -O \
+    GMT grdimage \\
+        ${GRD_FILE} \\
+        -JX \\
+        -R \\
+        -C${CPT_FILE} \\
+        -Sb \\
+        -U \\
+        -O \\
         -K
-    GMT grdcontour \
-        ${GRD_FILE} \
-        -JX \
-        -R \
-        -C${Z_INC} \
-        -S10 \
+    GMT grdcontour \\
+        ${GRD_FILE} \\
+        -JX \\
+        -R \\
+        -C${Z_INC} \\
+        -S10 \\
         -O
 }
 EOS
