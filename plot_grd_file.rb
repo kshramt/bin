@@ -57,27 +57,35 @@ Z_INC = (z1 - z0).abs.to_f/N_CONTOUR
 TICK_INTERVAL = "#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}"
 
 COMMAND = <<EOS
+#!/bin/sh -ue
+
+readonly GRD_FILE=#{GRD_FILE}
+readonly CPT=#{CPT}
+readonly ZS=#{ZS}
+readonly Z_INC=#{Z_INC}
+readonly RANGES=#{RANGES}
+readonly TICK_INTERVAL=#{TICK_INTERVAL}
+readonly CPT_FILE=$(mktemp)
+
 GMT gmtset PAPER_MEDIA a4+
 GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
 GMT gmtset PLOT_DEGREE_FORMAT D
 
-readonly CPT_FILE=$(mktemp)
-
 GMT makecpt \
-    -C#{CPT} \
-    -T#{ZS} \
+    -C${CPT} \
+    -T${ZS} \
     > ${CPT_FILE}
 
 {
     GMT psbasemap \
         -JX15c \
-        -R#{RANGES} \
-        -B#{TICK_INTERVAL} \
+        -R${RANGES} \
+        -B${TICK_INTERVAL} \
         -U \
         -K
     GMT grdimage \
-        #{GRD_FILE} \
+        ${GRD_FILE} \
         -JX \
         -R \
         -C${CPT_FILE} \
@@ -86,10 +94,10 @@ GMT makecpt \
         -O \
         -K
     GMT grdcontour \
-        #{GRD_FILE} \
+        ${GRD_FILE} \
         -JX \
         -R \
-        -C#{Z_INC} \
+        -C${Z_INC} \
         -S10 \
         -O
 }
