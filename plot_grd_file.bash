@@ -44,18 +44,18 @@ do
     shift
 done
 
-data_file="${opt_f}"
-n_contour="${opt_n:-10}"
+readonly DATA_FILE="${opt_f}"
+readonly N_CONTOUR="${opt_n:-10}"
 
 GMT gmtset PAPER_MEDIA a4+
 GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
 GMT gmtset PLOT_DEGREE_FORMAT D
 
-readonly RANGES=$(parse_grdinfo.rb ${data_file} '#{w}/#{e}/#{s}/#{n}')
-readonly ZS=$(parse_grdinfo.rb ${data_file} '#{z0}/#{z1}/#{(z1 - z0)/200.0}')
-readonly Z_INC=$(parse_grdinfo.rb ${data_file} "#{((z1 - z0)/${n_contour})}")
-readonly THICK_INTERVALS=$(parse_grdinfo.rb ${data_file} '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')
+readonly RANGES=$(parse_grdinfo.rb ${DATA_FILE} '#{w}/#{e}/#{s}/#{n}')
+readonly ZS=$(parse_grdinfo.rb ${DATA_FILE} '#{z0}/#{z1}/#{(z1 - z0)/200.0}')
+readonly Z_INC=$(parse_grdinfo.rb ${DATA_FILE} "#{((z1 - z0)/${N_CONTOUR})}")
+readonly TICK_INTERVAL=$(parse_grdinfo.rb ${DATA_FILE} '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')
 readonly CPT_FILE=$(mktemp)
 
 GMT makecpt \
@@ -67,11 +67,11 @@ GMT makecpt \
     GMT psbasemap \
         -JX15c \
         -R${RANGES} \
-        -B${THICK_INTERVALS} \
+        -B${TICK_INTERVAL} \
         -U \
         -K
     GMT grdimage \
-        ${data_file} \
+        ${DATA_FILE} \
         -JX \
         -R \
         -C${CPT_FILE} \
@@ -80,7 +80,7 @@ GMT makecpt \
         -O \
         -K
     GMT grdcontour \
-        ${data_file} \
+        ${DATA_FILE} \
         -JX \
         -R \
         -C${Z_INC} \
