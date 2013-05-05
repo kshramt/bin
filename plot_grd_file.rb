@@ -36,10 +36,16 @@ GRD_FILE = opts[:f] || usage_and_exit(1)
 N_CONTOUR = opts[:n] || 10
 
 GRD_INFO = parse_grdinfo(GRD_FILE)
-RANGES = "#{GRD_INFO[:w]}/#{GRD_INFO[:e]}/#{GRD_INFO[:s]}/#{GRD_INFO[:n]}"
-ZS = "#{GRD_INFO[:z0]}/#{GRD_INFO[:z1]}/#{(GRD_INFO[:z1] - GRD_INFO[:z0]).abs/200.0}"
-Z_INC = "#{(GRD_INFO[:z1] - GRD_INFO[:z0]).abs.to_f/N_CONTOUR}"
-TICK_INTERVAL = "#{((GRD_INFO[:e] - GRD_INFO[:w])/5.0).abs}/#{((GRD_INFO[:n] - GRD_INFO[:s])/5.0).abs}"
+w = GRD_INFO[:w]
+e = GRD_INFO[:e]
+s = GRD_INFO[:s]
+n = GRD_INFO[:n]
+z0 = GRD_INFO[:z0]
+z1 = GRD_INFO[:z1]
+RANGES = "#{w}/#{e}/#{s}/#{n}"
+ZS = "#{z0}/#{z1}/#{(z1 - z0).abs/200.0}"
+Z_INC = (z1 - z0).abs.to_f/N_CONTOUR
+TICK_INTERVAL = "#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}"
 
 COMMAND = <<EOS
 GMT gmtset PAPER_MEDIA a4+
