@@ -23,7 +23,6 @@ def parse_grdinfo(grd_file)
   names = %w[file w e s n z0 z1 dx dy nx ny x0 y0 x1 y1 med scale mean std rms n_nan].map(&:to_sym)
   types = %w[s f f f f f f f f i i f f f f f f f f f i].map{|t| "to_#{t}"}
   raw_values = `GMT grdinfo -C -M -L1 -L2 #{grd_file}`.split
-  Hash[]
   names_to_values = names.zip(types, raw_values)\
     .map{|n, t, v| [n, v.__send__(t)]}
 
