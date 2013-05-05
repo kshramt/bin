@@ -26,14 +26,19 @@ def parse_grdinfo(grd_file)
   Hash[names_to_values]
 end
 
+N_CONTOUR_DEFAULT = 10
+CPT_DEFAULT = 'rainbow'
+
 op = OptionParser.new()
 opts = {}
 op.on('-f', '--file=FILE', 'A grd file name to plot.'){|v| opts[:f] = v}
-op.on('-n', '--n_contour=N_CONTOUR', 'Number of cotours to plot'){|v| opts[:n] = v.to_i}
+op.on('-n', '--n_contour=N_CONTOUR', "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]"){|v| opts[:n] = v.to_i}
+op.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]"){|v| opts[:c] = v}
 op.parse!
 
 GRD_FILE = opts[:f] || usage_and_exit(1)
-N_CONTOUR = opts[:n] || 10
+N_CONTOUR = opts[:n] || N_CONTOUR_DEFAULT
+CPT = opts[:c] || CPT_DEFAULT
 
 GRD_INFO = parse_grdinfo(GRD_FILE)
 w = GRD_INFO[:w]
@@ -56,7 +61,7 @@ GMT gmtset PLOT_DEGREE_FORMAT D
 readonly CPT_FILE=$(mktemp)
 
 GMT makecpt \
-    -Crainbow \
+    -C#{CPT} \
     -T#{ZS} \
     > ${CPT_FILE}
 
