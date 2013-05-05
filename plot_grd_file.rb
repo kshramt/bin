@@ -32,13 +32,13 @@ end
 N_CONTOUR_DEFAULT = 10
 CPT_DEFAULT = 'rainbow'
 
-op = OptionParser.new()
+parser = OptionParser.new()
 opts = {}
-op.on('-f', '--file=FILE', 'A grd file name to plot.'){|v| opts[:f] = v}
-op.on('-n', '--n_contour=N_CONTOUR', "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]."){|v| opts[:n] = v.to_i}
-op.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]."){|v| opts[:c] = v}
-op.parse!
-HELP = op.help
+parser.on('-f', '--file=FILE', 'A grd file name to plot.'){|v| opts[:f] = v}
+parser.on('-n', '--n_contour=N_CONTOUR', Integer, "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]."){|v| opts[:n] = v}
+parser.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]."){|v| opts[:c] = v}
+parser.parse!
+HELP = parser.help
 
 GRD_FILE = opts[:f] || usage_and_exit(HELP, 1)
 N_CONTOUR = opts[:n] || N_CONTOUR_DEFAULT
