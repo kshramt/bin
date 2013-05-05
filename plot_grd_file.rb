@@ -96,4 +96,4 @@ GMT makecpt \
 }
 EOS
 
-system(COMMAND)
+puts COMMAND
