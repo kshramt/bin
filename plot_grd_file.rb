@@ -8,9 +8,13 @@ require 'optparse'
 
 VERSION = '0.0.0'
 
-def usage_and_exit(exit_status)
-  system "#{$PROGRAM_NAME} --help"
-  exit(exit_status)
+def usage_and_exit(usage, exit_status)
+  if exit_status == 0
+    $stdout.puts usage
+  else
+    $stderr.puts usage
+  end
+  exit exit_status
 end
 
 def parse_grdinfo(grd_file)
@@ -35,8 +39,9 @@ op.on('-f', '--file=FILE', 'A grd file name to plot.'){|v| opts[:f] = v}
 op.on('-n', '--n_contour=N_CONTOUR', "Number of cotours to plot [#{N_CONTOUR_DEFAULT}]"){|v| opts[:n] = v.to_i}
 op.on('-c', '--cpt=COLOR_PALETTE', "Color palette [#{CPT_DEFAULT}]"){|v| opts[:c] = v}
 op.parse!
+HELP = op.help
 
-GRD_FILE = opts[:f] || usage_and_exit(1)
+GRD_FILE = opts[:f] || usage_and_exit(HELP, 1)
 N_CONTOUR = opts[:n] || N_CONTOUR_DEFAULT
 CPT = opts[:c] || CPT_DEFAULT
 
