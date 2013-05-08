@@ -1,4 +1,8 @@
-#!/bin/sh -ue
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 print_usage(){
     echo "${0}" EXECUTABLE_FILE TIMESTAMP_FILE

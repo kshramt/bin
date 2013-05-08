@@ -1,4 +1,8 @@
-#/bin/sh -ue
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 exec ${MY_RUBY} -x "$0" "$@"
 

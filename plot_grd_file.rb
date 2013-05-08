@@ -1,4 +1,8 @@
-#/bin/sh -ue
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 exec ${MY_RUBY} -w -x "$0" "$@"
 
@@ -57,7 +61,11 @@ Z_INC = (z1 - z0).abs.to_f/N_CONTOUR
 TICK_INTERVAL = "#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}"
 
 COMMAND = <<EOS
-#!/bin/sh -ue
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 readonly GRD_FILE=#{GRD_FILE}
 readonly CPT=#{CPT}

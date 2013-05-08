@@ -1,5 +1,9 @@
 #!/bin/sh
 
+set -o nounset
+set -o errexit
+set -o pipefail
+
 GMT gmtset PAPER_MEDIA a4+
 GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
