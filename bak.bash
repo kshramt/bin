@@ -15,11 +15,11 @@ exit_status=0
 
 for f in "${@}"
 do
-    full_path=$(readlink -f "${f}")
-    dir="${root_dir}"/$(dirname "${full_path}")
-    mkdir -p "${dir}"
+    full_path=$(readlink -f -- "${f}")
+    dir="${root_dir}"/$(dirname -- "${full_path}")
+    mkdir -p -- "${dir}"
     if [[ -e "${f}" ]]; then
-        cp -a "${full_path}" "${dir}"
+        cp -a -- "${full_path}" "${dir}"
     else
         exit_status=1
         echo FAIL: "${f}" 1>&2
