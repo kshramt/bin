@@ -73,7 +73,7 @@ readonly ZS=#{ZS}
 readonly Z_INC=#{Z_INC}
 readonly RANGES=#{RANGES}
 readonly TICK_INTERVAL=#{TICK_INTERVAL}
-readonly CPT_FILE=$(mktemp)
+readonly CPT_FILE=$(mktemp --suffix=.cpt)
 
 GMT gmtset PAPER_MEDIA a4+
 GMT gmtset PAGE_ORIENTATION portrait
