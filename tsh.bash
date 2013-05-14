@@ -6,7 +6,7 @@ set -o pipefail
 
 if [[ ${#} -eq 0 ]]; then
     echo "${0}" FILES DIRS
-    exit 0
+    exit 1
 fi
 
 my_trash_dir=${MY_TRASH_DIR:-${HOME}/.Trash/tsh.sh}
