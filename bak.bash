@@ -19,7 +19,9 @@ do
     dir="${root_dir}"/$(dirname -- "${full_path}")
     mkdir -p -- "${dir}"
     if [[ -e "${full_path}" ]]; then
-        cp -a -- "${full_path}" "${dir}"
+        if [[ ! -e "${root_dir}/${full_path}" ]]; then
+            cp -a -- "${full_path}" "${dir}"
+        fi
     else
         exit_status=1
         echo FAIL: "${f}" 1>&2
