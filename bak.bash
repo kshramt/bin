@@ -23,5 +23,3 @@ do
     fi
 done
 
-echo
-echo ROOT_DIR: "${root_dir}"
