@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 if [[ ${#} -eq 0 ]]; then
     echo "${0}" FILES DIRS
