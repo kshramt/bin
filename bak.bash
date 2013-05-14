@@ -18,7 +18,7 @@ do
     full_path=$(readlink -f -- "${f}")
     dir="${root_dir}"/$(dirname -- "${full_path}")
     mkdir -p -- "${dir}"
-    if [[ -e "${f}" ]]; then
+    if [[ -e "${full_path}" ]]; then
         cp -a -- "${full_path}" "${dir}"
     else
         exit_status=1
