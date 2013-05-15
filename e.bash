@@ -47,7 +47,7 @@ done
 readonly MODE=${opt_mode:-undefined}
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
-readonly SIGNALS_TO_TRAP='SIGHUP'
+readonly SIGNALS_TO_TRAP='SIGHUP SIGTERM'
 
 if ${EMACSCLIENT_} -e '()' > /dev/null 2>&1 ; then
     :
