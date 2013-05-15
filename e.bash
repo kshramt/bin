@@ -85,7 +85,10 @@ case "${MODE}" in
         fi
         ;;
     cui)
-        exec ${EMACSCLIENT_} -t -- "$@"
+        (
+            trap '' ${SIGNALS_TO_TRAP}
+            exec ${EMACSCLIENT_} -t -- "$@"
+        )
         ;;
     *)
         usage_and_exit 1
