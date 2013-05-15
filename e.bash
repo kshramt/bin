@@ -47,12 +47,13 @@ done
 readonly MODE=${opt_mode:-undefined}
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
+readonly SIGNALS_TO_TRAP='SIGHUP'
 
 if ${EMACSCLIENT_} -e '()' > /dev/null 2>&1 ; then
     :
 else
     (
-        trap '' SIGHUP
+        trap '' ${SIGNALS_TO_TRAP}
         exec ${EMACS_} --daemon
     )
 fi
@@ -66,12 +67,12 @@ case "${MODE}" in
 
         if is_gui_running ${EMACSCLIENT_}; then
             (
-                trap '' SIGHUP
+                trap '' ${SIGNALS_TO_TRAP}
                 exec ${EMACSCLIENT_} -n -- "$@"
             )
         else
             (
-                trap '' SIGHUP
+                trap '' ${SIGNALS_TO_TRAP}
                 exec ${EMACSCLIENT_} -c -n -- "$@"
             )
 
