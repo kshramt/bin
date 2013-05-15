@@ -65,20 +65,26 @@ case "${MODE}" in
         }
 
         if is_gui_running ${EMACSCLIENT_}; then
-            ${EMACSCLIENT_} -n -- "$@"
+            (
+                trap '' SIGHUP
+                exec ${EMACSCLIENT_} -n -- "$@"
+            )
         else
-            ${EMACSCLIENT_} -c -n -- "$@"
+            (
+                trap '' SIGHUP
+                exec ${EMACSCLIENT_} -c -n -- "$@"
+            )
 
             # Run within terminal when X is not supported.
             if is_gui_running ${EMACSCLIENT_}; then
                 :
             else
-                em.bash "$@"
+                e.bash --mode=cui "$@"
             fi
         fi
         ;;
     cui)
-        ${EMACSCLIENT_} -t -- "$@"
+        exec ${EMACSCLIENT_} -t -- "$@"
         ;;
     *)
         usage_and_exit 1
