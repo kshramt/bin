@@ -1,2 +1,1 @@
-#!/bin/sh
-bak.bash "$@"
+bak.bash

@@ -1,2 +1,1 @@
-#!/bin/sh
-emacs_stop.bash "$@"
+emacs_stop.bash
