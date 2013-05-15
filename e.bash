@@ -44,7 +44,7 @@ do
     shift
 done
 
-readonly MODE="${opt_mode}"
+readonly MODE=${opt_mode:-undefined}
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
 
