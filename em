@@ -1,2 +1,2 @@
 #!/bin/sh
-e.bash --cui "$@"
+e.bash --mode=cui "$@"
