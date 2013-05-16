@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 
 if [[ ${#} -eq 0 ]]; then
-    echo "${0}" FILES DIRS
+    echo "${0}" FILES DIRS 1>&2
     exit 1
 fi
 
