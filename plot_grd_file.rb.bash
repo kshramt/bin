@@ -4,7 +4,7 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-exec ${MY_RUBY} -w -x "$0" "$@"
+exec ${MY_RUBY:-ruby} -w -x "$0" "$@"
 
 #!/usr/bin/ruby
 
