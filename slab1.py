@@ -7,16 +7,9 @@ class Slab1Data:
         self.path = path
         self.points = numpy.loadtxt(path)
 
-        xs = self.points[:, 0]
-        self.x_min = xs.min()
-        self.x_max = xs.max()
-        ys = self.points[:, 1]
-        self.y_min = ys.min()
-        self.y_max = ys.max()
-        zs = self.points[:, 2]
-        self.__linear_interpolate = scipy.interpolate.interp2d(x=xs,
-                                                               y=ys,
-                                                               z=zs,
+        self.__linear_interpolate = scipy.interpolate.interp2d(x=self.points[:, 0],
+                                                               y=self.points[:, 1],
+                                                               z=self.points[:, 2],
                                                                kind='linear',
                                                                bounds_error=bounds_error,
                                                                fill_value=fill_value)
