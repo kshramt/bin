@@ -24,7 +24,7 @@ class Slab1Data:
 
     def interpolate(self, xs, ys):
         """Return interpolated values (depth, strike or dip)"""
-        return numpy.diag(self.__linear_interpolate(xs, ys)).flatten() # flatten() is for a case that sx.size == ys.size == 1
+        return self.__linear_interpolate(x, y)
 
 if __name__ == '__main__':
     s1d = Slab1Data('./slab1_test.xyz')
