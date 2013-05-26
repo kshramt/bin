@@ -39,5 +39,15 @@ class Slab1Data:
         return self.__linear_interpolate(x, y)
 
 if __name__ == '__main__':
+    import numpy
+    import matplotlib.pyplot
+    import mpl_toolkits.mplot3d
     s1d = Slab1Data('./slab1_test.xyz')
-    print(s1d.interpolate([0.5, 15], [0.5, 20]))
+
+    fig = matplotlib.pyplot.figure()
+    ax = fig.add_subplot(111, projection = '3d')
+    x = numpy.linspace(0, 0.02)
+    y = numpy.linspace(0, 0.02)
+    xx, yy = numpy.meshgrid(x, y)
+    ax.plot_surface(xx, yy, s1d.interpolate(x, y))
+    matplotlib.pyplot.show()
