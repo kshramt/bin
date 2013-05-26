@@ -3,7 +3,7 @@ import numpy
 import scipy.interpolate
 import pandas
 
-class Slab1Data:
+class Slab1Data(object):
     def __init__(self, path, bounds_error=False, fill_value=numpy.nan):
         def get_knots(xs, dx):
             x_min = xs.min()
