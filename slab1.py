@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import numpy
 import scipy.interpolate
+import pandas
 
 class Slab1Data:
     def __init__(self, path, bounds_error=False, fill_value=numpy.nan):
@@ -11,7 +12,7 @@ class Slab1Data:
             return numpy.linspace(x_min, x_max, nx + 1)
 
         self.path = path
-        self.points = numpy.loadtxt(path)
+        self.points = pandas.read_table(path, header = None).values
         x = get_knots(self.points[:, 0], 0.02)
         y = get_knots(self.points[:, 1], 0.02)
 
