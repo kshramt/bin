@@ -5,7 +5,7 @@ import pandas
 
 class Slab1Data(object):
     def __init__(self, path, bounds_error=False, fill_value=numpy.nan):
-        def get_knots(xs, dx):
+        def _get_knots(xs, dx):
             x_min = xs.min()
             x_max = xs.max()
             nx = round((x_max - x_min)/dx)
@@ -13,8 +13,8 @@ class Slab1Data(object):
 
         self.path = path
         self.points = pandas.read_table(path, header = None).values
-        x = get_knots(self.points[:, 0], 0.02)
-        y = get_knots(self.points[:, 1], 0.02)
+        x = _get_knots(self.points[:, 0], 0.02)
+        y = _get_knots(self.points[:, 1], 0.02)
 
         self.__linear_interpolate = scipy.interpolate.interp2d(x=x,
                                                                y=y,
