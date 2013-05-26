@@ -3,7 +3,7 @@ import numpy
 import scipy.interpolate
 
 class Slab1Data:
-    def __init__(self, path, bounds_error=True, fill_value=numpy.nan):
+    def __init__(self, path, bounds_error=False, fill_value=numpy.nan):
         def get_knots(xs, dx):
             x_min = xs.min()
             x_max = xs.max()
@@ -27,5 +27,5 @@ class Slab1Data:
         return numpy.diag(self.__linear_interpolate(xs, ys)).flatten() # flatten() is for a case that sx.size == ys.size == 1
 
 if __name__ == '__main__':
-    s1d = Slab1Data('./slab1_test.xyz', bounds_error=False, fill_value=numpy.nan)
+    s1d = Slab1Data('./slab1_test.xyz')
     print(s1d.interpolate([0.5, 15], [0.5, 20]))
