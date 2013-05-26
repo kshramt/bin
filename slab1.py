@@ -22,8 +22,19 @@ class Slab1Data:
                                                                bounds_error=bounds_error,
                                                                fill_value=fill_value)
 
-    def interpolate(self, xs, ys):
-        """Return interpolated values (depth, strike or dip)"""
+    def interpolate(self, x, y):
+        """Return interpolated values (depth, strike or dip)
+
+        Parameters
+        ----------
+        x, y : float, int or 1-D array (assending order)
+
+        Returns
+        -------
+        Interpolated value(s)
+            Size-1 1-D array of an interpolated value if x and y are float, int or size-1 1-D array.
+            2-D ndarray of interpolated values on mesh(x, y) if x and y are 1-D array.
+        """
         return self.__linear_interpolate(x, y)
 
 if __name__ == '__main__':
