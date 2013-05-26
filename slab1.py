@@ -3,7 +3,6 @@ import numpy
 import scipy.interpolate
 
 class Slab1Data:
-    """Hold Slab1.0 data"""
     def __init__(self, path, bounds_error=True, fill_value=numpy.nan):
         self.path = path
         self.points = numpy.loadtxt(path)
