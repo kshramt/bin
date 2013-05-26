@@ -18,7 +18,7 @@ class Slab1Data:
 
         self.__linear_interpolate = scipy.interpolate.interp2d(x=x,
                                                                y=y,
-                                                               z=numpy.reshape(self.points[:, 2], (x.size, y.size), 'F'),
+                                                               z=numpy.reshape(self.points[:, 2], (y.size, x.size)),
                                                                kind='linear',
                                                                bounds_error=bounds_error,
                                                                fill_value=fill_value)
