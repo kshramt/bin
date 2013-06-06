@@ -1,12 +1,3 @@
-#!/bin/sh
-
-set -o nounset
-set -o errexit
-set -o pipefail
-
-exec ${MY_RUBY} -x "$0" "$@"
-
-#!/usr/bin/ruby
 raise "graphvis is not installed." unless system "dot -V > #{::File::NULL} 2>&1"
 
 format = ARGV.first || 'svg'

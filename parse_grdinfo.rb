@@ -1,13 +1,3 @@
-#!/bin/sh
-
-set -o nounset
-set -o errexit
-set -o pipefail
-
-exec ${MY_RUBY} -x "$0" "$@"
-
-#!/usr/bin/ruby
-
 VALS = %w[w e s n z0 z1 dx dy nx ny x0 y0 x1 y1 med scale mean std rms n_nan]
 
 if ARGV.size != 2

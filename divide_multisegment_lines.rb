@@ -1,13 +1,3 @@
-#!/bin/sh
-
-set -o nounset
-set -o errexit
-set -o pipefail
-
-exec ${MY_RUBY} -x "$0" "$@"
-
-#!/usr/bin/ruby
-
 # = Input format
 #   1.0 2
 #   3 4.0
