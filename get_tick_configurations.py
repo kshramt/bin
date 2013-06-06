@@ -114,7 +114,7 @@ def main(args):
                         metavar='NUM',
                         type=float,
                         nargs=2,
-                        help= 'one of data range values')
+                        help= 'data range values')
     parser.add_argument('--test',
                         action=_TestAction,
                         help='run tests')
