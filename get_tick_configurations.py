@@ -17,11 +17,17 @@ def _get_interval(lx):
 
 def _get_lower_limit(x, dx):
     assert(dx > 0)
-    return math.floor(x/dx)*dx
+    lower = math.floor(x/dx)*dx
+    if lower >= x:
+        lower -= dx
+    return lower
 
 def _get_upper_limit(x, dx):
     assert(dx > 0)
-    return math.ceil(x/dx)*dx
+    upper = math.ceil(x/dx)*dx
+    if upper <= x:
+        upper += dx
+    return upper
 
 def get_tick_configurations(x1, x2):
     x_small, x_large = sorted([x1, x2])
@@ -75,6 +81,7 @@ class Tester(unittest.TestCase):
             _get_lower_limit(0, -1)
 
         self.assertAlmostEqual(_get_lower_limit(-10, 3), -12)
+        self.assertAlmostEqual(_get_lower_limit(-12, 3), -15)
 
     def test__get_upper_limit(self):
         with self.assertRaises(AssertionError):
@@ -83,12 +90,18 @@ class Tester(unittest.TestCase):
             _get_upper_limit(0, -1)
 
         self.assertAlmostEqual(_get_upper_limit(-10, 3), -9)
+        self.assertAlmostEqual(_get_upper_limit(-12, 3), -9)
 
     def test_get_tick_configurations(self):
         x1, x2, dx = get_tick_configurations(101.001, 103.0001)
         self.assertAlmostEqual(x1, 101)
         self.assertAlmostEqual(x2, 103.2)
         self.assertAlmostEqual(dx, 0.2)
+
+        x1, x2, dx = get_tick_configurations(0, 1)
+        self.assertAlmostEqual(x1, -0.1)
+        self.assertAlmostEqual(x2, 1.1)
+        self.assertAlmostEqual(dx, 0.1)
 
 
 def main(args):
