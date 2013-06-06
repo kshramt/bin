@@ -90,7 +90,25 @@ class Tester(unittest.TestCase):
         self.assertAlmostEqual(x2, 103.2)
         self.assertAlmostEqual(dx, 0.2)
 
+
 def main(args):
+    class _TestAction(argparse.Action):
+        def __init__(self,
+                     option_strings,
+                     dest=argparse.SUPPRESS,
+                     default=argparse.SUPPRESS,
+                     help=None):
+            super(_TestAction, self).__init__(
+                option_strings=option_strings,
+                dest=dest,
+                default=default,
+                nargs=0,
+                help=help)
+
+        def __call__(self, parser, namespace, values, option_string=None):
+            unittest.main(argv=sys.argv[:1])
+            parser.exit()
+
     parser = argparse.ArgumentParser(description='get pretty tick configurations')
     parser.add_argument('x1_x2',
                         metavar='NUM',
@@ -98,17 +116,14 @@ def main(args):
                         nargs=2,
                         help= 'one of data range values')
     parser.add_argument('--test',
-                        action='store_true',
+                        action=_TestAction,
                         help='run tests')
     parser.add_argument('--version',
                         action='version',
                         version='%(prog)s {version}'.format(version=VERSION))
     parsed_args = parser.parse_args(args)
-    if parsed_args.test:
-        unittest.main(argv=sys.argv[:1])
-    else:
-        output = '\t'.join(str(x) for x in get_tick_configurations(*parsed_args.x1_x2))
-        print(output)
+    output = '\t'.join(str(x) for x in get_tick_configurations(*parsed_args.x1_x2))
+    print(output)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
