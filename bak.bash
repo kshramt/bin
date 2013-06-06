@@ -13,7 +13,7 @@ my_backup_dir=${MY_BACKUP_DIR:-${HOME}/backup}
 root_dir=${my_backup_dir}/"$(date +'%FT%T.%N%z')"
 exit_status=0
 
-for f in "${@}"
+for f in "$@"
 do
     full_path=$(readlink -f -- "${f}")
     dir="${root_dir}"/$(dirname -- "${full_path}")

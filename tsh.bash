@@ -13,4 +13,4 @@ my_trash_dir=${MY_TRASH_DIR:-${HOME}/.Trash/tsh.sh}
 dir=${my_trash_dir}/$(date +'%FT%T.%N%z')
 mkdir -p ${dir}
 
-mv -- "${@}" "${dir}"
+mv -- "$@" "${dir}"

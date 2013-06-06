@@ -19,7 +19,7 @@ opts=$(
         --options hm: \
         --longoptions help,mode: \
         -- \
-        "${@}"
+        "$@"
 )
 set -- ${opts} # DO NOT quote.
 
