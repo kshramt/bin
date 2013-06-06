@@ -4,4 +4,4 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-${MY_RUBY:-ruby} "${0%.*}" "${@}"
+${MY_RUBY:-ruby} "${0%.*}" "$@"
