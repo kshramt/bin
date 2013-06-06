@@ -3,7 +3,7 @@ import math
 import unittest
 import argparse
 
-VERSION = '0.0.0'
+__version__ = '0.0.0'
 
 def _get_interval(lx):
     assert(lx > 0)
@@ -120,7 +120,7 @@ def main(args):
                         help='run tests')
     parser.add_argument('--version',
                         action='version',
-                        version='%(prog)s {version}'.format(version=VERSION))
+                        version='%(prog)s {version}'.format(version=__version__))
     parsed_args = parser.parse_args(args)
     output = '\t'.join(str(x) for x in get_tick_configurations(*parsed_args.x1_x2))
     print(output)
