@@ -15,6 +15,9 @@ def main(args):
     parser.add_argument('--method',
                         default='nearest',
                         help='interpolate method nearest|linear|cubic [nearest]')
+    parser.add_argument('--print_intervals',
+                        action='store_true',
+                        help='print x and y intervals and exit')
     parser.add_argument('--fill_value',
                         type=float,
                         default=numpy.nan,
@@ -62,8 +65,17 @@ def main(args):
         y_upper = xyz_data[:, 1].max()
     else:
         y_upper = parsed_args.y_upper
+
+    assert(parsed_args.nx >= 2)
+    assert(parsed_args.ny >= 2)
     xs = numpy.linspace(x_lower, x_upper, parsed_args.nx)
     ys = numpy.linspace(y_lower, y_upper, parsed_args.ny)
+
+    if parsed_args.print_intervals:
+        output = '\t'.join([str(xs[1] - xs[0]), str(ys[1] - ys[0])])
+        print(output)
+        sys.exit()
+
     xys = numpy.ndarray(shape=(parsed_args.nx*parsed_args.ny, 2),
                         dtype=float)
     for ix, x in enumerate(xs):
