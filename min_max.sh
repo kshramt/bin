@@ -1,3 +1,7 @@
+#!/bin/sh
+
+gawk \
+'
 BEGIN{
     OFMT = "%.17g"
     CONVFMT = "%.17g"
@@ -15,3 +19,4 @@ $2 > y2{y2 = $2}
 END{
     print x1 "\t" x2 "\t" y1 "\t" y2
 }
+'
