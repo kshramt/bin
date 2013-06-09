@@ -5,6 +5,8 @@ import argparse
 
 __version__ = '0.0.0'
 
+PADDING_RATIO = 1/10
+
 def _get_interval(lx):
     assert(lx > 0)
     dx = 10**(math.ceil(math.log10(lx)) - 1)
@@ -18,14 +20,14 @@ def _get_interval(lx):
 def _get_lower_limit(x, dx):
     assert(dx > 0)
     lower = math.floor(x/dx)*dx
-    if lower >= x:
+    if x <= lower + dx*PADDING_RATIO:
         lower -= dx
     return lower
 
 def _get_upper_limit(x, dx):
     assert(dx > 0)
     upper = math.ceil(x/dx)*dx
-    if upper <= x:
+    if x >= upper - dx*PADDING_RATIO:
         upper += dx
     return upper
 
@@ -94,7 +96,7 @@ class Tester(unittest.TestCase):
 
     def test_get_tick_configurations(self):
         x1, x2, dx = get_tick_configurations(101.001, 103.0001)
-        self.assertAlmostEqual(x1, 101)
+        self.assertAlmostEqual(x1, 100.8)
         self.assertAlmostEqual(x2, 103.2)
         self.assertAlmostEqual(dx, 0.2)
 
