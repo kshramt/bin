@@ -16,8 +16,8 @@ copy_file=${tmp_dir}/copy_file.dat
 cat > ${copy_file}
 x_sorted=${tmp_dir}/x_sorted.dat
 y_sorted=${tmp_dir}/y_sorted.dat
-sort -n -k 1 ${copy_file} > ${x_sorted}
-sort -n -k 2 ${copy_file} > ${y_sorted}
+sort -g -k 1 ${copy_file} > ${x_sorted}
+sort -g -k 2 ${copy_file} > ${y_sorted}
 x1=$(head -1 ${x_sorted}| awk '{print $1}')
 y1=$(head -1 ${y_sorted}| awk '{print $2}')
 x2=$(tail -1 ${x_sorted}| awk '{print $1}')
