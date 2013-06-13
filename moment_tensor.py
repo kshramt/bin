@@ -24,8 +24,8 @@ def mrtf_matrix_from_mrtf(m):
     mrtf_matrix = numpy.ndarray(shape=(3, 3),
                                 dtype=float)
     mrtf_matrix[0, :] = [m.rr, m.rt, m.rf]
-    mrtf_matrix[1, :] = [m.rt, m.tt, m.rf]
-    mrtf_matrix[2, :] = [m.rf, m.rf, m.ff]
+    mrtf_matrix[1, :] = [m.rt, m.tt, m.tf]
+    mrtf_matrix[2, :] = [m.rf, m.tf, m.ff]
     return mrtf_matrix
 
 def mrtf_from_m_1_to_5(m_1_to_5):
