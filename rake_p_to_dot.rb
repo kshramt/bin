@@ -16,7 +16,7 @@ nodes = buf\
   .uniq\
   .map{|name|
      case name
-     when /\A\.\.\/bin/
+     when /\/bin\//
        "#{name.inspect} [color = red]"
      when /\.(eps|pdf)\z/
        "#{name.inspect} [color = blue]"
