@@ -1,2 +1,2 @@
 #!/bin/sh
-e.bash --mode=gui "$@"
+e.sh --mode=gui "$@"
