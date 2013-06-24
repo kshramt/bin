@@ -7,4 +7,4 @@ set -o errexit
 set -o pipefail
 
 strip.sh "$@" \
-    | sed -e 's/[ 	]\+/=/' -e 's/^/readonly /'
+    | sed -e 's/[ 	]\+/=/'
