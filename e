@@ -1,2 +1,7 @@
 #!/bin/sh
-e.sh --mode=gui "$@"
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+$(dirname "${0}")/e.sh --mode=gui "$@"
