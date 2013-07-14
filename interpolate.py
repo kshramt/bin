@@ -7,6 +7,7 @@ import scipy.interpolate
 
 __version__ = '0.0.0'
 
+
 def main(args):
     parser = argparse.ArgumentParser(description='interpolate 2D data from stdin')
     parser.add_argument('--version',

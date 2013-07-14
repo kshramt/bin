@@ -3,6 +3,7 @@ import numpy
 import scipy.interpolate
 import pandas
 
+
 class Slab1Data(object):
     def __init__(self, path, bounds_error=False, fill_value=numpy.nan):
         def _get_knots(xs, dx):
@@ -12,7 +13,7 @@ class Slab1Data(object):
             return numpy.linspace(x_min, x_max, nx + 1)
 
         self.path = path
-        self.points = pandas.read_table(path, header = None).values
+        self.points = pandas.read_table(path, header=None).values
         x = _get_knots(self.points[:, 0], 0.02)
         y = _get_knots(self.points[:, 1], 0.02)
 
@@ -45,7 +46,7 @@ if __name__ == '__main__':
     s1d = Slab1Data('./slab1_test.xyz')
 
     fig = matplotlib.pyplot.figure()
-    ax = fig.add_subplot(111, projection = '3d')
+    ax = fig.add_subplot(111, projection='3d')
     x = numpy.linspace(0, 0.02)
     y = numpy.linspace(0, 0.02)
     xx, yy = numpy.meshgrid(x, y)
