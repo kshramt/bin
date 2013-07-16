@@ -43,7 +43,7 @@ def get_tick_configurations(x1, x2):
     return (lower, upper, dx)
 
 
-class Tester(unittest.TestCase):
+class _Tester(unittest.TestCase):
     def test__get_interval(self):
         with self.assertRaises(AssertionError):
             _get_interval(-1)
@@ -111,7 +111,7 @@ class Tester(unittest.TestCase):
         self.assertAlmostEqual(dx, 0.1)
 
 
-def main(args):
+def _main(args):
     class _TestAction(argparse.Action):
         def __init__(self,
                      option_strings,
@@ -146,4 +146,4 @@ def main(args):
     print(output)
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    _main(sys.argv[1:])
