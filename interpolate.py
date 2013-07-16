@@ -1,5 +1,4 @@
 import sys
-import itertools
 import argparse
 
 import numpy

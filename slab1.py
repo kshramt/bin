@@ -42,7 +42,6 @@ class Slab1Data(object):
 if __name__ == '__main__':
     import numpy
     import matplotlib.pyplot
-    import mpl_toolkits.mplot3d
     s1d = Slab1Data('./slab1_test.xyz')
 
     fig = matplotlib.pyplot.figure()
