@@ -1,5 +1,5 @@
 module ::KeyValueConfig
-  INTEGER_REGEXP = /\A[-+]?[0-9]\z/
+  INTEGER_REGEXP = /\A[-+]?[0-9]+\z/
   FLOAT_REGEXP = /\A[-+]?[0-9]*\.?[0-9]+([eEdDqQ][-+]?[0-9]+)?\z/
 
   module_function
@@ -41,29 +41,35 @@ if $PROGRAM_NAME == __FILE__
 
   class Tester < ::MiniTest::Test
     def test__parse_value_integer
-      assert(::KeyValueConfig._parse_value('0'), 0)
-      assert(::KeyValueConfig._parse_value('1'), 1)
-      assert(::KeyValueConfig._parse_value('-1'), -1)
+      assert(::KeyValueConfig._parse_value('0').integer?)
+      assert_equal(::KeyValueConfig._parse_value('0'), 0)
+      assert(::KeyValueConfig._parse_value('1').integer?)
+      assert_equal(::KeyValueConfig._parse_value('1'), 1)
+      assert(::KeyValueConfig._parse_value('-1').integer?)
+      assert_equal(::KeyValueConfig._parse_value('-1'), -1)
+      assert(::KeyValueConfig._parse_value('10').integer?)
+      assert_equal(::KeyValueConfig._parse_value('10'), 10)
     end
 
     def test__parse_value_float
-      assert(::KeyValueConfig._parse_value('0.'), 0.0)
-      assert(::KeyValueConfig._parse_value('0.0'), 0.0)
-      assert(::KeyValueConfig._parse_value('1.0'), 1.0)
-      assert(::KeyValueConfig._parse_value('-1.0'), -1.0)
-      assert(::KeyValueConfig._parse_value('1.e3'), 1000.0)
-      assert(::KeyValueConfig._parse_value('1.d3'), 1000.0)
-      assert(::KeyValueConfig._parse_value('1.q3'), 1000.0)
+      assert_equal(::KeyValueConfig._parse_value('0.1'), 0.1)
+      assert_equal(::KeyValueConfig._parse_value('1.1'), 1.1)
+      assert_equal(::KeyValueConfig._parse_value('-1.1'), -1.1)
+      assert_equal(::KeyValueConfig._parse_value('1.1e3'), 1100.0)
+      assert_equal(::KeyValueConfig._parse_value('1e3'), 1000.0)
+      assert_equal(::KeyValueConfig._parse_value('1e-3'), 0.001)
+      assert_equal(::KeyValueConfig._parse_value('1.1d3'), 1100.0)
+      assert_equal(::KeyValueConfig._parse_value('1.1q3'), 1100.0)
     end
 
     def test__parse_value_string
-      assert(::KeyValueConfig._parse_value('1.r3'), '1.r3')
-      assert(::KeyValueConfig._parse_value('1.qq3'), '1.qq3')
-      assert(::KeyValueConfig._parse_value('1 3'), '1 3')
+      assert_equal(::KeyValueConfig._parse_value('1.r3'), '1.r3')
+      assert_equal(::KeyValueConfig._parse_value('1.qq3'), '1.qq3')
+      assert_equal(::KeyValueConfig._parse_value('1 3'), '1 3')
     end
 
     def test_load
-      assert(::KeyValueConfig.load(<<-EOS), {'a' => 1, 'b' => 2.1, 'c' => 'd'})
+      assert_equal(::KeyValueConfig.load(<<-EOS), {'a' => 1, 'b' => 2.1, 'c' => 'd'})
  a 1
 b 2.1
 c d
@@ -71,7 +77,7 @@ c d
     end
 
     def test_dump
-      assert(::KeyValueConfig.dump({'a' => 1, 'b' => 2.1, 'c' => 'd'}), <<-EOS)
+      assert_equal(::KeyValueConfig.dump({'a' => 1, 'b' => 2.1, 'c' => 'd'}), <<-EOS.chomp)
 a	1
 b	2.1
 c	d
