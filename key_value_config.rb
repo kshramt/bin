@@ -39,7 +39,7 @@ if $PROGRAM_NAME == __FILE__
   require 'minitest/pride'
   require 'minitest/autorun'
 
-  class Tester < ::MiniTest::Unit::TestCase
+  class Tester < ::MiniTest::Test
     def test__parse_value_integer
       assert(::KeyValueConfig._parse_value('0'), 0)
       assert(::KeyValueConfig._parse_value('1'), 1)
