@@ -1,6 +1,4 @@
 #!/bin/bash
-#
-# Convert a key-value style configuration file to Bash's readonly variable declarations.
 
 set -o nounset
 set -o errexit
