@@ -6,6 +6,8 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-strip.sh "$@" \
-    | sed -e 's/[ 	]\+/=/' \
-    | sed -e 's|^|readonly |'
+strip.sh "$@" | sed -e '
+/^$/d
+s/[ \t]\+/=/
+s/^/declare -xr /
+'
