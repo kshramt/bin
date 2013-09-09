@@ -1,7 +1,24 @@
+"""Get pretty tick configurations
+
+Usage:
+  get_tick_configurations.py <x1> <x2>
+  get_tick_configurations.py --test
+
+Options:
+  --test     Run tests
+  -h --help  Show this screen
+  --version  Show version
+
+"""
+
+
 import sys
 import math
 import unittest
-import argparse
+
+import docopt
+import schema
+
 
 __version__ = '0.0.0'
 
@@ -112,37 +129,16 @@ class _Tester(unittest.TestCase):
 
 
 def _main(args):
-    class _TestAction(argparse.Action):
-        def __init__(self,
-                     option_strings,
-                     dest=argparse.SUPPRESS,
-                     default=argparse.SUPPRESS,
-                     help=None):
-            super(_TestAction, self).__init__(
-                option_strings=option_strings,
-                dest=dest,
-                default=default,
-                nargs=0,
-                help=help)
 
-        def __call__(self, parser, namespace, values, option_string=None):
-            unittest.main(argv=sys.argv[:1])
-            parser.exit()
-
-    parser = argparse.ArgumentParser(description='get pretty tick configurations')
-    parser.add_argument('x1_x2',
-                        metavar='NUM',
-                        type=float,
-                        nargs=2,
-                        help='data range values')
-    parser.add_argument('--test',
-                        action=_TestAction,
-                        help='run tests')
-    parser.add_argument('--version',
-                        action='version',
-                        version='%(prog)s {version}'.format(version=__version__))
-    parsed_args = parser.parse_args(args)
-    output = '\t'.join(str(x) for x in get_tick_configurations(*parsed_args.x1_x2))
+    parsed_args = docopt.docopt(__doc__, version=__version__)
+    if parsed_args['--test']:
+        unittest.main(argv=sys.argv[:1])
+        exit
+    parsed_args = schema.Schema({'<x2>': schema.Use(float),
+                                 '<x1>': schema.Use(float),
+                                 '--test': bool})\
+                        .validate(parsed_args)
+    output = '\t'.join(str(x) for x in get_tick_configurations(parsed_args['<x1>'], parsed_args['<x2>']))
     print(output)
 
 if __name__ == '__main__':
