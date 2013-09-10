@@ -6,5 +6,5 @@ set -o pipefail
 
 grep '^ *use, non_intrinsic::' "${1:--}" \
     | awk '{print $3}' \
-    | uniq \
-    | sed -e 's/,$//'
+    | sed -e 's/,$//' \
+    | sort -u
