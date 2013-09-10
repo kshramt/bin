@@ -25,7 +25,7 @@ def dotify(targets, dependencies):
                          in itertools.product(targets, dependencies))
 
 def is_task_line(line):
-    return (re.match(r'^[a-zA-Z0-9_\-\./%]+(\ [a-zA-Z0-9_\-\./%]+)*:', line)
+    return (re.match(r'^[a-zA-Z0-9_\-./%{}$]+(\ [a-zA-Z0-9_\-./%{}$]+)*:', line)
             and all(not line.startswith(special)
                     for special
                     in ['.SUFFIXES',
