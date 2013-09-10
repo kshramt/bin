@@ -30,6 +30,10 @@ def is_task_line(line):
                     for special
                     in ['.SUFFIXES',
                         '.DELETE_ON_ERROR',
+                        '.ONESHELL',
+                        '.EXPORT_ALL_VARIABLES',
+                        '.NOTPARALLEL',
+                        '.POSIX',
                         '.PRECIOUS']))
 
 def main():
