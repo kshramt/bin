@@ -12,7 +12,7 @@ __version__ = '0.0.0'
 
 def _parse_zero_or_pos_int(s):
     n = int(s)
-    assert(n >= 0)
+    assert n >= 0
     return(n)
 
 
@@ -23,8 +23,7 @@ def _chomp(s):
     return s
 
 def _convert(s, column, columns, input_format, output_format, delta):
-    assert(column >= 1
-           and all(i >= 1 for i in columns))
+    assert column >= 1 and all(i >= 1 for i in columns)
 
     if any(i == column for i in columns):
         dd = datetime.datetime
@@ -99,8 +98,7 @@ def main(args=sys.argv[1:]):
             break
 
         words = _chomp(line).split('\t')
-        assert(len(words) >= max(columns)
-               and all(i >= 1 for i in columns))
+        assert len(words) >= max(columns) and all(i >= 1 for i in columns)
 
         try:
             print('\t'.join(_convert(s=word,

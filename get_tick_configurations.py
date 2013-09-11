@@ -9,7 +9,7 @@ PADDING_RATIO = 1/10
 
 
 def _get_interval(lx):
-    assert(lx > 0)
+    assert lx > 0
     dx = 10**(math.ceil(math.log10(lx)) - 1)
     if lx > 5*dx:
         return dx
@@ -20,7 +20,7 @@ def _get_interval(lx):
 
 
 def _get_lower_limit(x, dx):
-    assert(dx > 0)
+    assert dx > 0
     lower = math.floor(x/dx)*dx
     if x <= lower + dx*PADDING_RATIO:
         lower -= dx
@@ -28,7 +28,7 @@ def _get_lower_limit(x, dx):
 
 
 def _get_upper_limit(x, dx):
-    assert(dx > 0)
+    assert dx > 0
     upper = math.ceil(x/dx)*dx
     if x >= upper - dx*PADDING_RATIO:
         upper += dx

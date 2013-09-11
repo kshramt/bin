@@ -66,8 +66,8 @@ def main(args):
     else:
         y_upper = parsed_args.y_upper
 
-    assert(parsed_args.nx >= 2)
-    assert(parsed_args.ny >= 2)
+    assert parsed_args.nx >= 2
+    assert parsed_args.ny >= 2
     xs = numpy.linspace(x_lower, x_upper, parsed_args.nx)
     ys = numpy.linspace(y_lower, y_upper, parsed_args.ny)
 
