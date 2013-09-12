@@ -6,6 +6,8 @@ import unittest
 import argparse
 import signal
 
+import kshramt
+
 
 __version__ = '0.0.0'
 
@@ -34,23 +36,6 @@ def _convert(s, column, columns, input_format, output_format, delta):
 
 
 def _parse_arguments(args=sys.argv[1:]):
-    class _TestAction(argparse.Action):
-        def __init__(self,
-                     option_strings,
-                     dest=argparse.SUPPRESS,
-                     default=argparse.SUPPRESS,
-                     help=None):
-            super(_TestAction, self).__init__(
-                option_strings=option_strings,
-                dest=dest,
-                default=default,
-                nargs=0,
-                help=help)
-
-        def __call__(self, parser, namespace, values, option_string=None):
-            unittest.main(argv=sys.argv[:1])
-            parser.exit()
-
     parser = argparse.ArgumentParser(description='convert date time format')
     parser.add_argument('--input',
                         required=True,
@@ -71,7 +56,7 @@ def _parse_arguments(args=sys.argv[1:]):
                         default=datetime.timedelta(seconds=0),
                         help='time delta to add in seconds [%(default)s]')
     parser.add_argument('--test',
-                        action=_TestAction,
+                        action=kshramt.TestAction,
                         help='run tests')
     parser.add_argument('--version',
                         action='version',

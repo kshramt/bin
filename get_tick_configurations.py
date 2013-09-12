@@ -3,6 +3,9 @@ import math
 import unittest
 import argparse
 
+import kshramt
+
+
 __version__ = '0.0.0'
 
 PADDING_RATIO = 1/10
@@ -112,23 +115,6 @@ class _Tester(unittest.TestCase):
 
 
 def _main(args):
-    class _TestAction(argparse.Action):
-        def __init__(self,
-                     option_strings,
-                     dest=argparse.SUPPRESS,
-                     default=argparse.SUPPRESS,
-                     help=None):
-            super(_TestAction, self).__init__(
-                option_strings=option_strings,
-                dest=dest,
-                default=default,
-                nargs=0,
-                help=help)
-
-        def __call__(self, parser, namespace, values, option_string=None):
-            unittest.main(argv=sys.argv[:1])
-            parser.exit()
-
     parser = argparse.ArgumentParser(description='get pretty tick configurations')
     parser.add_argument('x1_x2',
                         metavar='NUM',
@@ -136,7 +122,7 @@ def _main(args):
                         nargs=2,
                         help='data range values')
     parser.add_argument('--test',
-                        action=_TestAction,
+                        action=kshramt.TestAction,
                         help='run tests')
     parser.add_argument('--version',
                         action='version',
