@@ -8,6 +8,15 @@ __version__ = '0.0.0'
 
 
 def flatten(vs):
+    """
+    # Flatten containers
+
+    ## Note
+    Do not include recursive elements.
+
+    ## Exceptions
+    - `RuntimeError`: Recursive elements will cause this
+    """
     if isinstance(vs, str):
         yield vs
     else:
