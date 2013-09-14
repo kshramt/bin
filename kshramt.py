@@ -13,10 +13,7 @@ def flatten(vs):
     else:
         for v in vs:
             if isinstance(v, collections.abc.Iterable):
-                if any(_v == v for _v in v):
-                    yield v
-                else:
-                    yield from flatten(v)
+                yield from flatten(v)
             else:
                 yield v
 
