@@ -115,22 +115,22 @@ def is_task_line(line):
 
 def _decorate_node(s):
     prop = ''
-    if s.startswith('"bin/'):
-        prop = '[fillcolor=pink]'
-    elif s.startswith('"work/'):
-        prop = '[fillcolor=yellow]'
-    elif s.startswith('"data/'):
-        prop = '[fillcolor=orange]'
-    elif s.startswith('"Makefile'):
-        prop = '[fillcolor=orange]'
-    elif s.startswith('"${HOME}'):
+    if re.search(r'/?\${HOME}/', s):
         prop = '[fillcolor="#ddddff"]'
-    elif s.startswith('"template/'):
+    elif re.search(r'/?bin/', s):
+        prop = '[fillcolor=pink]'
+    elif re.search(r'/?template/', s):
         prop = '[fillcolor=orange]'
-    elif s.startswith('"report'):
+    elif re.search(r'/?report/', s):
         prop = '[fillcolor="#aaffaa"]'
-    elif s.startswith('"doc'):
+    elif re.search(r'/?doc/', s):
         prop = '[fillcolor="#aaffaa"]'
+    elif re.search(r'/?work/', s):
+        prop = '[fillcolor=yellow]'
+    elif re.search(r'/?data/', s):
+        prop = '[fillcolor=orange]'
+    elif re.search(r'/?Makefile', s):
+        prop = '[fillcolor=orange]'
 
     return '{} {}'.format(s, prop)
 
