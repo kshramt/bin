@@ -85,15 +85,16 @@ def main(args=sys.argv[1:]):
         words = _chomp(line).split('\t')
         assert len(words) >= max(columns) and all(i >= 1 for i in columns)
 
+        output = '\t'.join(_convert(s=word,
+                                    column=i + 1,
+                                    columns=columns,
+                                    input_format=parsed_args.input,
+                                    output_format=parsed_args.output,
+                                    delta=parsed_args.delta)
+                           for i, word
+                           in enumerate(words))
         try:
-            print('\t'.join(_convert(s=word,
-                                     column=i + 1,
-                                     columns=columns,
-                                     input_format=parsed_args.input,
-                                     output_format=parsed_args.output,
-                                     delta=parsed_args.delta)
-                            for i, word
-                            in enumerate(words)))
+            print(output)
         except BrokenPipeError:
             return
 
