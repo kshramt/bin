@@ -57,10 +57,10 @@ GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
 GMT gmtset PLOT_DEGREE_FORMAT D
 
-readonly RANGES=$(parse_grdinfo.rb ${DATA_FILE} '#{w}/#{e}/#{s}/#{n}')
-readonly ZS=$(parse_grdinfo.rb ${DATA_FILE} '#{z0}/#{z1}/#{(z1 - z0)/200.0}')
-readonly Z_INC=$(parse_grdinfo.rb ${DATA_FILE} "#{((z1 - z0)/${N_CONTOUR})}")
-readonly TICK_INTERVAL=$(parse_grdinfo.rb ${DATA_FILE} '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')
+readonly RANGES=$(parse_grdinfo.rb.sh ${DATA_FILE} '#{w}/#{e}/#{s}/#{n}')
+readonly ZS=$(parse_grdinfo.rb.sh ${DATA_FILE} '#{z0}/#{z1}/#{(z1 - z0)/200.0}')
+readonly Z_INC=$(parse_grdinfo.rb.sh ${DATA_FILE} "#{((z1 - z0)/${N_CONTOUR})}")
+readonly TICK_INTERVAL=$(parse_grdinfo.rb.sh ${DATA_FILE} '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')
 readonly CPT_FILE=$(mktemp)
 
 GMT makecpt \
