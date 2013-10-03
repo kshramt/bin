@@ -8,5 +8,5 @@ strip.sh "$@" \
    | uncomment.sh \
    | sed -e '
      /^$/d
-     s/[ \t]\+/=/
-     s/^/declare -xr /'
+     s/[ \t]\+/="/
+     s/$/"/'
