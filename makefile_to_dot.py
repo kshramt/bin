@@ -80,6 +80,7 @@ def dot_from_makefile(s):
                    if is_task_line(l)])
 
     return '\n'.join(['''digraph Workflow{
+                           rankdir=LR
                            node [shape=note, style=filled]
                            edge [color=gray]''',
                       '\n'.join(_decorate_node('"{}"'.format(_escape(node)))
