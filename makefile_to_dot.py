@@ -74,10 +74,10 @@ class _Tester(unittest.TestCase):
 
 
 def dot_from_makefile(s):
-    graph = Graph([parse_task(s)
-                   for s
+    graph = Graph([parse_task(l)
+                   for l
                    in s.split('\n')
-                   if is_task_line(s)])
+                   if is_task_line(l)])
 
     return '\n'.join(['''digraph Workflow{
                            node [shape=note, style=filled]
