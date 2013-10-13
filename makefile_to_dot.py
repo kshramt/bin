@@ -125,8 +125,10 @@ def _decorate_node(s):
         prop = '[fillcolor="#aaffaa"]'
     elif re.search(r'/?doc/', s):
         prop = '[fillcolor="#aaffaa"]'
-    elif re.search(r'/?work/', s):
+    elif re.search(r'/?tmp/', s):
         prop = '[fillcolor=yellow]'
+    elif re.search(r'/?work/', s):
+        prop = '[fillcolor=orange]'
     elif re.search(r'/?data/', s):
         prop = '[fillcolor=orange]'
     elif re.search(r'/?Makefile', s):
