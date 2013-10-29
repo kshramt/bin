@@ -37,6 +37,9 @@ do
 done
 
 pushd "${GIST_DIR}"
-git add *
+for f in "$@"
+do
+   git add "$(basename ${f})"
+done
 git commit -am "Update"
 popd
