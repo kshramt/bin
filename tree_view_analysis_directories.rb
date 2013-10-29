@@ -1,12 +1,7 @@
-raise "graphvis is not installed." unless system "dot -V > #{::File::NULL} 2>&1"
-
-format = ARGV.first || 'svg'
-if %w[-h --help].include? format
-  puts "#{$PROGRAM_NAME} [FORMAT = svg]"
-  puts "  FORMAT: pdf, svg"
+unless ARGV.empty?
+  puts "#{$PROGRAM_NAME} | dot -Tpdf >| _.pdf"
   exit
 end
-raise "Unknown formt: #{format}" unless ['pdf', 'svg'].include? format
 
 pairs = Dir['*']\
   .map{|dir| dir\
@@ -17,10 +12,6 @@ pairs = Dir['*']\
     .map{|parent, child| "#{parent.inspect} -> #{child.inspect};"}}\
   .join("\n")
 
-system <<-EOS
-dot -T#{format} <<-EOF
-digraph {
-#{pairs}
-}
-EOF
-EOS
+puts "digraph {"
+puts pairs
+puts "}"
