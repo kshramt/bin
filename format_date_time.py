@@ -15,7 +15,7 @@ __version__ = '0.0.0'
 def _parse_zero_or_pos_int(s):
     n = int(s)
     assert n >= 0
-    return(n)
+    return n
 
 
 def _chomp(s):
