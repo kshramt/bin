@@ -28,9 +28,9 @@ if [[ $# -ne 1 ]] || [[ $1 = '-h' ]] || [[ $1 = '--help' ]]; then
 fi
 
 input="$1"
-n_pages="$(pdfinfo $input | grep Pages | cut -f2 -d: | strip.sh)"
+n_pages="$(pdfinfo $input | grep Pages | cut -f2 -d:)"
 half_n_pages=$(($n_pages/2))
-if is_odd $half_n_pages; then
+if is_odd $n_pages; then
    half_n_pages=$((half_n_pages + 1))
 fi
 
