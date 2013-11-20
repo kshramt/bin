@@ -34,6 +34,12 @@ if is_even $half_n_pages; then
    half_n_pages=$((half_n_pages + 1))
 fi
 
-pdfnup --nup 2x"${half_n_pages}" "${input}" -o /dev/stdout \
-   | pdfcrop  - "${TMP_DIR}"/output.pdf > /dev/null
+pdfnup \
+   --paper a0paper \
+   --nup 2x"${half_n_pages}" "${input}" \
+   -o /dev/stdout \
+   | pdfcrop \
+   - \
+   "${TMP_DIR}"/output.pdf \
+   > /dev/null
 pdf2svg "${TMP_DIR}"/output.pdf /dev/stdout
