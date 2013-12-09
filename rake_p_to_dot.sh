@@ -25,6 +25,21 @@ decorate(){
       *bin/*)
 	 echo "$(quote ${node}) [fillcolor=pink]"
 	 ;;
+      *data/*)
+	 echo "$(quote ${node}) [fillcolor=orange]"
+	 ;;
+      *template/*)
+	 echo "$(quote ${node}) [fillcolor=orange]"
+	 ;;
+      *work/*)
+	 echo "$(quote ${node}) [fillcolor=yellow]"
+	 ;;
+      *report/*)
+	 echo "$(quote ${node}) [fillcolor=\"#aaffaa\"]"
+	 ;;
+      *doc/*)
+	 echo "$(quote ${node}) [fillcolor=\"#aaffaa\"]"
+	 ;;
       *)
 	 quote "${node}"
 	 ;;
