@@ -9,7 +9,7 @@ if [[ ${#} -eq 0 ]]; then
     exit 1
 fi
 
-my_trash_dir=${MY_TRASH_DIR:-${HOME}/trash}
+my_trash_dir=${MY_TRASH_DIR:-${HOME}/d/trash}
 dir=${my_trash_dir}/$(date +'%FT%T.%N%z')
 mkdir -p ${dir}
 
