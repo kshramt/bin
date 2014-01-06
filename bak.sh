@@ -9,7 +9,7 @@ if [[ ${#} -eq 0 ]]; then
     exit 1
 fi
 
-my_backup_dir=${MY_BACKUP_DIR:-${HOME}/backup}
+my_backup_dir=${MY_BACKUP_DIR:-${HOME}/d/backup}
 root_dir=${my_backup_dir}/"$(date +'%FT%T.%N%z')"
 exit_status=0
 
