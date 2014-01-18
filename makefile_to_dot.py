@@ -24,10 +24,11 @@ class Graph(object):
     """
 
     def __init__(self, pairs):
-        """All data should be included in pairs since you can't update.
+        """
+        All connection should be included in pairs since you can't modify the data later.
 
-        pairs - (((parent1),          (child11, child12, ...)),
-                 ((parent2),          (child21, child22, ...)),
+        pairs - (((parent1,),          (child11, child12, ...)),
+                 ((parent2,),          (child21, child22, ...)),
                  ((parent1, parent3), (child11, child13, ...)),
                  ...)
         """
