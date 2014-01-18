@@ -110,6 +110,7 @@ def is_task_line(line):
                         '.ONESHELL',
                         '.EXPORT_ALL_VARIABLES',
                         '.NOTPARALLEL',
+                        '.SECONDARY',
                         '.POSIX',
                         '.PRECIOUS']))
 
