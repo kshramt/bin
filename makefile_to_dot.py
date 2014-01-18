@@ -103,16 +103,16 @@ def parse_task(s):
 
 def is_task_line(line):
     return (re.match(r'^[a-zA-Z0-9_\-./%{}$()]+(\ [a-zA-Z0-9_\-./%{}$()]+)*:', line)
-            and all(not line.startswith(special)
-                    for special
-                    in ['.SUFFIXES',
-                        '.DELETE_ON_ERROR',
-                        '.ONESHELL',
-                        '.EXPORT_ALL_VARIABLES',
-                        '.NOTPARALLEL',
-                        '.SECONDARY',
-                        '.POSIX',
-                        '.PRECIOUS']))
+            and not any(line.startswith(special)
+                        for special
+                        in ['.SUFFIXES',
+                            '.DELETE_ON_ERROR',
+                            '.ONESHELL',
+                            '.EXPORT_ALL_VARIABLES',
+                            '.NOTPARALLEL',
+                            '.SECONDARY',
+                            '.POSIX',
+                            '.PRECIOUS']))
 
 
 def _decorate_node(s):
