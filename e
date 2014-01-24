@@ -4,4 +4,8 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-$(dirname "${0}")/e.sh --mode=gui "$@"
+if [[ $(uname) = Darwin ]]; then
+   open -a emacs "$@"
+else
+   $(dirname "${0}")/e.sh --mode=gui "$@"
+fi
