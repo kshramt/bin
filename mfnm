@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo $(basename "${0}") DIR
+   echo $(basename "${0}") DIR > /dev/stderr
    exit 1
 }
 
