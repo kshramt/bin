@@ -6,7 +6,7 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-(
+{
    i=0
    for xs in "$@"
    do
@@ -29,4 +29,4 @@ set -o noclobber
    fi
 
    repeat.sh $# done
-) | bash
+} | bash
