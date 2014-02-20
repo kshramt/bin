@@ -28,8 +28,5 @@ set -o noclobber
       echo
    fi
 
-   for _ in "$@"
-   do
-      echo 'done'
-   done
+   repeat.sh $# done
 ) | bash
