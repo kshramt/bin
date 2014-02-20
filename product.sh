@@ -10,7 +10,7 @@ set -o noclobber
    i=0
    for xs in "$@"
    do
-      echo "for x$((i++)) in $(echo "$xs" | sed -e 's/,/\t/g'); do"
+      echo "for x$((i++)) in $(sed -e 's/,/\t/g' <<<$xs); do"
    done
 
    if [[ $# -gt 0 ]]; then
