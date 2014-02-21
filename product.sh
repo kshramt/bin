@@ -28,5 +28,5 @@ set -o noclobber
       echo
    fi
 
-   repeat.sh $# done
+   yes 'done' | head -n $#
 } | bash
