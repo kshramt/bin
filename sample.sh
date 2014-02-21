@@ -17,11 +17,12 @@ fi
 
 gawk -v N="$1" '
 BEGIN{
-   i = 0
+   i = N
 }
 {
-   if(i%N == 0){
+   if(i == N){
       print($0)
+      i = 0
    }
    i += 1
 }
