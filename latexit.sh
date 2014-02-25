@@ -49,8 +49,6 @@ fi
 \usepackage{bm}
 
 \DeclareMathOperator{\D}{\partial}
-\newcommand{\xxx}[1]{{\color{red}#1}}
-%\newcommand{\xxx}[1]{#1}
 \newcommand{\dd}[1]{\,d#1}
 \newcommand{\f}[2]{\frac{#1}{#2}}
 
