@@ -6,14 +6,6 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-readonly TMP_DIR="$(mktemp -d)"
-
-trap finalize EXIT
-
-finalize(){
-   \rm -fr "${TMP_DIR}"
-}
-
 usage_and_exit(){
    {
       echo '# Extract a header field value from a binary sac file.'
