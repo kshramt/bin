@@ -24,8 +24,17 @@ SAC="${MY_SAC:-sac}"
 file="$1"
 field="$2"
 
-"${SAC}" <<EOF | grep = | awk '{print $3}'
+{
+   "${SAC}" <<EOF
 read ${file}
 listhdr ${field}
 quit
 EOF
+} |
+cut \
+   --only-delimited \
+   --delimiter='=' \
+   --fields=2- |
+sed \
+   -e 's/^[ \t]\+//' \
+   -e 's/[ \t]\+$//'
