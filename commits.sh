@@ -17,7 +17,7 @@ fi
 
 cd ${1:-.}
 
-echo $'time\taddition\tdeletion\ttotal'
+echo -e 'time\taddition\tdeletion\ttotal'
 git log \
    --numstat \
    --pretty=tformat:'TIME %ai' \

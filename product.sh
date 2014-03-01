@@ -19,9 +19,9 @@ set -o noclobber
       for _ in "$@"
       do
          if [[ "$i" -gt 0 ]]; then
-            echo -n $'\t$x'"$((i++))"
+            echo -ne '\t$x'"$((i++))"
          else
-            echo -n $'$x'"$((i++))"
+            echo -ne '$x'"$((i++))"
          fi
       done
       echo -n '"'
