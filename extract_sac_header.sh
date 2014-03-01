@@ -8,7 +8,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo '# Extract a header field value from a binary sac file.'
+      echo '# Extract a header field value from a binary SAC file.'
       echo '# Nothing is printed if the field is not defined or exist.'
       echo $(basename "${0}") FILE FIELD
    } > /dev/stderr
