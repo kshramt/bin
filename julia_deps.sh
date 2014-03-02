@@ -26,7 +26,7 @@ do
       if [[ -r "${file}" ]]; then
          cat "${file}" \
             | (grep -v '^\(@\|#\|julia\)' || echo '') \
-            | gawk 'NF >= 1{print "  " $1}'
+            | awk 'NF >= 1{print "  " $1}'
       fi
    fi
 done

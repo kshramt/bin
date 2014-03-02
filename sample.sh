@@ -15,7 +15,7 @@ if [[ $# -ne 1 ]] || [[ $1 = "-h" ]] || [[ $1 = "--help" ]]; then
    usage_and_exit
 fi
 
-gawk -v N="$1" '
+awk -v N="$1" '
 BEGIN{
    i = N
 }

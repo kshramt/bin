@@ -1,6 +1,6 @@
 #!/bin/sh
 
-gawk \
+awk \
 '
 BEGIN{
     OFMT = "%.17g"

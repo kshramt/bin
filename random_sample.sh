@@ -15,9 +15,9 @@ if [[ $# -ne 1 ]] || [[ $1 = "-h" ]] || [[ $1 = "--help" ]]; then
    usage_and_exit
 fi
 
-gawk -v p="$1" '
+awk -v p="$1" '
 BEGIN{
-   srand(systime())
+   srand()
 }
 {
    if(rand() < p){

@@ -22,7 +22,7 @@ git log \
    --numstat \
    --pretty=tformat:'TIME %ai' \
    --reverse \
-   | gawk '
+   | awk '
 BEGIN{
    addition = 0; deletion = 0; total = 0; OFS="\t"
 }
