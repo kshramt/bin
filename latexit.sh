@@ -64,9 +64,9 @@ EOF
 EOF
    } > "${tex_file}"
 
-   lualatex "${tex_file}" > /dev/null
-   pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/null
    cat <<EOF | pdftk cropped.pdf update_info_utf8 - output /dev/stdout
+lualatex "${tex_file}" > /dev/stderr
+pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/stderr
 InfoKey: Equation
 InfoValue: ${equation}
 EOF
