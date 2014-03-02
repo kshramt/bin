@@ -23,16 +23,15 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-(
-   cd "${TMP_DIR}"
+cd "${TMP_DIR}"
 
-   base_name=main
-   tex_file="${base_name}".tex
-   pdf_file="${base_name}".pdf
-   equation="$(cat | tr '\n' ' ')"
+base_name=main
+tex_file="${base_name}".tex
+pdf_file="${base_name}".pdf
+equation="$(cat | tr '\n' ' ')"
 
-   {
-      cat <<EOF
+{
+   cat <<EOF
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltjsarticle}
 \usepackage[ipaex, deluxe, expert]{luatexja-preset}
@@ -57,17 +56,16 @@ fi
 \begin{document}
 \begin{align*}
 EOF
-      echo "${equation}"
-      cat <<EOF
+   echo "${equation}"
+   cat <<EOF
 \end{align*}
 \end{document}
 EOF
-   } > "${tex_file}"
+} > "${tex_file}"
 
-   cat <<EOF | pdftk cropped.pdf update_info_utf8 - output /dev/stdout
 lualatex "${tex_file}" > /dev/stderr
 pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/stderr
+cat <<EOF | pdftk cropped.pdf update_info_utf8 - output /dev/stdout
 InfoKey: Equation
 InfoValue: ${equation}
 EOF
-)
