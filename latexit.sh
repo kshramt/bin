@@ -32,19 +32,14 @@ equation="$(cat | tr '\n' ' ')"
 
 {
    cat <<EOF
-\RequirePackage[l2tabu, orthodox]{nag}
+%\RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltjsarticle}
 \usepackage[ipaex, deluxe, expert]{luatexja-preset}
 \usepackage[a0paper, landscape, margin=10mm]{geometry}
 \usepackage[usenames]{color}
-%\usepackage{microtype}
-\usepackage{verbatim}
-\usepackage[version=3]{mhchem}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathrsfs}
-\usepackage{breakurl}
 \usepackage{siunitx}
-\usepackage{algorithm2e}
 \usepackage{bm}
 
 \DeclareMathOperator{\D}{\partial}
