@@ -18,10 +18,8 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-awk '
+dawk.sh '
 BEGIN{
-   CONVFMT = "%.16g"
-   OFMT = "%.16g"
    srand()
    while(1){
       print(rand())

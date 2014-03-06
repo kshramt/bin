@@ -21,14 +21,12 @@ elif [[ $# -eq 3 ]]; then
    else
 
       seq 0 $(( $3 - 2 )) |
-      awk \
+      dawk.sh \
          -v x1="$1" \
          -v x2="$2" \
          -v nx="$3" \
          '
          BEGIN{
-            CONVFMT = "%.16g"
-            OFMT = "%.16g"
             dx = (x2 - x1)/(nx - 1)
          }
          {

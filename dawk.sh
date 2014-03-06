@@ -8,20 +8,10 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo $(basename "$0") 
+      echo '# double precision AWK'
+      echo $(basename "${0}")
    } > /dev/stderr
    exit 1
 }
 
-flatten.sh |
-dawk.sh '
-BEGIN{
-   sum = 0
-}
-{
-   sum += $i
-}
-END{
-   print(sum)
-}
-'
+"${MY_AWK:-awk}" -v CONVFMT='%.16g' -v OFMT='%.16g' "$@"

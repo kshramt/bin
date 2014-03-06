@@ -18,11 +18,7 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-awk '
-BEGIN{
-   CONVFMT = "%.16g"
-   OFMT = "%.16g"
-}
+dawk.sh '
 {
    if(NR%2 == 1){
       u = 1 - (2*$1)

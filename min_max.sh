@@ -1,10 +1,8 @@
 #!/bin/sh
 
-awk \
+dawk.sh \
 '
 BEGIN{
-    OFMT = "%.16g"
-    CONVFMT = "%.16g"
     x1 = "+inf" + 0
     x2 = "-inf" + 0
 }

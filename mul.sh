@@ -14,10 +14,8 @@ usage_and_exit(){
 }
 
 flatten.sh |
-awk '
+dawk.sh '
 BEGIN{
-   CONVFMT = "%.16g"
-   OFMT = "%.16g"
    mul = 1
 }
 {
