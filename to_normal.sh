@@ -20,8 +20,8 @@ fi
 
 awk '
 BEGIN{
-   CONVFMT = "%.18g"
-   OFMT = "%.18g"
+   CONVFMT = "%.16g"
+   OFMT = "%.16g"
 }
 {
    if(NR%2 == 1){

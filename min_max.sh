@@ -3,8 +3,8 @@
 awk \
 '
 BEGIN{
-    OFMT = "%.18g"
-    CONVFMT = "%.18g"
+    OFMT = "%.16g"
+    CONVFMT = "%.16g"
     x1 = "+inf" + 0
     x2 = "-inf" + 0
 }
