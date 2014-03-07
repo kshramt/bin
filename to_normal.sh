@@ -24,7 +24,7 @@ BEGIN{
 }
 {
    if(NR%2 == 1){
-      x1 = $1
+      x1 = 1 - $1
    }else{
       x2 = $1
       print sqrt(-2*log(x1))*sin(two_pi*x2)
