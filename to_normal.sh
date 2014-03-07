@@ -19,17 +19,16 @@ if [[ $# -ne 0 ]]; then
 fi
 
 dawk.sh '
+BEGIN{
+   two_pi = 4*atan2(1, 0)
+}
 {
    if(NR%2 == 1){
-      u = 1 - (2*$1)
+      x1 = $1
    }else{
-      v = 2*$1 - 1
-      w = u**2 + v**2
-      if(w <= 1){
-         z = sqrt(-2*log(w)/w)
-         print u*z
-         print v*z
-      }
+      x2 = $1
+      print sqrt(-2*log(x1))*sin(two_pi*x2)
+      print sqrt(-2*log(x1))*cos(two_pi*x2)
    }
 }
 '
