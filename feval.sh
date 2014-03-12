@@ -45,4 +45,4 @@ SRC="${TMP_DIR}"/main.F90
    echo   stop
    echo end program main
 } > "${SRC}"
-gf.sh "${SRC}"
+f.sh "${SRC}"
