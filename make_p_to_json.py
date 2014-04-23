@@ -5,21 +5,21 @@ import json
 
 
 def main(args):
-    deps_tree = {}
     _parse_args(args)
     for l in sys.stdin:
         if l.startswith('# Make data base, printed on '):
-            json.dump(_parse_db(sys.stdin, deps_tree), sys.stdout)
+            json.dump(_parse_db(sys.stdin), sys.stdout)
             sys.exit(0)
 
-def _parse_db(fp, deps_tree):
+def _parse_db(fp):
     for l in fp:
         if l.startswith('# Files'):
             fp.readline() # skip the first empty line
-            return _parse_entries(fp, deps_tree)
+            return _parse_entries(fp)
 
 
-def _parse_entries(fp, deps_tree):
+def _parse_entries(fp):
+    deps_tree = {}
     for l in fp:
         if l.startswith('# files hash-table stats:'):
             return deps_tree
