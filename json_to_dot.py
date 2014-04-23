@@ -6,14 +6,13 @@ import json
 
 def main(args):
     _parse_args(args)
-    deps_tree = json.load(sys.stdin)
     print("""
 digraph{
    graph [rankdir=LR]
    node [shape=box, style=filled]
    edge [color=gray]
     """)
-    for target, deps in deps_tree.items():
+    for target, deps in json.load(sys.stdin).items():
         target_str = escape(target)
         deps_str = [escape(dep) for dep in deps]
         print(target_str)
