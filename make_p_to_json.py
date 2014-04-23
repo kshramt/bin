@@ -13,6 +13,7 @@ def parse_make_p(fp):
     for l in fp:
         if l.startswith('# Make data base, printed on '):
             return _parse_db(fp)
+    raise ValueError("{} is not connected to `make -p`".format(fp))
 
 
 def _parse_db(fp):
@@ -20,6 +21,7 @@ def _parse_db(fp):
         if l.startswith('# Files'):
             fp.readline() # skip the first empty line
             return _parse_entries(fp)
+    return {}
 
 
 def _parse_entries(fp):
@@ -32,6 +34,7 @@ def _parse_entries(fp):
         else:
             _parse_entry(l, deps_tree)
             _skip_until_next_entry(fp)
+    return deps_tree
 
 
 def _parse_entry(l, deps_tree):
