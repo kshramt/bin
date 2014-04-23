@@ -13,8 +13,8 @@ digraph{
    edge [color=gray]
     """)
     for target, deps in json.load(sys.stdin).items():
-        target_str = escape(target)
-        deps_str = [escape(dep) for dep in deps]
+        target_str = _escape(target)
+        deps_str = [_escape(dep) for dep in deps]
         print(target_str)
         for dep_str in deps_str:
             print(dep_str)
@@ -22,7 +22,7 @@ digraph{
     print("}")
 
 
-def escape(s):
+def _escape(s):
     return '"{}"'.format(s.replace('"', r'\"'))
 
 
