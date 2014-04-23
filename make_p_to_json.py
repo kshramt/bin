@@ -11,6 +11,7 @@ def main(args):
             json.dump(_parse_db(sys.stdin), sys.stdout)
             sys.exit(0)
 
+
 def _parse_db(fp):
     for l in fp:
         if l.startswith('# Files'):
