@@ -6,10 +6,13 @@ import json
 
 def main(args):
     _parse_args(args)
-    for l in sys.stdin:
+    json.dump(parse_make_p(sys.stdin), sys.stdout)
+
+
+def parse_make_p(fp):
+    for l in fp:
         if l.startswith('# Make data base, printed on '):
-            json.dump(_parse_db(sys.stdin), sys.stdout)
-            sys.exit(0)
+            return _parse_db(fp)
 
 
 def _parse_db(fp):
