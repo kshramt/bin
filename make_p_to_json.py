@@ -13,7 +13,7 @@ def parse_make_p(fp):
     for l in fp:
         if l.startswith('# Make data base, printed on '):
             return _parse_db(fp)
-    raise ValueError("{} is not connected to `make -p`".format(fp))
+    raise ValueError("{} is not connected to `LANG=C make -p`".format(fp))
 
 
 def _parse_db(fp):
