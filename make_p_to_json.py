@@ -38,10 +38,8 @@ def _parse_entries(fp):
 
 
 def _parse_entry(l, deps_tree):
-    targets, deps = l.split(':', 2)
-    deps = [dep for dep in deps.split() if dep != '|']
-    for target in targets.split():
-        deps_tree[target] = deps
+    target, deps = l.split(':', 2)
+    deps_tree[target] = [dep for dep in deps.split() if dep != '|']
 
 
 def _skip_until_next_entry(fp):
