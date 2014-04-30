@@ -2,10 +2,6 @@
 
 IFS=$' \t\n'
 
-\unset -f unalias
-\unalias -a
-unset -f command
-
 # set -xv
 set -o nounset
 set -o errexit
