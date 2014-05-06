@@ -2,6 +2,7 @@
 
 import sys
 import json
+import re
 
 
 def main(args):
@@ -37,8 +38,9 @@ def _parse_entries(fp):
     return deps_tree
 
 
+TARGET_SPLIT_REGEX = re.compile(r': *')
 def _parse_entry(l, deps_tree):
-    target, deps = l.split(':', 2)
+    target, deps = TARGET_SPLIT_REGEX.split(l, 1)
     deps_tree[target] = [dep for dep in deps.split() if dep != '|']
 
 
