@@ -109,6 +109,6 @@ $ ruby1.9 gcmt_scrape.rb http://abc.def
   event_list = GcmtScrape.scrape(ARGV[0])
 
   # Please modify following code.
-  require 'yaml'
-  puts YAML.dump(event_list)
+  require 'json'
+  puts JSON.dump(event_list)
 end
