@@ -9,20 +9,45 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# generate uniform random numbers [0, 1)'
-      echo $(basename "$0")
+      echo "$(basename "$0")" '[SEED]'
    } > /dev/stderr
    exit 1
 }
 
-if [[ $# -ne 0 ]]; then
-   usage_and_exit
+opts=$(
+   getopt \
+      --unquoted \
+      --options h \
+      --longoptions help \
+      -- \
+      "$@"
+)
+set -- ${opts}
+
+while true
+do
+   case "$1" in
+      -h | --help)
+         usage_and_exit
+         ;;
+      --)
+         shift
+         break
+         ;;
+   esac
+done
+
+if [[ $# -eq 0 ]]; then
+   readonly SRAND='srand()'
+else
+   readonly SRAND="srand($1)"
 fi
 
-dawk.sh '
+dawk.sh "
 BEGIN{
-   srand()
+   ${SRAND}
    while(1){
       print(rand())
    }
 }
-'
+"
