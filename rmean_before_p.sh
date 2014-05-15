@@ -16,14 +16,6 @@ usage_and_exit(){
    exit 1
 }
 
-readonly TMP_DIR="$(mktemp -d)"
-
-finalize(){
-   rm -fr "${TMP_DIR}"
-}
-
-trap finalize EXIT
-
 if [[ $# -ne 2 ]]; then
    usage_and_exit
 fi
@@ -31,27 +23,17 @@ fi
 readonly IN_FILE="$1"
 readonly OUT_FILE="$2"
 
-readonly RMEAN_BEFORE_P_MACRO="${TMP_DIR}"/rmean_before_p.m
 
-cat <<EOF >| "${RMEAN_BEFORE_P_MACRO}"
+SAC_DISPLAY_COPYRIGHT=false sac <<EOF
 cut b a
 r ${IN_FILE}
+setbb t_before_p (&1,a - &1,b)
 int
-setbb abs_depmin (abs &1,depmin)
-if %abs_depmin ge &1,depmax
-   setbb sum_before_p &1,depmin
-else
-   setbb sum_before_p &1,depmax
-endif
-setbb mean_before_p (%sum_before_p / (&1,a - &1,b))
+cutim b (&1,delta * (&1,npts - 1.5)) e
+setbb mean_before_p (&1,depmax / %t_before_p)
 cut off
 r ${IN_FILE}
 sub %mean_before_p
 w ${OUT_FILE}
-EOF
-
-
-SAC_DISPLAY_COPYRIGHT=false sac <<EOF
-macro ${RMEAN_BEFORE_P_MACRO}
 quit
 EOF
