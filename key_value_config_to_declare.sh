@@ -4,8 +4,9 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-strip.sh "$@" \
-   | uncomment.sh \
+readonly THIS_DIR="$(dirname "$0")"
+"${THIS_DIR}"/strip.sh "$@" \
+   | "${THIS_DIR}"/uncomment.sh \
    | sed -e '
      /^$/d
      s/[ \t]\+/="/

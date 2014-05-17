@@ -18,8 +18,9 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-symmetrize.sh |
-dawk.sh '
+readonly THIS_DIR="$(dirname "$0")"
+"${THIS_DIR}"/symmetrize.sh |
+"${THIS_DIR}"/dawk.sh '
 BEGIN{
    sqrt2 = sqrt(2)
 }

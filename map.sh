@@ -17,6 +17,6 @@ if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-dawk.sh '
+"$(dirname "$0")"/dawk.sh '
 {print('"$1"')}
 '

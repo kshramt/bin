@@ -13,7 +13,7 @@ usage_and_exit(){
    exit 1
 }
 
-dawk.sh '
+"$(dirname "$0")"/dawk.sh '
 {
    for(i = 1; i < NF + 1; i++){
       print($i)

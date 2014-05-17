@@ -15,4 +15,5 @@ if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-e "$(tfnm $1)"
+readonly THIS_DIR="$(dirname "$0")"
+"${THIS_DIR}"/e "$("${THIS_DIR}"/tfnm $1)"

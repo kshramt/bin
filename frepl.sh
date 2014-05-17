@@ -20,4 +20,4 @@ if [[ $# -eq 0 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-feval.sh 'print*, ' "$@"
+"$(dirname "$0")"/feval.sh 'print*, ' "$@"

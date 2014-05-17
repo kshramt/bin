@@ -7,5 +7,5 @@ set -o pipefail
 if [[ $(uname) = Darwin ]]; then
    open -a emacs "$@"
 else
-   $(dirname "${0}")/e.sh --mode=gui "$@"
+   "$(dirname "${0}")"/e.sh --mode=gui "$@"
 fi

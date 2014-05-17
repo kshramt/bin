@@ -21,7 +21,7 @@ elif [[ $# -eq 3 ]]; then
    else
 
       seq 0 $(( $3 - 2 )) |
-      dawk.sh \
+      "$(dirname "$0")"/dawk.sh \
          -v x1="$1" \
          -v x2="$2" \
          -v nx="$3" \

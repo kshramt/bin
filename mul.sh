@@ -6,4 +6,5 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-flatten.sh | reduce.sh 1 'ret *= $1'
+readonly THIS_DIR="$(dirname "$0")"
+"${THIS_DIR}"/flatten.sh | "${THIS_DIR}"/reduce.sh 1 'ret *= $1'

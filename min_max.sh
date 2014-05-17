@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dawk.sh \
+"$(dirname "$0")"/dawk.sh \
 '
 BEGIN{
     x1 = "+inf" + 0

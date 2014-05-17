@@ -80,7 +80,7 @@ case "${MODE}" in
             if is_gui_running ${EMACSCLIENT_}; then
                 :
             else
-                e.sh --mode=cui "$@"
+                "$(dirname "$0")"/e.sh --mode=cui "$@"
             fi
         fi
         ;;

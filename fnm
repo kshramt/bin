@@ -15,4 +15,4 @@ if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-echo "$(ymdhms.sh)"_"$1"
+echo "$("$(dirname "$0")"/ymdhms.sh)"_"$1"

@@ -17,7 +17,7 @@ if [[ $# -ne 2 ]]; then
    usage_and_exit
 fi
 
-dawk.sh -v ret="$1" '
+"$(dirname "$0")"/dawk.sh -v ret="$1" '
 {'"$2"'}
 END{
    print(ret)

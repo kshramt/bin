@@ -43,7 +43,7 @@ else
    readonly SRAND="srand($1)"
 fi
 
-dawk.sh "
+"$(dirname "$0")"/dawk.sh "
 BEGIN{
    ${SRAND}
    while(1){

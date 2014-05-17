@@ -18,7 +18,7 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-dawk.sh '
+"$(dirname "$0")"/dawk.sh '
 BEGIN{
    two_pi = 4*atan2(1, 0)
 }

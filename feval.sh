@@ -41,4 +41,4 @@ SRC="${TMP_DIR}"/main.F90
    echo   stop
    echo end program main
 } > "${SRC}"
-f.sh "${SRC}"
+"$(dirname "$0")"/f.sh "${SRC}"

@@ -17,8 +17,9 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-for m in $(fort_deps.sh | grep -v ifport)
+readonly THIS_DIR="$(dirname "$0")"
+for m in $("${THIS_DIR}"/fort_deps.sh | grep -v ifport)
 do
    echo "${m}"
-   fort_deps_recursive.sh < "${m}.F90"
+   "${THIS_DIR}"/fort_deps_recursive.sh < "${m}.F90"
 done
