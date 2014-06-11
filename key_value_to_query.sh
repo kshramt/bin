@@ -19,6 +19,6 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-sed -e 's/ /=/' |
+sed -e 's/[ \t]\+/=/' |
 tr '\n' '&' |
 sed -e 's/&$//'
