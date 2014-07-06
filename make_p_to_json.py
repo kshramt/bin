@@ -32,6 +32,8 @@ def _parse_entries(fp):
             return deps_tree
         elif l.startswith('# Not a target:'):
             _skip_until_next_entry(fp)
+        elif l.startswith("# makefile (from '"):
+            fp.readline() # skip information on target specific variable value
         else:
             _parse_entry(l, deps_tree)
             _skip_until_next_entry(fp)
