@@ -5,6 +5,13 @@ set -o errexit
 set -o pipefail
 
 if [[ $(uname) = Darwin ]]; then
+   for f in "$@"
+   do
+      if [[ ! -f $f ]]; then
+         mkdir -p $(dirname "${f}")
+         touch "${f}"
+      fi
+   done
    open -a emacs "$@"
 else
    "$(dirname "${0}")"/e.sh --mode=gui "$@"
