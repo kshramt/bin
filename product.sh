@@ -30,5 +30,5 @@ set -o noclobber
       echo
    fi
 
-   yes 'done' | head -n $#
+   { yes 'done' || : ; } | head -n $#
 } | bash
