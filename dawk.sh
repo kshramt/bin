@@ -14,4 +14,4 @@ usage_and_exit(){
    exit 1
 }
 
-"${MY_AWK:-awk}" -v CONVFMT='%.16g' -v OFMT='%.16g' "$@"
+"${MY_AWK:-awk}" -v CONVFMT='%.15g' -v OFMT='%.15g' "$@"
