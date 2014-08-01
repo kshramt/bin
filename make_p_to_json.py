@@ -32,6 +32,8 @@ def _parse_entries(fp):
             return deps_tree
         elif l.startswith('# Not a target:'):
             _skip_until_next_entry(fp)
+        elif l.startswith("# makefile (from '"):
+            fp.readline() # skip information on target specific variable value
         else:
             _parse_entry(l, deps_tree)
             _skip_until_next_entry(fp)
@@ -56,7 +58,7 @@ def _is_new_entry(s):
 
 def _parse_args(args):
     if len(args) != 1:
-        print("# parse Makefile's data base and print dependency graph in dot format")
+        print("# parse Makefile's data base and print dependency graph in JSON format")
         print("LANG=C gmake all test --dry-run --print-data-base | {} | json_to_dot.py | dot -Tpdf >| workflow.pdf".format(args[0]))
         sys.exit(1)
 
