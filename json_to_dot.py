@@ -10,7 +10,7 @@ def main(args):
 digraph{
    graph [rankdir=LR]
    node [shape=box, style=filled]
-    edge [color="#00000011"]
+    edge [color="#00000088"]
     """)
     for target, deps in json.load(sys.stdin).items():
         target_str = _escape(target)
