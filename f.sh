@@ -23,7 +23,7 @@ fi
 SRC="$1"
 EXE="${SRC}".exe
 
-${MY_FORTRAN_DEBUG} -o "${EXE}" "${SRC}"
+${MY_FC} ${MY_FFLAG_COMMON} ${MY_FFLAG_DEBUG} -o "${EXE}" "${SRC}"
 if [[ "${SRC}" == /* ]]; then
    "${EXE}"
 else
