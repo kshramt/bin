@@ -21,7 +21,9 @@ finalize(){
    fi
 }
 
-echo | "$target" || :
+if echo | "$target"; then
+   false
+fi
 [[ "$(echo -1 1 | "$target")" = 0 ]]
 [[ "$(echo 1 -1 | "$target")" = 0 ]]
 [[ "$(echo 1 -1 2 | "$target")" = 1 ]]
