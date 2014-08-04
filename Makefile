@@ -16,9 +16,12 @@ export SHELL := /bin/bash
 export SHELLOPTS := pipefail:errexit:nounset:noclobber
 
 # Tasks
-.PHONY: all deps
+.PHONY: all deps test
 all: deps
 deps: $(DEPS:%=dep/%.updated)
+
+test: deps
+	test/median_row.sh
 
 # Files
 
