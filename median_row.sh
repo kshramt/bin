@@ -15,6 +15,10 @@ usage_and_exit(){
    exit 1
 }
 
+if [[ $# -ne 0 ]]; then
+   usage_and_exit
+fi
+
 "$(dirname "${0}")"/dawk.sh '
 {
    if(NF < 1){
