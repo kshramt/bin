@@ -50,4 +50,4 @@ BEGIN{
       print(rand())
    }
 }
-"
+" || :

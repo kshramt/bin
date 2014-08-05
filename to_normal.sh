@@ -31,4 +31,4 @@ BEGIN{
       print sqrt(-2*log(x1))*cos(two_pi*x2)
    }
 }
-'
+' || :

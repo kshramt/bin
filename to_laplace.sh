@@ -32,4 +32,4 @@ BEGIN{
       print(log(1 + x)/sqrt2)
    }
 }
-'
+' || :
