@@ -32,6 +32,7 @@ SRC="${TMP_DIR}"/main.F90
 {
    echo program main
    echo   use, intrinsic:: iso_fortran_env
+   echo   use, intrinsic:: iso_c_binding
    echo   ! implicit none
    if [[ $# -eq 0 ]]; then
       cat
