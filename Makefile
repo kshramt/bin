@@ -22,7 +22,6 @@ deps: $(DEPS:%=dep/%.updated)
 
 test: deps
 	test/median_row.sh
-	./binning.py.sh --test
 
 # Files
 
