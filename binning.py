@@ -6,7 +6,6 @@ import sys
 # import re
 # import pickle
 
-import numpy as np
 # import scipy as sp
 # import matplotlib.pyplot as plt
 # import pandas as pd
@@ -34,10 +33,12 @@ def _usage_and_exit():
 
 
 def binning(xs, bins):
-    assert bins >= 1
+    if bins < 1:
+        return []
     n_xs = len(xs)
-    assert n_xs
-    if n_xs == 1:
+    if n_xs < 1:
+        return []
+    elif n_xs == 1:
         x_min = xs[0] - 1/2
         x_max = xs[0] + 1/2
     else:
@@ -62,7 +63,7 @@ def binning(xs, bins):
              'n': n,
              'y': n/n_xs/dx}
             for (x1, x2), n
-            in zip(kshramt.each_cons(np.linspace(x_min, x_max, bins + 1), 2), ns)]
+            in zip(kshramt.each_cons(kshramt.linspace(x_min, x_max, bins + 1), 2), ns)]
 
 
 def _min_max(xs):
