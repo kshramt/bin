@@ -19,7 +19,7 @@ if [[ $# -ne 0 ]]; then
 fi
 
 "$(dirname "$0")"/dawk.sh '
-$1 != 0{
+$1 > 0{
    print(2*($1 - 0.5))
 }
 '
