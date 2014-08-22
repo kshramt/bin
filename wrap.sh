@@ -25,17 +25,15 @@ fi
 
 "$(dirname "${0}")"/dawk.sh -v N="${1}" '
 BEGIN{
-   buf = ""
    i = 1
 }
 {
    for(j = 1; j <= NF; j++){
       if(i >= N){
-         print buf $j
-         buf = ""
+         print $j
          i = 1
       }else{
-         buf = buf $j "\t"
+         printf $j "\t"
          i += 1
       }
    }
