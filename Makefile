@@ -1,6 +1,6 @@
 # Constants
 DIR := $(abspath .)
-DEPS :=
+DEPS := kshramt.py
 
 export MY_PYTHON ?= python3
 PYTHON := $(MY_PYTHON)
@@ -37,7 +37,9 @@ dep/%.updated: config/dep/%.ref dep/%.synced
 	git fetch origin
 	git merge "$$(cat ../../$<)"
 	cd -
-	$(MAKE) -C dep/$*
+	if [[ -r dep/$*/Makefile ]]; then
+	   $(MAKE) -C dep/$*
+	fi
 	touch $@
 
 dep/%.synced: config/dep/%.uri | dep/%

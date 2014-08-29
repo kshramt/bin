@@ -2,6 +2,8 @@
 
 
 import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dep', 'kshramt.py'))
 
 import kshramt
 
@@ -14,7 +16,7 @@ def main(args):
     if bins in ['-h', '--help']:
         _usage_and_exit()
     for b in kshramt.binning([float(l) for l in sys.stdin], bins):
-        print('{}\t{}\t{}\t{}'.format(b['x1'], b['x2'], b['n'], b['y']))
+        print('\t'.join(str(v) for v in b))
 
 
 def _usage_and_exit():
