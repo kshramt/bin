@@ -93,7 +93,7 @@ readonly GRDIMAGE_INTERPOLATE_OPTION=-nb
 EOF
 else
    cat <<EOF
-"${GMT}" gmtset PAPER_MEDIA a4
+"${GMT}" gmtset PAPER_MEDIA a4+
 "${GMT}" gmtset PAGE_ORIENTATION portrait
 "${GMT}" gmtset MEASURE_UNIT cm
 "${GMT}" gmtset PLOT_DEGREE_FORMAT D
