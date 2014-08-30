@@ -1,9 +1,9 @@
 #!/bin/bash
 
+#set -xv
 set -o nounset
 set -o errexit
 set -o pipefail
-set -o xtrace
 
 usage_and_exit(){
     echo ${0} -f GRD_FILE -n [N_CONTOUR] 1>&2
@@ -59,38 +59,38 @@ GMT gmtset PAGE_ORIENTATION portrait
 GMT gmtset MEASURE_UNIT cm
 GMT gmtset PLOT_DEGREE_FORMAT D
 
-readonly RANGES=$("${DIR}"/parse_grdinfo.rb.sh ${DATA_FILE} '#{w}/#{e}/#{s}/#{n}')
-readonly ZS=$("${DIR}"/parse_grdinfo.rb.sh ${DATA_FILE} '#{z0}/#{z1}/#{(z1 - z0)/200.0}')
-readonly Z_INC=$("${DIR}"/parse_grdinfo.rb.sh ${DATA_FILE} "#{((z1 - z0)/${N_CONTOUR})}")
-readonly TICK_INTERVAL=$("${DIR}"/parse_grdinfo.rb.sh ${DATA_FILE} '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')
-readonly CPT_FILE=$(mktemp)
+readonly RANGES="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{w}/#{e}/#{s}/#{n}')"
+readonly ZS="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{z0}/#{z1}/#{(z1 - z0)/200.0}')"
+readonly Z_INC="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" "#{((z1 - z0)/${N_CONTOUR})}")"
+readonly TICK_INTERVAL="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')"
+readonly CPT_FILE="$(mktemp)"
 
 GMT makecpt \
     -Crainbow \
-    -T${ZS} \
-    > ${CPT_FILE}
+    -T"${ZS}" \
+    > "${CPT_FILE}"
 
 {
     GMT psbasemap \
         -JX15c \
-        -R${RANGES} \
-        -B${TICK_INTERVAL} \
+        -R"${RANGES}" \
+        -B"${TICK_INTERVAL}" \
         -U \
         -K
     GMT grdimage \
-        ${DATA_FILE} \
+        "${DATA_FILE}" \
         -JX \
         -R \
-        -C${CPT_FILE} \
+        -C"${CPT_FILE}" \
         -Sb \
         -U \
         -O \
         -K
     GMT grdcontour \
-        ${DATA_FILE} \
+        "${DATA_FILE}" \
         -JX \
         -R \
-        -C${Z_INC} \
+        -C"${Z_INC}" \
         -S10 \
         -O
 }
