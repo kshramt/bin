@@ -55,30 +55,54 @@ done
 readonly DATA_FILE="${opt_f}"
 readonly N_CONTOUR="${opt_n:-10}"
 
-readonly RANGES="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{w}/#{e}/#{s}/#{n}')"
-readonly ZS="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{z0}/#{z1}/#{(z1 - z0)/200.0}')"
-readonly Z_INC="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" "#{((z1 - z0)/${N_CONTOUR})}")"
-readonly TICK_INTERVAL="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')"
+# file w e s n z0 z1 dx dy nx ny
+readonly GRD_INFO="$("${GMT}" grdinfo -C "${DATA_FILE}")"
+readonly W="$(echo "${GRD_INFO}" | cut -f2)"
+readonly E="$(echo "${GRD_INFO}" | cut -f3)"
+readonly S="$(echo "${GRD_INFO}" | cut -f4)"
+readonly N="$(echo "${GRD_INFO}" | cut -f5)"
+readonly Z0="$(echo "${GRD_INFO}" | cut -f6)"
+readonly Z1="$(echo "${GRD_INFO}" | cut -f7)"
+readonly RANGES="${W}/${E}/${S}/${N}"
+readonly ZS="${Z0}/${Z1}/$(awk -v z0="${Z0}" -v z1="${Z1}" 'BEGIN{print (z1 - z0)/200}')"
+readonly Z_INC="$(awk -v z0="${Z0}" -v z1="${Z1}" -v n="${N_CONTOUR}" 'BEGIN{print (z1 - z0)/n}')"
+readonly TICK_INTERVAL="$(awk -v w="${W}" -v e="${E}" 'BEGIN{print (e - w)/5}')"/"$(awk -v s="${S}" -v n="${N}" 'BEGIN{print (n - s)/5}')"
+
 
 cat<<EOF
 #!/bin/bash
 
+set -o nounset
+set -o errexit
+
+
 readonly CPT_FILE="\$(mktemp)"
 
-if [[ "$("${GMT}" --version)" =~ 5* ]]; then
-   # todo: specify size matching -R (ex. 45cx25c)
-   "${GMT}" gmtset PS_MEDIA a4
-   "${GMT}" gmtset PS_PAGE_ORIENTATION portrait
-   "${GMT}" gmtset PROJ_LENGTH_UNIT cm
-   "${GMT}" gmtset FORMAT_GEO_MAP D
-    readonly GRDIMAGE_INTERPOLATE_OPTION=-nb
+
+EOF
+
+
+if [[ "$("${GMT}" --version 2>&1)" =~ ^5+ ]]; then
+   cat <<EOF
+# todo: specify size matching -R (ex. 45cx25c) instead of a4
+"${GMT}" gmtset PS_MEDIA a4
+"${GMT}" gmtset PS_PAGE_ORIENTATION portrait
+"${GMT}" gmtset PROJ_LENGTH_UNIT cm
+"${GMT}" gmtset FORMAT_GEO_MAP D
+readonly GRDIMAGE_INTERPOLATE_OPTION=-nb
+EOF
 else
-   "${GMT}" gmtset PAPER_MEDIA a4
-   "${GMT}" gmtset PAGE_ORIENTATION portrait
-   "${GMT}" gmtset MEASURE_UNIT cm
-   "${GMT}" gmtset PLOT_DEGREE_FORMAT D
-    readonly GRDIMAGE_INTERPOLATE_OPTION=-Sb
+   cat <<EOF
+"${GMT}" gmtset PAPER_MEDIA a4
+"${GMT}" gmtset PAGE_ORIENTATION portrait
+"${GMT}" gmtset MEASURE_UNIT cm
+"${GMT}" gmtset PLOT_DEGREE_FORMAT D
+readonly GRDIMAGE_INTERPOLATE_OPTION=-Sb
+EOF
 fi
+
+cat <<EOF
+
 
 "${GMT}" makecpt \\
     -Crainbow \\
