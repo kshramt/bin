@@ -10,7 +10,7 @@ usage_and_exit(){
     exit "${1:-1}"
 }
 
-if [[ ${#} -lt 2 ]]; then
+if [[ "${#}" -lt 2 ]]; then
     usage_and_exit 1
 fi
 
@@ -69,7 +69,7 @@ readonly Z_INC="$(awk -v z0="${Z0}" -v z1="${Z1}" -v n="${N_CONTOUR}" 'BEGIN{pri
 readonly TICK_INTERVAL="$(awk -v w="${W}" -v e="${E}" 'BEGIN{print (e - w)/5}')"/"$(awk -v s="${S}" -v n="${N}" 'BEGIN{print (n - s)/5}')"
 
 
-cat<<EOF
+cat <<EOF
 #!/bin/bash
 
 set -o nounset
@@ -84,7 +84,7 @@ EOF
 
 if [[ "$("${GMT}" --version 2>&1)" =~ ^5+ ]]; then
    cat <<EOF
-# todo: specify size matching -R (ex. 45cx25c) instead of a4
+# todo: specify size matching -R (e.g. 45cx25c) instead of a4
 "${GMT}" gmtset PS_MEDIA a4
 "${GMT}" gmtset PS_PAGE_ORIENTATION portrait
 "${GMT}" gmtset PROJ_LENGTH_UNIT cm
