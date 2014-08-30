@@ -55,16 +55,26 @@ done
 readonly DATA_FILE="${opt_f}"
 readonly N_CONTOUR="${opt_n:-10}"
 
-"${GMT}" gmtset PAPER_MEDIA a4+
-"${GMT}" gmtset PAGE_ORIENTATION portrait
-"${GMT}" gmtset MEASURE_UNIT cm
-"${GMT}" gmtset PLOT_DEGREE_FORMAT D
-
 readonly RANGES="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{w}/#{e}/#{s}/#{n}')"
 readonly ZS="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{z0}/#{z1}/#{(z1 - z0)/200.0}')"
 readonly Z_INC="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" "#{((z1 - z0)/${N_CONTOUR})}")"
 readonly TICK_INTERVAL="$("${DIR}"/parse_grdinfo.rb.sh "${DATA_FILE}" '#{((e - w)/5.0).abs}/#{((n - s)/5.0).abs}')"
 readonly CPT_FILE="$(mktemp)"
+
+if [[ "$("${GMT}" --version)" =~ 5* ]]; then
+   # todo: specify size matching -R (ex. 45cx25c)
+   "${GMT}" gmtset PS_MEDIA a4
+   "${GMT}" gmtset PS_PAGE_ORIENTATION portrait
+   "${GMT}" gmtset PROJ_LENGTH_UNIT cm
+   "${GMT}" gmtset FORMAT_GEO_MAP D
+    readonly GRDIMAGE_INTERPOLATE_OPTION=-nb
+else
+   "${GMT}" gmtset PAPER_MEDIA a4+
+   "${GMT}" gmtset PAGE_ORIENTATION portrait
+   "${GMT}" gmtset MEASURE_UNIT cm
+   "${GMT}" gmtset PLOT_DEGREE_FORMAT D
+    readonly GRDIMAGE_INTERPOLATE_OPTION=-Sb
+fi
 
 "${GMT}" makecpt \
     -Crainbow \
@@ -83,7 +93,7 @@ readonly CPT_FILE="$(mktemp)"
         -JX \
         -R \
         -C"${CPT_FILE}" \
-        -Sb \
+        "${GRDIMAGE_INTERPOLATE_OPTION}" \
         -U \
         -O \
         -K
@@ -92,6 +102,6 @@ readonly CPT_FILE="$(mktemp)"
         -JX \
         -R \
         -C"${Z_INC}" \
-        -S10 \
+        -S"${N_CONTOUR}" \
         -O
 }
