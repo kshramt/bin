@@ -28,7 +28,10 @@ cd "${TMP_DIR}"
 base_name=main
 tex_file="${base_name}".tex
 pdf_file="${base_name}".pdf
-equation="$(cat | tr '\n' ' ')"
+log_dir="${HOME}"/d/log/latexit
+mkdir -p "${log_dir}"
+log_file="${log_dir}"/"$($(dirname "${0}")/ymdhmsn.sh)".tex
+equation="$(cat | tee "${log_file}" | tr '\n' ' ')"
 
 {
    cat <<EOF
