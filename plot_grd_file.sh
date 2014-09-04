@@ -4,6 +4,7 @@
 set -o nounset
 set -o errexit
 set -o pipefail
+set -o noclobber
 
 usage_and_exit(){
     echo "${0}" '-f GRD_FILE -n [N_CONTOUR]' 1>&2
@@ -107,7 +108,7 @@ cat <<EOF
 "${GMT}" makecpt \\
     -Crainbow \\
     -T"${ZS}" \\
-    > "\${CPT_FILE}"
+    >| "\${CPT_FILE}"
 
 {
     "${GMT}" psbasemap \\
