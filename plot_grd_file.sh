@@ -106,33 +106,33 @@ cat <<EOF
 
 
 "${GMT}" makecpt \\
-    -Crainbow \\
-    -T"${ZS}" \\
-    >| "\${CPT_FILE}"
+   -Crainbow \\
+   -T"${ZS}" \\
+   >| "\${CPT_FILE}"
 
 {
-    "${GMT}" psbasemap \\
-        -JX15c \\
-        -R"${RANGES}" \\
-        -B"${TICK_INTERVAL}" \\
-        -U \\
-        -K
-    "${GMT}" grdimage \\
-        "${DATA_FILE}" \\
-        -JX \\
-        -R \\
-        -C"\${CPT_FILE}" \\
-        "\${GRDIMAGE_INTERPOLATE_OPTION}" \\
-        -Q \\
-        -U \\
-        -O \\
-        -K
-    "${GMT}" grdcontour \\
-        "${DATA_FILE}" \\
-        -JX \\
-        -R \\
-        -C"${Z_INC}" \\
-        -S"${N_CONTOUR}" \\
-        -O
+   "${GMT}" psbasemap \\
+      -JX15c \\
+      -R"${RANGES}" \\
+      -B"${TICK_INTERVAL}" \\
+      -U \\
+      -K
+   "${GMT}" grdimage \\
+      "${DATA_FILE}" \\
+      -JX \\
+      -R \\
+      -C"\${CPT_FILE}" \\
+      "\${GRDIMAGE_INTERPOLATE_OPTION}" \\
+      -Q \\
+      -U \\
+      -O \\
+      -K
+   "${GMT}" grdcontour \\
+      "${DATA_FILE}" \\
+      -JX \\
+      -R \\
+      -C"${Z_INC}" \\
+      -S"${N_CONTOUR}" \\
+      -O
 }
 EOF
