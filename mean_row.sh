@@ -22,7 +22,8 @@ fi
 "$(dirname "${0}")"/dawk.sh '
 {
    if(NF < 1){
-      print 0
+      print "NF < 1" > "/dev/stderr"
+      exit 1
    }else{
       sum = 0
       for(i = 1; i <= NF; i++){
