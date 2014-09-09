@@ -28,7 +28,7 @@ def _escape(s):
 
 def _parse_args(args):
     if len(args) != 1:
-        print('# convert tree in json format to dot format')
+        print('# convert a dependency graph stored in JSON format to DOT format')
         print('{} < deps.json | dot -Tpdf >| workflow.pdf'.format(args[0]))
         sys.exit(1)
 
