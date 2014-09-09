@@ -7,21 +7,20 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo $(basename "${0}") "[DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf"
+   echo $(basename "${0}") "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
    exit 1
 }
 
-if [[ $# -ne 0 ]]; then
+if [[ $# -gt 1 ]]; then
    usage_and_exit
 fi
-
-cd ${1:-.}
 
 echo -e 'time\taddition\tdeletion\ttotal'
 git log \
    --numstat \
    --pretty=tformat:'TIME %ai' \
    --reverse \
+   "${1:-.}" \
    | awk '
 BEGIN{
    addition = 0; deletion = 0; total = 0; OFS="\t"
