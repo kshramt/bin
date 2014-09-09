@@ -26,24 +26,24 @@ def _parse_db(fp):
 
 
 def _parse_entries(fp):
-    deps_tree = {}
+    deps_graph = {}
     for l in fp:
         if l.startswith('# files hash-table stats:'):
-            return deps_tree
+            return deps_graph
         elif l.startswith('# Not a target:'):
             _skip_until_next_entry(fp)
         elif l.startswith("# makefile (from '"):
             fp.readline() # skip information on target specific variable value
         else:
-            _parse_entry(l, deps_tree)
+            _parse_entry(l, deps_graph)
             _skip_until_next_entry(fp)
-    return deps_tree
+    return deps_graph
 
 
 TARGET_SPLIT_REGEX = re.compile(r': *')
-def _parse_entry(l, deps_tree):
+def _parse_entry(l, deps_graph):
     target, deps = TARGET_SPLIT_REGEX.split(l, 1)
-    deps_tree[target] = [dep for dep in deps.split() if dep != '|']
+    deps_graph[target] = [dep for dep in deps.split() if dep != '|']
 
 
 def _skip_until_next_entry(fp):
