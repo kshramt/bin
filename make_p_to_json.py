@@ -40,7 +40,8 @@ def _parse_entries(fp):
     return deps_graph
 
 
-TARGET_SPLIT_REGEX = re.compile(r': *')
+
+TARGET_SPLIT_REGEX = re.compile(r':{1,2} *')
 def _parse_entry(l, deps_graph):
     target, deps = TARGET_SPLIT_REGEX.split(l, 1)
     deps_graph[target] = [dep for dep in deps.split() if dep != '|']
