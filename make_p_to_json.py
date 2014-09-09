@@ -10,11 +10,15 @@ def main(args):
     json.dump(parse_make_p(sys.stdin), sys.stdout)
 
 
-def parse_make_p(fp):
+def parse_make_p(fp, graphs=None):
+    if graphs is None:
+        graphs = []
     for l in fp:
         if l.startswith('# Make data base, printed on '):
-            return _parse_db(fp)
-    raise ValueError("{} is not connected to `LANG=C make -p`".format(fp))
+            graphs.append(_parse_db(fp))
+    if not graphs:
+        raise ValueError("{} seems not connected to `LANG=C make -p`".format(fp))
+    return graphs
 
 
 def _parse_db(fp):
