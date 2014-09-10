@@ -15,7 +15,7 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-\cd "${HOME}"/.julia/METADATA/
+cd "${HOME}"/.julia/v0.4/METADATA/
 for package in *
 do
    echo "rake ${package}"
