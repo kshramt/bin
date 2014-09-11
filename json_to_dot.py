@@ -6,6 +6,8 @@ import json
 
 class Id:
 
+    __slots__ = ['_i']
+
     def __init__(self):
         super().__init__()
         self._i = 0
