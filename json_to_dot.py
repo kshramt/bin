@@ -4,7 +4,7 @@ import sys
 import json
 
 
-class Id(object):
+class Id:
 
     def __init__(self):
         super().__init__()
