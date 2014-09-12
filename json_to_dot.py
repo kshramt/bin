@@ -21,7 +21,7 @@ class Id:
 def main(args):
     _parse_args(args)
     print("""
-digraph{
+digraph G {
    graph [rankdir=LR]
    node [shape=plaintext]
     edge [color="#00000088"]

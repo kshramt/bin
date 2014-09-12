@@ -47,7 +47,7 @@ decorate(){
 }
 
 cat <<EOF
-digraph {
+digraph G {
    graph [rankdir=LR]
    node [shape=plaintext]
    edge [color=gray]
