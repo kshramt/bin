@@ -49,7 +49,7 @@ decorate(){
 cat <<EOF
 digraph {
    graph [rankdir=LR]
-   node [shape=box, style=filled]
+   node [shape=plaintext]
    edge [color=gray]
 EOF
 

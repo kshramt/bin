@@ -23,7 +23,7 @@ def main(args):
     print("""
 digraph{
    graph [rankdir=LR]
-   node [shape=box, style=filled]
+   node [shape=plaintext]
     edge [color="#00000088"]
     """)
     i = Id()
