@@ -30,7 +30,7 @@ tex_file="${base_name}".tex
 pdf_file="${base_name}".pdf
 log_dir="${HOME}"/d/log/latexit
 mkdir -p "${log_dir}"
-log_file="${log_dir}"/"$($(dirname "${0}")/ymdhmsn.sh)".tex
+log_file="${log_dir}"/"$($(dirname "${0}")/iso_8601_time.sh)".tex
 equation="$(cat | tee "${log_file}" | tr '\n' ' ')"
 
 {
