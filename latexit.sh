@@ -31,7 +31,7 @@ pdf_file="${base_name}".pdf
 log_dir="${HOME}"/d/log/latexit
 mkdir -p "${log_dir}"
 log_file="${log_dir}"/"$($(dirname "${0}")/iso_8601_time.sh)".tex
-equation="$(cat | tee "${log_file}" | tr '\n' ' ')"
+equation="$(cat | tee "${log_file}")"
 
 {
    cat <<EOF
@@ -63,7 +63,7 @@ EOF
 
 lualatex "${tex_file}" > /dev/stderr
 pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/stderr
-cat <<EOF | pdftk cropped.pdf update_info_utf8 - output /dev/stdout
-InfoKey: Equation
-InfoValue: ${equation}
-EOF
+{
+   echo 'InfoKey: Equation'
+   echo InfoValue: "$(echo "${equation}" | sed -e 's/%.*//g' | tr '\n' ' ')"
+} | pdftk cropped.pdf update_info_utf8 - output /dev/stdout
