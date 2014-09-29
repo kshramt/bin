@@ -16,7 +16,7 @@ LANG=C gmake -p | python3 make_p_to_json.py | python3 json_to_dot.py | dot -Tpdf
 ## [LaTeXiT](http://www.chachatelier.fr/latexit/) Alternative
 
 ```bash
-cat <<EOF | latexit.sh >| eq_1.pdf
+latexit.sh <<EOF >| eq_1.pdf
 \bm{d} = \bm{G}\bm{m} + \bm{e}
 EOF
 ```
