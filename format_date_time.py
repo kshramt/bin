@@ -5,10 +5,8 @@ import datetime
 import unittest
 import argparse
 import signal
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dep', 'kshramt.py'))
 
-import kshramt
+import dep.kshramt_py.kshramt as kshramt
 
 
 __version__ = '0.0.0'

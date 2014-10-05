@@ -2,10 +2,8 @@
 
 
 import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dep', 'kshramt.py'))
 
-import kshramt
+import dep.kshramt_py.kshramt as kshramt
 
 
 def main(args):

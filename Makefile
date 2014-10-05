@@ -1,6 +1,6 @@
 # Constants
 DIR := $(abspath .)
-DEPS := kshramt.py
+DEPS := kshramt_py
 
 export MY_PYTHON ?= python3
 PYTHON := $(MY_PYTHON)

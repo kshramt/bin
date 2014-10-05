@@ -1,9 +1,7 @@
 import sys
 import argparse
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dep', 'kshramt.py'))
 
-from kshramt import get_tick_configurations
+from dep.kshramt_py.kshramt import get_tick_configurations
 
 
 __version__ = '0.0.0'

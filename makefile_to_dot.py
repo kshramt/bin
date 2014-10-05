@@ -12,10 +12,8 @@ import sys
 import re
 import argparse
 import unittest
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dep', 'kshramt.py'))
 
-from kshramt import TestAction, list_2d, flatten
+from dep.kshramt_py.kshramt import TestAction, list_2d, flatten
 
 
 __version__ = '0.0.0'
