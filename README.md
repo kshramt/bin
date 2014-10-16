@@ -22,20 +22,13 @@ EOF
 ```
 
 - `latexit.sh`
-    - Compile LaTeX equation to a cropped PDF.
+    - Compile a LaTeX equation to a cropped PDF.
 
-Original LaTeX input is stored in the PDF file.
+The LaTeX input is stored in output PDF file with Base64 encoding.
+You can extract the equation by:
 
 ```bash
-pdftk eq_1.pdf dump_data_utf8
-```
-
-```
-...
-InfoBegin
-InfoKey: Equation
-InfoValue: \bm{d} = \bm{G}\bm{m} + \bm{e} 
-...
+pdftk eq1.pdf dump_data_utf8 | grep -A1 'InfoKey: latexit\.sh' | tail -n1 | sed -e 's/InfoValue: //' | base64 --decode
 ```
 
 # License
