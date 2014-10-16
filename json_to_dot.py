@@ -24,7 +24,7 @@ def main(args):
 digraph G {
    graph [rankdir=LR]
    node [shape=plaintext]
-    edge [color="#00000088"]
+   edge [color="#00000088"]
     """)
     i = Id()
     for graph in json.load(sys.stdin):
