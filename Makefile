@@ -22,6 +22,7 @@ deps: $(DEPS:%=dep/%.updated)
 
 test: deps
 	test/median_row.sh
+	test/linspace.sh
 
 # Files
 

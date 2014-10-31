@@ -19,8 +19,6 @@ elif [[ $# -eq 3 ]]; then
    if [[ $3 -lt 2 ]]; then
       usage_and_exit
    else
-
-      seq 0 $(( $3 - 2 )) |
       "$(dirname "$0")"/dawk.sh \
          -v x1="$1" \
          -v x2="$2" \
@@ -28,9 +26,9 @@ elif [[ $# -eq 3 ]]; then
          '
          BEGIN{
             dx = (x2 - x1)/(nx - 1)
-         }
-         {
-            print(x1 + dx*$1)
+            for(i = 0; i < nx - 1; i++){
+               print(x1 + dx*i)
+            }
          }'
       echo "$2"
    fi
