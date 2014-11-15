@@ -64,7 +64,7 @@ done
 
 if [[ "${opt_print:-false}" = true ]]; then
    pdftk - dump_data_utf8 |
-   grep -A1 'InfoKey: latexit\.sh' |
+   grep -A1 'InfoKey: '"${program_name}" |
    tail -n1 |
    sed -e 's/InfoValue: //' |
    base64 --decode
