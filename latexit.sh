@@ -6,21 +6,23 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-readonly TMP_DIR="$(mktemp -d)"
-
-trap finalize EXIT
-
-finalize(){
-   rm -fr "${TMP_DIR}"
-}
 
 readonly program_name="$(basename "${0}")"
 usage_and_exit(){
    {
-      echo "${program_name}" "[options] 'e^{i\pi} + 1 = 0' >| eq1.pdf"
-      echo "${program_name}" '[options] < eq1.tex >| eq1.pdf'
-      echo "# -h, --help: print help message"
-      echo "# -cLATEX, --command=LATEX: set LaTeX engine [lualatex]"
+      cat <<EOF
+# create a PDF
+
+${program_name} [options] 'e^{i\pi} + 1 = 0' >| eq1.pdf
+${program_name} [options] < eq1.tex >| eq1.pdf
+# -h, --help: print help message
+# -cLATEX, --command=LATEX: set LaTeX engine [lualatex]
+
+# extract a formula from a PDF
+
+${program_name} -p < eq1.pdf
+# -p, --print: print LaTeX formula in a PDF file.
+EOF
    } > /dev/stderr
    exit "${1:-1}"
 }
@@ -29,8 +31,8 @@ usage_and_exit(){
 opts=$(
    getopt \
       --unquoted \
-      --options hc: \
-      --longoptions help,command: \
+      --options hpc: \
+      --longoptions help,print,command: \
       -- \
       "${@}"
 )
@@ -41,6 +43,9 @@ do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
+         ;;
+      "-p" | "--print")
+         opt_print=true
          ;;
       "-c" | "--command")
          opt_command="${2}"
@@ -56,11 +61,24 @@ do
    esac
    shift
 done
+
+if [[ "${opt_print:-false}" = true ]]; then
+   pdftk - dump_data_utf8 |
+   grep -A1 'InfoKey: latexit\.sh' |
+   tail -n1 |
+   sed -e 's/InfoValue: //' |
+   base64 --decode
+   exit
+fi
+
+readonly tmp_dir="$(mktemp -d)"
+trap finalize EXIT
+finalize(){
+   rm -fr "${tmp_dir}"
+}
+cd "${tmp_dir}"
+
 readonly latex="${opt_command:-lualatex}"
-
-
-cd "${TMP_DIR}"
-
 readonly base_name=main
 readonly tex_file="${base_name}".tex
 readonly pdf_file="${base_name}".pdf
