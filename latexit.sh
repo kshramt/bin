@@ -27,34 +27,34 @@ usage_and_exit(){
 
 
 opts=$(
-    getopt \
-        --unquoted \
-        --options hc: \
-        --longoptions help,command: \
-        -- \
-        "${@}"
+   getopt \
+      --unquoted \
+      --options hc: \
+      --longoptions help,command: \
+      -- \
+      "${@}"
 )
 set -- ${opts} # DO NOT quote.
 
 while true
 do
-    case "${1}" in
-        "-h" | "--help")
-            usage_and_exit 0
-            ;;
-        "-c" | "--command")
-            opt_command="${2}"
-            shift
-            ;;
-        --)
-            shift
-            break
-            ;;
-        *)
-            usage_and_exit 1
-            ;;
-    esac
-    shift
+   case "${1}" in
+      "-h" | "--help")
+         usage_and_exit 0
+         ;;
+      "-c" | "--command")
+         opt_command="${2}"
+         shift
+         ;;
+      --)
+         shift
+         break
+         ;;
+      *)
+         usage_and_exit 1
+         ;;
+   esac
+   shift
 done
 readonly latex="${opt_command:-lualatex}"
 
