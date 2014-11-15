@@ -21,7 +21,7 @@ ${program_name} [options] < eq1.tex >| eq1.pdf
 # extract a formula from a PDF
 
 ${program_name} -p < eq1.pdf
-# -p, --print: print LaTeX formula in a PDF file.
+# -p, --print: print a LaTeX formula in a PDF file
 EOF
    } > /dev/stderr
    exit "${1:-1}"
