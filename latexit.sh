@@ -17,14 +17,47 @@ finalize(){
 readonly program_name="$(basename "${0}")"
 usage_and_exit(){
    {
-      echo "${program_name}" '< EQUATION.tex > EQUATION.pdf'
+      echo "${program_name}" "[options] 'e^{i\pi} + 1 = 0' >| eq1.pdf"
+      echo "${program_name}" '[options] < eq1.tex >| eq1.pdf'
+      echo "# -h, --help: print help message"
+      echo "# -cLATEX, --command=LATEX: set LaTeX engine [lualatex]"
    } > /dev/stderr
-   exit 1
+   exit "${1:-1}"
 }
 
-if [[ $# -ne 0 ]]; then
-   usage_and_exit
-fi
+
+opts=$(
+    getopt \
+        --unquoted \
+        --options hc: \
+        --longoptions help,command: \
+        -- \
+        "${@}"
+)
+set -- ${opts} # DO NOT quote.
+
+while true
+do
+    case "${1}" in
+        "-h" | "--help")
+            usage_and_exit 0
+            ;;
+        "-c" | "--command")
+            opt_command="${2}"
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            usage_and_exit 1
+            ;;
+    esac
+    shift
+done
+readonly latex="${opt_command:-lualatex}"
+
 
 cd "${TMP_DIR}"
 
@@ -34,13 +67,19 @@ readonly pdf_file="${base_name}".pdf
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
 readonly log_file="${log_dir}"/"$($(dirname "${0}")/iso_8601_time.sh)".tex
-cat > "${log_file}"
+{
+   if [[ $# -ne 0 ]]; then
+      echo "$@"
+   else
+      cat
+   fi
+} > "${log_file}"
 
 {
    cat <<EOF
 %\RequirePackage[l2tabu, orthodox]{nag}
 EOF
-   if [[ "${LATEX:=lualatex}" = "lualatex" ]]; then
+   if [[ "${latex}" = "lualatex" ]]; then
       cat <<EOF
 \documentclass{ltjsarticle}
 \usepackage[ipaex, deluxe, expert]{luatexja-preset}
@@ -74,7 +113,7 @@ EOF
 EOF
 } > "${tex_file}"
 
-"${LATEX}" "${tex_file}" > /dev/stderr
+"${latex}" "${tex_file}" > /dev/stderr
 pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/stderr
 {
    echo 'InfoKey: '"${program_name}"
