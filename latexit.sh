@@ -39,8 +39,18 @@ cat > "${log_file}"
 {
    cat <<EOF
 %\RequirePackage[l2tabu, orthodox]{nag}
+EOF
+   if [[ "${LATEX:=lualatex}" = "lualatex" ]]; then
+      cat <<EOF
 \documentclass{ltjsarticle}
 \usepackage[ipaex, deluxe, expert]{luatexja-preset}
+EOF
+   else
+      cat <<EOF
+\documentclass{article}
+EOF
+   fi
+cat <<EOF
 \usepackage[a0paper, landscape, margin=10mm]{geometry}
 \usepackage[usenames]{color}
 \usepackage{amsmath, amssymb, amsthm}
@@ -64,7 +74,7 @@ EOF
 EOF
 } > "${tex_file}"
 
-lualatex "${tex_file}" > /dev/stderr
+"${LATEX}" "${tex_file}" > /dev/stderr
 pdfcrop --margins=1 "${pdf_file}" cropped.pdf > /dev/stderr
 {
    echo 'InfoKey: '"${program_name}"
