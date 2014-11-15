@@ -16,7 +16,7 @@ LANG=C gmake -p | python3 make_p_to_json.py | python3 json_to_dot.py | dot -Tpdf
 ## [LaTeXiT](http://www.chachatelier.fr/latexit/) Alternative
 
 ```bash
-latexit.sh <<EOF >| eq_1.pdf
+latexit.sh <<'EOF' >| eq_1.pdf
 \bm{d} = \bm{G}\bm{m} + \bm{e}
 EOF
 ```
@@ -28,7 +28,7 @@ The LaTeX input is stored in output PDF file with Base64 encoding.
 You can extract the equation by:
 
 ```bash
-pdftk eq1.pdf dump_data_utf8 | grep -A1 'InfoKey: latexit\.sh' | tail -n1 | sed -e 's/InfoValue: //' | base64 --decode
+latexit.sh -p < eq_1.pdf
 ```
 
 # License
