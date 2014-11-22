@@ -7,6 +7,8 @@ PYTHON := $(MY_PYTHON)
 export MY_RUBY ?= ruby2
 RUBY := $(RUBY)
 
+TEST_NAMES := median_row linspace
+
 # Configurations
 .SUFFIXES:
 .DELETE_ON_ERROR:
@@ -20,13 +22,15 @@ export SHELLOPTS := pipefail:errexit:nounset:noclobber
 all: deps
 deps: $(DEPS:%=dep/%.updated)
 
-test: deps
-	test/median_row.sh
-	test/linspace.sh
+test: deps $(TEST_NAMES:%=test/%.sh.tested)
 
 # Files
 
 # Rules
+
+test/%.sh.tested: test/%.sh %.sh
+	$<
+	touch $@
 
 define DEPS_RULE_TEMPLATE =
 dep/$(1)/%: | dep/$(1).updated ;
