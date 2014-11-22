@@ -8,18 +8,7 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-readonly target="$(dirname "${0}")"/../"$(basename "${0}")"
-
-trap finalize EXIT
-
-finalize(){
-   if [[ $? = 0 ]]; then
-      echo PASS "${0}"
-   else
-      echo FAIL "${0}" > /dev/stderr
-      exit $?
-   fi
-}
+source "$(dirname "${0}")"/util.sh
 
 readonly ret="$("$target" 0 1 11)"
 readonly expected="0
