@@ -28,7 +28,7 @@ test: deps $(TEST_NAMES:%=test/%.sh.tested)
 
 # Rules
 
-test/%.sh.tested: test/%.sh %.sh
+test/%.sh.tested: test/%.sh %.sh test/util.sh
 	$<
 	touch $@
 
