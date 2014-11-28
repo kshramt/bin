@@ -83,7 +83,7 @@ case "${MODE}" in
                 "$(dirname "$0")"/e.sh --mode=cui "$@"
             fi
         fi
-        "${EMACSCLIENT_}" -e '(raise-frame)'
+        "${EMACSCLIENT_}" -e '(raise-frame)' > /dev/null
         wmctrl -a :ACTIVE:
         ;;
     cui)
