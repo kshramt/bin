@@ -1,0 +1,29 @@
+#!/bin/bash
+# @(#) create a junk file
+
+IFS=$' \t\n'
+
+# set -xv
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o noclobber
+
+usage_and_exit(){
+   {
+      echo "$(basename "${0}")" '[PREFIX] [SUFFIX]'
+   } > /dev/stderr
+   exit "${1:-1}"
+}
+
+readonly base_name=delete_me
+
+if [[ $# -eq 0 ]]; then
+   "${EDITOR}" ./"${base_name}".tmp
+elif [[ $# -eq 1 ]]; then
+   "${EDITOR}" ./"${base_name}"."${1}"
+elif [[ $# -eq 2 ]]; then
+   "${EDITOR}" "${1}"/"${base_name}"."${2}"
+else
+   usage_and_exit 1
+fi
