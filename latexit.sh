@@ -100,7 +100,7 @@ EOF
    if [[ "${latex}" = "lualatex" ]]; then
       cat <<EOF
 \documentclass{ltjsarticle}
-\usepackage[ipaex, deluxe, expert]{luatexja-preset}
+\usepackage[ipa, expert]{luatexja-preset}
 EOF
    else
       cat <<EOF
