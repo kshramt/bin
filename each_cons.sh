@@ -33,22 +33,20 @@ else
    awk -v n="$1" '
 BEGIN{
    split("", fs)
-   n_1 = n - 1
+   i_now = 0
 }
 NR < n{
-   fs[NR] = $0
+   i_now = (i_now + 1)%n
+   fs[i_now] = $0
 }
 NR >= n{
-   printf fs[1] "\t"
-   for(i = 2; i < n; i++){
-      fsi = fs[i]
-      printf fsi "\t"
-#print i > "/dev/stderr"
-      fs[i - 1] = fsi
+   i_now = (i_now + 1)%n
+   fs[i_now] = $0
+
+   for(i = 1; i < n; i++){
+      printf fs[(i_now + i)%n] "\t"
    }
    print $0
-   fs[n_1] = $0
 }
 '
 fi
-
