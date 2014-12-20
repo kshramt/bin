@@ -22,7 +22,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 
-if [[ "${1:0:1}" = '-' ]]; then
+if [[ "$1" =~ '^[1-9]+$' ]]; then
    usage_and_exit
 fi
 
