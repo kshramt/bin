@@ -24,11 +24,11 @@ EOF
 - `latexit.sh`
     - Compile a LaTeX equation to a cropped PDF.
 
-The LaTeX input is stored in output PDF file with Base64 encoding.
+The LaTeX input is attached to a generated PDF file.
 You can extract the equation by:
 
 ```bash
-latexit.sh -p < eq_1.pdf
+latexit.sh -p eq_1.pdf
 ```
 
 # License
