@@ -30,12 +30,20 @@ BEGIN{
 {
    for(j = 1; j <= NF; j++){
       if(i >= N){
-         print $j
+         print "\t" $j
          i = 1
+      }else if(i <= 1){
+         printf $j
+         i += 1
       }else{
-         printf $j "\t"
+         printf "\t" $j
          i += 1
       }
+   }
+}
+END{
+   if(i != 1){
+      printf "\n"
    }
 }
 '
