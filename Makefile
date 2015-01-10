@@ -18,11 +18,11 @@ export SHELL := /bin/bash
 export SHELLOPTS := pipefail:errexit:nounset:noclobber
 
 # Tasks
-.PHONY: all deps test
+.PHONY: all deps check
 all: deps
 deps: $(DEPS:%=dep/%.updated)
 
-test: deps $(TEST_NAMES:%=test/%.sh.tested)
+check: deps $(TEST_NAMES:%=test/%.sh.tested)
 
 # Files
 
