@@ -23,7 +23,7 @@ if [[ "${1}" = "-h" || "${1}" = '--help' ]]; then
 fi
 
 
-"$(dirname "${0}")"/dawk.sh -v N="${1}" '
+"${MY_AWK:-gawk}" -v N="${1}" '
 BEGIN{
    i = 1
 }
