@@ -1,0 +1,46 @@
+#!/bin/bash
+
+IFS=$' \t\n'
+
+# set -xv
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o noclobber
+
+usage_and_exit(){
+   {
+      echo "$(basename "${0}")" '<description>'
+   } >&2
+   exit "${1:-1}"
+}
+
+
+readonly dir="$(cd "$(dirname "$0")"; pwd -P)"
+readonly progrma_name="$(basename "$0")"
+readonly log_dir="$HOME"/d/log/"$progrma_name"
+readonly log_file="$log_dir"/"$progrma_name".log
+readonly lock_file="$log_dir"/"$progrma_name".lock
+
+
+mkdir -p "$log_dir"
+
+
+readonly now="$("$dir"/iso_8601_time.sh)"
+readonly host_name="$(hostname)"
+readonly tab=$'\t'
+if [[ -f "$lock_file" ]]; then
+   echo "$now${tab}stop$tab$host_name" >> "$log_file"
+   if [[ $# = 0 ]]; then
+      rm "$lock_file"
+   else
+      echo "$now${tab}start$tab$host_name$tab$@" >> "$log_file"
+   fi
+else
+   if [[ $# = 0 ]]; then
+      usage_and_exit
+   else
+      echo  "$now${tab}start$tab$host_name$tab$@" >> "$log_file"
+      touch "$lock_file"
+   fi
+fi
