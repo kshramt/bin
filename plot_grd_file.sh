@@ -16,7 +16,7 @@ if [[ "${#}" -lt 2 ]]; then
 fi
 
 readonly DIR="$(dirname "$0")"
-readonly GMT="${MY_GMT:-GMT}"
+readonly GMT="${MY_GMT:-gmt}"
 
 opts=$(
     getopt \
