@@ -16,7 +16,7 @@ usage_and_exit(){
 }
 
 
-readonly dir="$(cd "$(dirname "$0")"; pwd -P)"
+readonly dir="$(cd "${0%/*}"; pwd -P)"
 readonly progrma_name="$(basename "$0")"
 readonly log_dir="$HOME"/d/log/"$progrma_name"
 readonly log_file="$log_dir"/"$progrma_name".log
