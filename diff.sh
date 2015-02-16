@@ -25,8 +25,8 @@ readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 "$dir"/dawk.sh -v OFS=$'\t' '
 NR == 1{
-   x1 = $1
-   y1 = $2
+   x = $1
+   y = $2
 }
 NR > 1{
    dx = $1 - x
