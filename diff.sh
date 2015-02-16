@@ -23,7 +23,9 @@ fi
 readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 
-"$dir"/dawk.sh --include "$dir"/assert.awk -v OFS=$'\t' '
+AWKPATH="$dir":"${AWKPATH:-}" "$dir"/dawk.sh -v OFS=$'\t' '
+@include "assert.awk"
+
 NR == 1{
    assert(NF == 2, $0)
    x = $1
