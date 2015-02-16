@@ -23,12 +23,14 @@ fi
 readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 
-"$dir"/dawk.sh -v OFS=$'\t' '
+"$dir"/dawk.sh --include "$dir"/assert.awk -v OFS=$'\t' '
 NR == 1{
+   assert(NF == 2, $0)
    x = $1
    y = $2
 }
 NR > 1{
+   assert(NF == 2, $0)
    dx = $1 - x
    print x + 0.5*dx, ($2 - y)/dx
    x = $1
