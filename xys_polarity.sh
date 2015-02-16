@@ -25,9 +25,10 @@ readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 
 "$dir"/xys_cut.sh "$1" "$2" |
-sum.sh | (
-   read sum
-   "$dir"/dawk.sh -v sum="$sum" '
+   cut -f2 |
+   sum.sh | (
+      read sum
+      "$dir"/dawk.sh -v sum="$sum" '
 BEGIN{
    if(sum >= 0){
       print 1
@@ -36,4 +37,4 @@ BEGIN{
    }
 }
 '
-)
+   )
