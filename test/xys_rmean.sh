@@ -10,7 +10,7 @@ set -o noclobber
 
 source "$(dirname "${0}")"/util.sh
 
-readonly ret="$(cat <<EOF | "$target" 2.5
+readonly ret="$(cat <<EOF | "$target" -inf 2.5
 1 10
 2 20
 3 15

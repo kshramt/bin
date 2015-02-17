@@ -10,8 +10,8 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo '# extract XY data in [START, END]'
-      echo "$(basename "${0}")" 'START END < XYS'
+      echo '# extract XY data in [X1, X2]'
+      echo "$(basename "${0}")" 'X1 X2 < XYS'
    } >&2
    exit "${1:-1}"
 }
@@ -25,9 +25,9 @@ fi
 readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 
-"$dir"/dawk.sh -v OFS=$'\t' -v start="$1" -v end="$2" '
-$1 >= start{
-   if($1 > end){
+"$dir"/dawk.sh -v OFS=$'\t' -v x1="$1" -v x2="$2" '
+$1 >= x1{
+   if($1 > x2){
       exit
    }
    print $1, $2
