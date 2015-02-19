@@ -7,7 +7,7 @@ PYTHON := $(MY_PYTHON)
 export MY_RUBY ?= ruby2
 RUBY := $(RUBY)
 
-TEST_NAMES := median_row linspace each_cons wrap ys_to_xys diff xys_rmean xys_scale xys_cut
+TEST_NAMES := median_row linspace each_cons wrap ys_to_xys diff xys_rmean xys_scale xys_cut xys_taper
 
 # Configurations
 .SUFFIXES:
