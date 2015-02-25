@@ -16,7 +16,7 @@ usage_and_exit(){
 ${program_name} [options] 'e^{i\pi} + 1 = 0' >| eq1.pdf
 ${program_name} [options] < eq1.tex >| eq1.pdf
 # -h, --help: print help message
-# -cLATEX, --command=LATEX: set LaTeX engine [lualatex]
+# -cLATEX, --command=LATEX: set LaTeX engine [pdflatex]
 
 # extract a formula from a PDF
 
@@ -114,7 +114,7 @@ fi
 
 
 
-readonly latex="${opt_command:-lualatex}"
+readonly latex="${opt_command:-pdflatex}"
 {
    cat <<EOF
 %\RequirePackage[l2tabu, orthodox]{nag}
