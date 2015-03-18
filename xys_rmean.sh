@@ -23,17 +23,9 @@ readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 if [[ $# -eq 3 ]]; then
    "$dir"/xys_cut.sh "$2" "$3" < "$1" |
-      "$dir"/dawk.sh '
-BEGIN{
-   sum = 0
-}
-{
-   sum += $2
-}
-END{
-   print sum/NR
-}
-' | (
+      awk '{print $2}' |
+      "$dir"/mean.sh |
+      (
          read offset
          "$dir"/dawk.sh -v OFS=$'\t' -v offset="$offset" '
 {
