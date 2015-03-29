@@ -27,8 +27,7 @@ readonly dir="$(dirname "$0")"
 
 "$dir"/dawk.sh -v th="$1" '
 BEGIN{
-   pi = 2*atan2(1, 0)
-   th = pi*th/180
+   th = th*atan2(1, 0)/90
    c = cos(th)
    s = sin(th)
 }
