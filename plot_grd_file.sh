@@ -24,7 +24,7 @@ opts=$(
         --options hf:n: \
         --longoptions help,file:,n_contour: \
         -- \
-        "${@}"
+        "$@"
 )
 set -- ${opts} # DO NOT quote.
 

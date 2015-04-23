@@ -35,7 +35,7 @@ opts=$(
       --options hp:P:c: \
       --longoptions help,print:,print-full:,command: \
       -- \
-      "${@}"
+      "$@"
 )
 set -- ${opts} # DO NOT quote.
 
