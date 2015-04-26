@@ -1,5 +1,7 @@
 #!/bin/bash
 
+IFS=$' \t\n'
+
 # set -xv
 set -o nounset
 set -o errexit
@@ -7,12 +9,15 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo $(basename "${0}") NAME > /dev/stderr
-   exit 1
+   {
+      echo "$(basename "${0}")" '<name>'
+   } >&2
+   exit "${1:-1}"
 }
+
 
 if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-echo "$("$(dirname "$0")"/ymdhms.sh)"_"$1"
+echo "$(dirname "$1")"/"$("$(cd "${0%/*}"; pwd -P)"/ymdhms.sh)"_"$(basename "$1")"
