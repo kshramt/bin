@@ -1,0 +1,44 @@
+#!/bin/bash
+
+IFS=$' \t\n'
+
+# set -xv
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o noclobber
+
+usage_and_exit(){
+   {
+      echo "$(basename "${0}")" "'pi=2*atan2(1, 0)' 'OFMT=\"%.3g\"' 'pi100 = pi^100' 'sin(pi100)/cos(pi100)'"
+   } >&2
+   exit "${1:-1}"
+}
+
+
+if [[ $# -lt 1 ]]; then
+   exit 0
+fi
+
+body=''
+while true
+do
+   case "$1" in
+      -h | --help)
+         usage_and_exit 0
+         ;;
+      *)
+         if [[ $# -eq 1 ]]; then
+            body="$body; print $1"
+            break
+         else
+            body="$body; $1"
+         fi
+         ;;
+   esac
+   shift
+done
+
+
+readonly dir="$(cd "${0%/*}"; pwd -P)"
+"$dir"/dawk.sh "BEGIN{$body}"
