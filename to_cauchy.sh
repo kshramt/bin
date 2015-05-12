@@ -28,4 +28,5 @@ BEGIN{
    x = half_pi*$1
    print(sin(x)/cos(x))
 }
-'
+' || :
+

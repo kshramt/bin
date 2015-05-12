@@ -19,4 +19,4 @@ usage_and_exit(){
       print($i)
    }
 }
-'
+' || :
