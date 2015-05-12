@@ -13,7 +13,7 @@ usage_and_exit(){
    exit 1
 }
 
-"${MY_AWK:-awk}" '
+${MY_AWK:-awk} '
 {
    for(i = 1; i < NF + 1; i++){
       print($i)

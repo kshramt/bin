@@ -57,7 +57,7 @@ readonly DATA_FILE="${opt_f}"
 readonly N_CONTOUR="${opt_n:-10}"
 
 # file w e s n z0 z1 dx dy nx ny
-readonly GRD_INFO="$("${GMT}" grdinfo -C "${DATA_FILE}")"
+readonly GRD_INFO="$(${GMT} grdinfo -C "${DATA_FILE}")"
 readonly W="$(echo "${GRD_INFO}" | cut -f2)"
 readonly E="$(echo "${GRD_INFO}" | cut -f3)"
 readonly S="$(echo "${GRD_INFO}" | cut -f4)"
@@ -83,21 +83,21 @@ readonly CPT_FILE="\$(mktemp)"
 EOF
 
 
-if [[ "$("${GMT}" --version 2>&1)" =~ ^5+ ]]; then
+if [[ "$(${GMT} --version 2>&1)" =~ ^5+ ]]; then
    cat <<EOF
 # todo: specify size matching -R (e.g. 45cx25c) instead of a4
-"${GMT}" gmtset PS_MEDIA a4
-"${GMT}" gmtset PS_PAGE_ORIENTATION portrait
-"${GMT}" gmtset PROJ_LENGTH_UNIT cm
-"${GMT}" gmtset FORMAT_GEO_MAP D
+${GMT} gmtset PS_MEDIA a4
+${GMT} gmtset PS_PAGE_ORIENTATION portrait
+${GMT} gmtset PROJ_LENGTH_UNIT cm
+${GMT} gmtset FORMAT_GEO_MAP D
 readonly GRDIMAGE_INTERPOLATE_OPTION=-nb
 EOF
 else
    cat <<EOF
-"${GMT}" gmtset PAPER_MEDIA a4+
-"${GMT}" gmtset PAGE_ORIENTATION portrait
-"${GMT}" gmtset MEASURE_UNIT cm
-"${GMT}" gmtset PLOT_DEGREE_FORMAT D
+${GMT} gmtset PAPER_MEDIA a4+
+${GMT} gmtset PAGE_ORIENTATION portrait
+${GMT} gmtset MEASURE_UNIT cm
+${GMT} gmtset PLOT_DEGREE_FORMAT D
 readonly GRDIMAGE_INTERPOLATE_OPTION=-Sb
 EOF
 fi
@@ -105,19 +105,19 @@ fi
 cat <<EOF
 
 
-"${GMT}" makecpt \\
+${GMT} makecpt \\
    -Crainbow \\
    -T"${ZS}" \\
    >| "\${CPT_FILE}"
 
 {
-   "${GMT}" psbasemap \\
+   ${GMT} psbasemap \\
       -JX15c \\
       -R"${RANGES}" \\
       -B"${TICK_INTERVAL}" \\
       -U \\
       -K
-   "${GMT}" grdimage \\
+   ${GMT} grdimage \\
       "${DATA_FILE}" \\
       -JX \\
       -R \\
@@ -127,7 +127,7 @@ cat <<EOF
       -U \\
       -O \\
       -K
-   "${GMT}" grdcontour \\
+   ${GMT} grdcontour \\
       "${DATA_FILE}" \\
       -JX \\
       -R \\

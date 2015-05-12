@@ -28,7 +28,7 @@ readonly in_file="$1"
 readonly field="$2"
 readonly value="$3"
 
-"${MY_SAC:-sac}" <<EOF
+${MY_SAC:-sac} <<EOF
 r ${in_file}
 chnhdr ${field} ${value}
 w ${out_file}

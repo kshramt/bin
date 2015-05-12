@@ -19,13 +19,12 @@ if [[ $# -ne 2 ]]; then
    usage_and_exit
 fi
 
-SAC="${MY_SAC:-sac}"
 
 file="$1"
 field="$2"
 
 {
-   "${SAC}" <<EOF
+   "${MY_SAC:-sac}" <<EOF
 read ${file}
 listhdr ${field}
 quit
