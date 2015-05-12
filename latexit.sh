@@ -85,7 +85,8 @@ readonly tex_file="$tmp_dir"/"$base_name".tex
 
 
 if [[ "$is_opt_print" = true ]]; then
-   pdftk "$opt_print_file" unpack_files output "$tmp_dir"
+   pdfdetach -saveall -o "$tmp_dir" "$opt_print_file"
+
    if [[ -r "$equation_file" ]]; then
       cat "$equation_file"
    else
@@ -98,7 +99,7 @@ if [[ "$is_opt_print" = true ]]; then
    exit
 fi
 if [[ "$is_opt_print_full" = true ]]; then
-   pdftk "$opt_print_full_file" unpack_files output "$tmp_dir"
+   pdfdetach -saveall -o "$tmp_dir" "$opt_print_full_file"
    cat "$tex_file"
    exit
 fi
