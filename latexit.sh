@@ -40,6 +40,7 @@ opts=$(
 set -- ${opts} # DO NOT quote.
 
 
+readonly caller_dir="$(pwd)"
 is_opt_print=false
 is_opt_print_full=false
 while true
@@ -49,12 +50,12 @@ do
          usage_and_exit 0
          ;;
       "-p" | "--print")
-         opt_print_file="${2}"
+         opt_print_file="$caller_dir/$2"
          is_opt_print=true
          break
          ;;
       "-P" | "--print-full")
-         opt_print_full_file="${2}"
+         opt_print_full_file="$caller_dir/$2"
          is_opt_print_full=true
          break
          ;;
@@ -78,14 +79,16 @@ trap finalize EXIT
 finalize(){
    rm -fr "${tmp_dir}"
 }
+cd "$tmp_dir"
 
-readonly equation_file="$tmp_dir"/equation.tex
+
+readonly equation_file=equation.tex
 readonly base_name=main
-readonly tex_file="$tmp_dir"/"$base_name".tex
+readonly tex_file="$base_name".tex
 
 
 if [[ "$is_opt_print" = true ]]; then
-   pdfdetach -saveall -o "$tmp_dir" "$opt_print_file"
+   pdfdetach -saveall "$opt_print_file"
 
    if [[ -r "$equation_file" ]]; then
       cat "$equation_file"
@@ -99,7 +102,7 @@ if [[ "$is_opt_print" = true ]]; then
    exit
 fi
 if [[ "$is_opt_print_full" = true ]]; then
-   pdfdetach -saveall -o "$tmp_dir" "$opt_print_full_file"
+   pdfdetach -saveall "$opt_print_full_file"
    cat "$tex_file"
    exit
 fi
@@ -132,9 +135,13 @@ EOF
    fi
 cat <<EOF
 \usepackage[a0paper, landscape, margin=10mm]{geometry}
-\usepackage[usenames]{color}
+\usepackage[active, tightpage]{preview}
+\setlength\PreviewBorder{1pt}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{embedfile}
+
 \usepackage{mathrsfs}
+\usepackage[usenames]{color}
 \usepackage{siunitx}
 \usepackage{bm}
 
@@ -142,26 +149,27 @@ cat <<EOF
 \newcommand{\dd}[1]{\,d#1}
 \newcommand{\f}[2]{\frac{#1}{#2}}
 
-\pagenumbering{gobble}
-
+\embedfile{$equation_file}
+\embedfile{$tex_file}
 \begin{document}
-\begin{align*}
+\thispagestyle{empty}
+\begin{preview}
+  \$\displaystyle
+    \begin{aligned}
 EOF
    cat "$equation_file"
    cat <<EOF
-\end{align*}
+    \end{aligned}
+  \$
+\end{preview}
 \end{document}
 EOF
 } > "$tex_file"
 
 
-"$latex" -output-directory="$tmp_dir" "$tex_file" 1>&2
-
-readonly pdf_file="$tmp_dir"/"${base_name}".pdf
-readonly cropped_file="$tmp_dir"/cropped.pdf
-pdfcrop --margins=1 "$pdf_file" "$cropped_file" 1>&2
-
-pdftk "$cropped_file" attach_files "$equation_file" "$tex_file" output -
+"$latex" "$tex_file" 1>&2
+readonly pdf_file="${base_name}".pdf
+cat "$pdf_file"
 
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
