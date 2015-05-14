@@ -12,10 +12,5 @@ fi
 readonly my_trash_dir="${MY_TRASH_DIR:-"${HOME}"/d/trash}"
 readonly base_dir="${my_trash_dir}"/"$(date +'%FT%T.%N%z')"
 
-i=0
-for f in "$@"
-do
-   dir="${base_dir}"/"$((i++))"
-   mkdir -p "${dir}"
-   mv -- "$f" "${dir}"
-done
+mkdir -p "$base_dir"
+mv --backup=numbered "$@" "$base_dir"
