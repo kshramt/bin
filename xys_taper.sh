@@ -19,7 +19,7 @@ usage_and_exit(){
 }
 
 
-readonly dir="$(cd "${0%/*}"; pwd -P)"
+readonly dir="${0%/*}"
 
 
 if [[ $# -eq 3 ]]; then

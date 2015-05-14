@@ -20,6 +20,6 @@ if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
    usage_and_exit
 fi
 
-dir="$("$(cd "${0%/*}"; pwd -P)"/fnm "$1")"
+dir="$("${0%/*}"/fnm "$1")"
 mkdir -p "${dir}"
 echo "${dir}"

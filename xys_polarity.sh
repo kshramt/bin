@@ -21,7 +21,7 @@ if [[ $# -ne 2 ]]; then
 fi
 
 
-readonly dir="$(cd "${0%/*}"; pwd -P)"
+readonly dir="${0%/*}"
 
 
 "$dir"/xys_cut.sh "$1" "$2" |

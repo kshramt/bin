@@ -21,7 +21,7 @@ if [[ $# -ne 2 ]]; then
 fi
 
 
-readonly dir="$(cd "${0%/*}"; pwd -P)"
+readonly dir="${0%/*}"
 
 
 "$dir"/dawk.sh -v t0="$1" -v dt="$2" -v OFS=$'\t' '
