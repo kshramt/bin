@@ -14,6 +14,7 @@ def parse_make_p(fp, graphs=None):
     if graphs is None:
         graphs = []
     for l in fp:
+        print(l.rstrip('\n'), file=sys.stderr)
         if l.startswith('# Make data base, printed on '):
             graphs.append(_parse_db(fp))
     if not graphs:
