@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# compile and execute'
-      echo $(basename "$0") FILE.F90
+      echo ${0##*/} FILE.F90
    } > /dev/stderr
    exit 1
 }

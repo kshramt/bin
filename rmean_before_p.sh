@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# remove mean before P-arrival'
-      echo "$(basename "$0")" IN_FILE OUT_FILE
+      echo "${0##*/}" IN_FILE OUT_FILE
    } > /dev/stderr
    exit 1
 }

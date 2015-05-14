@@ -15,7 +15,7 @@ if [[ "${#}" -lt 2 ]]; then
     usage_and_exit 1
 fi
 
-readonly DIR="$(dirname "$0")"
+readonly DIR="${0%/*}"
 readonly GMT="${MY_GMT:-gmt}"
 
 opts=$(

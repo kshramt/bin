@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-source "$(dirname "${0}")"/util.sh
+source "${0%/*}"/util.sh
 
 if echo | "$target"; then
    false

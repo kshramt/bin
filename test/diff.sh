@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-source "$(dirname "${0}")"/util.sh
+source "${0%/*}"/util.sh
 
 [[ "$(echo 1 1 | "$target")" = "" ]]
 [[ "$({ echo 1 1 ; echo 1.5 3 ; } | "$target")" = "1.25	4" ]]

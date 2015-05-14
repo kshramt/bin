@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo "# large <scale> means whiter colors"
-      echo "$(basename "${0}")" '<scale> < globe.cpt'
+      echo "${0##*/}" '<scale> < globe.cpt'
    } >&2
    exit "${1:-1}"
 }
@@ -22,7 +22,7 @@ if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
 fi
 
 
-readonly dir="$(dirname "$0")"
+readonly dir="${0%/*}"
 readonly scale="$1"
 
 while read line

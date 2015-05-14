@@ -9,4 +9,4 @@ set -o pipefail
 set -o noclobber
 
 
-"$(dirname "$0")"/mirror.sh --no-check-certificate "$@"
+"${0%/*}"/mirror.sh --no-check-certificate "$@"

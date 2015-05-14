@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-source "$(dirname "${0}")"/util.sh
+source "${0%/*}"/util.sh
 
 readonly ret="$(seq 5 | "$target" 0 1)"
 readonly expected="0	1

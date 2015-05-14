@@ -14,5 +14,5 @@ if [[ $(uname) = Darwin ]]; then
    done
    open -a emacs "$@"
 else
-   "$(dirname "${0}")"/e.sh --mode=gui "$@"
+   "${0%/*}"/e.sh --mode=gui "$@"
 fi

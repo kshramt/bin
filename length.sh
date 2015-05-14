@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" WORD
+      echo "${0##*/}" WORD
    } > /dev/stderr
    exit 1
 }

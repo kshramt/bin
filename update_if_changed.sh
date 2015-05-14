@@ -12,7 +12,7 @@ usage_and_exit(){
    {
       echo '# overwrite <file2> by <file1> if they differ'
       echo '# <file1>/<file2> should not be a stream'
-      echo "$(basename "${0}")" '<file1> <file2>'
+      echo "${0##*/}" '<file1> <file2>'
    } >&2
    exit "${1:-1}"
 }

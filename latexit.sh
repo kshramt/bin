@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 
-readonly program_name="$(basename "${0}")"
+readonly program_name="${0##*/}"
 usage_and_exit(){
    {
       cat <<EOF
@@ -173,4 +173,4 @@ cat "$pdf_file"
 
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
-mv "$equation_file" "${log_dir}"/"$($(dirname "${0}")/iso_8601_time.sh)".tex
+mv "$equation_file" "${log_dir}"/"$(${0%/*}/iso_8601_time.sh)".tex

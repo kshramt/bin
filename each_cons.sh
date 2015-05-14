@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# n >= 1'
-      echo "$(basename "${0}")" N
+      echo "${0##*/}" N
    } > /dev/stderr
    exit "${1:-1}"
 }

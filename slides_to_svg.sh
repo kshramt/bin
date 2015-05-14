@@ -15,7 +15,7 @@ finalize(){
 }
 
 usage_and_exit(){
-   echo "$(basename $0) INPUT.pdf > OUTPUT.svg"
+   echo "${0##*/} INPUT.pdf > OUTPUT.svg"
    exit 1
 }
 

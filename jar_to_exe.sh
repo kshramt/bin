@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo $(basename "$0") '< JAR > EXE && chmod u+x EXE'
+      echo ${0##*/} '< JAR > EXE && chmod u+x EXE'
    } > /dev/stderr
    exit 1
 }

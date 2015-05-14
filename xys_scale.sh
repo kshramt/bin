@@ -11,8 +11,8 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# y/max(abs(y(x1 <= x <= x2)))'
-      echo "$(basename "${0}")" 'XYS X1 X2'
-      echo "$(basename "${0}")" 'X1 X2 < XYS'
+      echo "${0##*/}" 'XYS X1 X2'
+      echo "${0##*/}" 'X1 X2 < XYS'
    } >&2
    exit "${1:-1}"
 }

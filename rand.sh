@@ -9,7 +9,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# generate uniform random numbers [0, 1)'
-      echo "$(basename "$0")" '[SEED]'
+      echo "${0##*/}" '[SEED]'
    } > /dev/stderr
    exit 1
 }
@@ -43,7 +43,7 @@ else
    readonly SRAND="srand($1)"
 fi
 
-"$(dirname "$0")"/dawk.sh "
+"${0%/*}"/dawk.sh "
 BEGIN{
    ${SRAND}
    while(1){

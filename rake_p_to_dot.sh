@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo 'rake -P |' $(basename "${0}") '| dot -Tpdf > workflow.pdf'
+   echo 'rake -P |' ${0##*/} '| dot -Tpdf > workflow.pdf'
    exit 1
 }
 

@@ -9,7 +9,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# convert uniform random numbers [0, 1) to standard laplace random numbers'
-      echo 'rand.sh |' $(basename "$0")
+      echo 'rand.sh |' ${0##*/}
    } > /dev/stderr
    exit 1
 }
@@ -18,7 +18,7 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-readonly THIS_DIR="$(dirname "$0")"
+readonly THIS_DIR="${0%/*}"
 "${THIS_DIR}"/symmetrize.sh |
 "${THIS_DIR}"/dawk.sh '
 BEGIN{

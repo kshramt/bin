@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "${0}")" "'pi=2*atan2(1, 0)' 'OFMT=\"%.3g\"' 'pi100 = pi^100' 'sin(pi100)/cos(pi100)'"
+      echo "${0##*/}" "'pi=2*atan2(1, 0)' 'OFMT=\"%.3g\"' 'pi100 = pi^100' 'sin(pi100)/cos(pi100)'"
    } >&2
    exit "${1:-1}"
 }

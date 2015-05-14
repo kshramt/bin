@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo $(basename "${0}") "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
+   echo ${0##*/} "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
    exit 1
 }
 

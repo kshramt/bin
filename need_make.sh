@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo "# return 0 if some of <dep>s are newer than <target>, otherwise 1"
-      echo "$(basename "${0}")" '<target>' '[<dep> ...]'
+      echo "${0##*/}" '<target>' '[<dep> ...]'
    } >&2
    exit "${1:-1}"
 }

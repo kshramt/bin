@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# rotate x-y data <angle> degrees counterclockwise'
-      echo "$(basename "${0}")" '<angle> < <file>'
+      echo "${0##*/}" '<angle> < <file>'
    } >&2
    exit "${1:-1}"
 }
@@ -22,7 +22,7 @@ if [[ $# -ne 1 ]] || [[ $1 = '-h' ]] || [[ $1 = '--help' ]]; then
 fi
 
 
-readonly dir="$(dirname "$0")"
+readonly dir="${0%/*}"
 
 
 "$dir"/dawk.sh -v th="$1" '

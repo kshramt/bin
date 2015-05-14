@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo "$(basename ${0}) | rake_p_to_dot.sh | dot -Tpdf >| _.pdf"
+   echo "${0##*/} | rake_p_to_dot.sh | dot -Tpdf >| _.pdf"
    exit 1
 }
 

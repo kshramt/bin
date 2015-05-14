@@ -8,7 +8,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo $(basename "$0") X1 X2 NX
+      echo ${0##*/} X1 X2 NX
    } > /dev/stderr
    exit 1
 }
@@ -19,7 +19,7 @@ elif [[ $# -eq 3 ]]; then
    if [[ $3 -lt 2 ]]; then
       usage_and_exit
    else
-      "$(dirname "$0")"/dawk.sh \
+      "${0%/*}"/dawk.sh \
          -v x1="$1" \
          -v x2="$2" \
          -v nx="$3" \

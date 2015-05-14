@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" N20E035
+      echo "${0##*/}" N20E035
    } > /dev/stderr
    exit 1
 }

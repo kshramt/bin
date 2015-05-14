@@ -11,7 +11,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" PATTERN
+      echo "${0##*/}" PATTERN
    } > /dev/stderr
    exit 1
 }

@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "${0}")" 't0 dt < YS >| XYS'
+      echo "${0##*/}" 't0 dt < YS >| XYS'
    } >&2
    exit "${1:-1}"
 }

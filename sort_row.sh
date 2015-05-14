@@ -10,13 +10,13 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" '< FILE'
+      echo "${0##*/}" '< FILE'
    } > /dev/stderr
    exit 1
 }
 
 
-"$(dirname "${0}")"/dawk.sh '
+"${0%/*}"/dawk.sh '
 {
    split("", fs)
    for(i = 1; i <= NF; i++){

@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" '< KEY_VALUES'
+      echo "${0##*/}" '< KEY_VALUES'
    } > /dev/stderr
    exit 1
 }

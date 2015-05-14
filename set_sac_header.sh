@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# `chnhdr` a binary format SAC file.'
-      echo "$(basename "$0")" '<in_file> <field> <value> [<out_file>]'
+      echo "${0##*/}" '<in_file> <field> <value> [<out_file>]'
    } > /dev/stderr
    exit 1
 }

@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "${0}")" '< <f90-file>'
+      echo "${0##*/}" '< <f90-file>'
    } >&2
    exit "${1:-1}"
 }

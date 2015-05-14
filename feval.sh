@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# eval Fortran statements'
-      echo $(basename "$0") STATEMENTS
+      echo ${0##*/} STATEMENTS
    } > /dev/stderr
    exit 1
 }
@@ -42,4 +42,4 @@ SRC="${TMP_DIR}"/main.F90
    echo   stop
    echo end program main
 } > "${SRC}"
-"$(dirname "$0")"/f.sh "${SRC}"
+"${0%/*}"/f.sh "${SRC}"

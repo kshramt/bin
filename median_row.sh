@@ -10,7 +10,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo "$(basename "$0")" '< FILE'
+      echo "${0##*/}" '< FILE'
    } > /dev/stderr
    exit 1
 }
@@ -19,7 +19,7 @@ if [[ $# -ne 0 ]]; then
    usage_and_exit
 fi
 
-"$(dirname "${0}")"/dawk.sh '
+"${0%/*}"/dawk.sh '
 {
    if(NF < 1){
       print "NF < 1" > "/dev/stderr"

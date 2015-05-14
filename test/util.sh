@@ -1,4 +1,4 @@
-readonly target="$(dirname "${0}")"/../"$(basename "${0}")"
+readonly target="${0%/*}"/../"${0##*/}"
 
 trap finalize EXIT
 

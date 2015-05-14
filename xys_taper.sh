@@ -12,8 +12,8 @@ usage_and_exit(){
    {
       echo '# Apply TYPE taper for [0, R] and [(1 - R), 1], where 0 < R <= 0.5'
       echo '# TYPE: cos'
-      echo "$(basename "${0}")" 'TYPE R < XYS'
-      echo "$(basename "${0}")" 'XYS TYPE R'
+      echo "${0##*/}" 'TYPE R < XYS'
+      echo "${0##*/}" 'XYS TYPE R'
    } >&2
    exit "${1:-1}"
 }

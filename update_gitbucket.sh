@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# update GitBucket to <version>'
-      echo "$(basename "${0}")" '<version>'
+      echo "${0##*/}" '<version>'
    } >&2
    exit "${1:-1}"
 }
