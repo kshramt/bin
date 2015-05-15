@@ -38,7 +38,7 @@ cd "$tmp_dir"
 wget "$uri"
 while read file
 do
-   hash="$(sha512sum "$file" | awk '{printf $1}')"
+   hash="$(sha256sum "$file" | awk '{printf $1}')"
    mkdir -p "$data_dir"/"$hash"
    cd "$data_dir"/"$hash"
    file_uri="$file	$uri"
