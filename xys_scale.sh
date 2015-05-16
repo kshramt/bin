@@ -45,7 +45,7 @@ END{
 }
 ' | (
       read a
-      "$dir"/dawk.sh -v OFS=$'\t' -v a="$a" '
+      "$dir"/dawk.sh -v a="$a" '
 {
    print $1, $2/a
 }

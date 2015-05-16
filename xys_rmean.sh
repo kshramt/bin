@@ -27,7 +27,7 @@ if [[ $# -eq 3 ]]; then
       "$dir"/mean.sh |
       (
          read offset
-         "$dir"/dawk.sh -v OFS=$'\t' -v offset="$offset" '
+         "$dir"/dawk.sh -v offset="$offset" '
 {
    print $1, $2 - offset
 }

@@ -24,7 +24,7 @@ fi
 readonly dir="${0%/*}"
 
 
-"$dir"/dawk.sh -v t0="$1" -v dt="$2" -v OFS=$'\t' '
+"$dir"/dawk.sh -v t0="$1" -v dt="$2" '
 {
    print t0 + (NR - 1)*dt, $0
 }

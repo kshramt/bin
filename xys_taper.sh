@@ -35,7 +35,7 @@ BEGIN{
    x1="$(head -n1 "$1" | "$dir"/dawk.sh '{print $1}')"
    x2="$(tail -n1 "$1" | "$dir"/dawk.sh '{print $1}')"
    if [[ "$2" = cos ]]; then
-      "$dir"/dawk.sh -v OFS=$'\t' -v x1="$x1" -v x2="$x2" -v r="$3" '
+      "$dir"/dawk.sh -v x1="$x1" -v x2="$x2" -v r="$3" '
 BEGIN{
    dx = r*(x2 - x1)
    xl = x1 + dx

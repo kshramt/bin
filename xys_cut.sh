@@ -25,7 +25,7 @@ fi
 readonly dir="${0%/*}"
 
 
-"$dir"/dawk.sh -v OFS=$'\t' -v x1="$1" -v x2="$2" '
+"$dir"/dawk.sh -v x1="$1" -v x2="$2" '
 $1 >= x1{
    if($1 > x2){
       exit
