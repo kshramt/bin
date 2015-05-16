@@ -5,13 +5,22 @@ set -o errexit
 set -o pipefail
 
 if [[ $(uname) = Darwin ]]; then
-   for f in "$@"
+   i=0
+   for file in "$@"
    do
-      if [[ ! -f $f ]]; then
-         mkdir -p $(dirname "${f}")
-         touch "${f}"
+      if [[ ! -e "$file" ]]; then
+         {
+            mkdir -p "$(dirname "$file")"
+            touch "$file"
+         } &
+         i="$((i + 1))"
+      fi
+      if [[ i -ge 20 ]]; then
+         wait
+         i=0
       fi
    done
+   wait
    open -a emacs "$@"
 else
    "${0%/*}"/e.sh --mode=gui "$@"
