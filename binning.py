@@ -13,8 +13,9 @@ def main(args):
         _usage_and_exit()
     if bins in ['-h', '--help']:
         _usage_and_exit()
-    for b in kshramt.binning([float(l) for l in sys.stdin], bins):
-        print('\t'.join(str(v) for v in b))
+    dx, bs = kshramt.binning([float(l) for l in sys.stdin], bins)
+    for x1, x2, n, r in bs:
+        print('\t'.join(map(str, [x1, x2, n, r, r/dx, n/dx])))
 
 
 def _usage_and_exit():
