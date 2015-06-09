@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo ${0##*/} "N < FILE"
+   echo ${0##*/} "N < FILE" 1>&2
    exit 1
 }
 
