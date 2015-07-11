@@ -11,43 +11,54 @@ readonly program_name="${0##*/}"
 usage_and_exit(){
    {
       cat <<EOF
-# create a PDF
-
+Make a PDF file:
 ${program_name} [options] 'e^{i\pi} + 1 = 0' >| eq1.pdf
 ${program_name} [options] < eq1.tex >| eq1.pdf
-# -h, --help: print help message
-# -cLATEX, --command=LATEX: set LaTeX engine [pdflatex]
 
-# extract a formula from a PDF
+Extract a LaTeX formula from a PDF file:
+${program_name} --print eq1.pdf
+${program_name} --print-full eq1.pdf
 
-${program_name} -p eq1.pdf
-# -p, --print: print a LaTeX formula in a PDF file
-# -P, --print-full: print a formula in a PDF file as a self-contained LaTeX document
+[options]:
+-h, --help: Print help message
+--ja: Allow Japanese (--command=lualatex is automatically set)
+--bold: Use bold fonts for presentation
+-c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
+-p, --print: Print a LaTeX formula in a PDF file
+-P, --print-full: Print a LaTeX formula in a PDF file as a standalone LaTeX document
 EOF
    } 1>&2
    exit "${1:-1}"
 }
 
 
-opts=$(
+opts="$(
    getopt \
-      --unquoted \
       --options hp:P:c: \
-      --longoptions help,print:,print-full:,command: \
+      --longoptions help,ja,bold,print:,print-full:,command: \
       -- \
       "$@"
-)
-set -- ${opts} # DO NOT quote.
+)"
+eval set -- "$opts"
 
 
 readonly caller_dir="$(pwd)"
 is_opt_print=false
 is_opt_print_full=false
+latex=lualatex
+ja=false
+bold=false
 while true
 do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
+         ;;
+      --ja)
+         ja=true
+         ;;
+      --bold)
+         bold=true
          ;;
       "-p" | "--print")
          opt_print_file="$caller_dir/$2"
@@ -60,7 +71,7 @@ do
          break
          ;;
       "-c" | "--command")
-         opt_command="${2}"
+         latex="$2"
          shift
          ;;
       --)
@@ -118,12 +129,12 @@ fi
 
 
 
-readonly latex="${opt_command:-pdflatex}"
 {
    cat <<EOF
 %\RequirePackage[l2tabu, orthodox]{nag}
 EOF
-   if [[ "${latex}" = "lualatex" ]]; then
+   if [[ "$ja" = true ]]; then
+      latex=lualatex
       cat <<EOF
 \documentclass{ltjsarticle}
 \usepackage[ipa, expert]{luatexja-preset}
@@ -153,6 +164,11 @@ cat <<EOF
 \embedfile{$tex_file}
 \begin{document}
 \thispagestyle{empty}
+EOF
+if [[ "$bold" = true ]]; then
+   echo '\bfseries \mathversion{bold}'
+fi
+cat <<EOF
 \begin{preview}
   \$\displaystyle
     \begin{aligned}
