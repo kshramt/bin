@@ -156,9 +156,7 @@ cat <<EOF
 \usepackage{siunitx}
 \usepackage{bm}
 
-\DeclareMathOperator{\D}{\partial}
 \newcommand{\dd}[1]{\,d#1}
-\newcommand{\f}[2]{\frac{#1}{#2}}
 
 \embedfile{$equation_file}
 \embedfile{$tex_file}
