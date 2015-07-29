@@ -157,6 +157,7 @@ cat <<EOF
 \usepackage{bm}
 
 \newcommand{\dd}[1]{\,d#1}
+\newcommand{\pr}[1]{\left(#1\right)}
 
 \embedfile{$equation_file}
 \embedfile{$tex_file}
