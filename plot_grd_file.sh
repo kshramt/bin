@@ -65,9 +65,9 @@ readonly N="$(echo "${GRD_INFO}" | cut -f5)"
 readonly Z0="$(echo "${GRD_INFO}" | cut -f6)"
 readonly Z1="$(echo "${GRD_INFO}" | cut -f7)"
 readonly RANGES="${W}/${E}/${S}/${N}"
-readonly ZS="${Z0}/${Z1}/$(awk -v z0="${Z0}" -v z1="${Z1}" 'BEGIN{print (z1 - z0)/200}')"
-readonly Z_INC="$(awk -v z0="${Z0}" -v z1="${Z1}" -v n="${N_CONTOUR}" 'BEGIN{print (z1 - z0)/n}')"
-readonly TICK_INTERVAL="$(awk -v w="${W}" -v e="${E}" 'BEGIN{print (e - w)/5}')"/"$(awk -v s="${S}" -v n="${N}" 'BEGIN{print (n - s)/5}')"
+readonly ZS="${Z0}/${Z1}/$(gawk -v z0="${Z0}" -v z1="${Z1}" 'BEGIN{print (z1 - z0)/200}')"
+readonly Z_INC="$(gawk -v z0="${Z0}" -v z1="${Z1}" -v n="${N_CONTOUR}" 'BEGIN{print (z1 - z0)/n}')"
+readonly TICK_INTERVAL="$(gawk -v w="${W}" -v e="${E}" 'BEGIN{print (e - w)/5}')"/"$(gawk -v s="${S}" -v n="${N}" 'BEGIN{print (n - s)/5}')"
 
 
 cat <<EOF

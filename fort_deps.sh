@@ -22,7 +22,7 @@ fi
 
 
 { grep '^ *use, non_intrinsic::' || : ; } |
-   awk '{print $3}' |
+   gawk '{print $3}' |
    { grep -v ifport || : ; } |
    sed -e 's/,$//' |
    sort -u

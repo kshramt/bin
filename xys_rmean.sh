@@ -23,7 +23,7 @@ readonly dir="${0%/*}"
 
 if [[ $# -eq 3 ]]; then
    "$dir"/xys_cut.sh "$2" "$3" < "$1" |
-      awk '{print $2}' |
+      gawk '{print $2}' |
       "$dir"/mean.sh |
       (
          read offset

@@ -21,7 +21,7 @@ git log \
    --pretty=tformat:'TIME %ai' \
    --reverse \
    "${1:-.}" \
-   | awk '
+   | gawk '
 BEGIN{
    addition = 0; deletion = 0; total = 0; OFS="\t"
 }

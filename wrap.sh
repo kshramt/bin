@@ -23,7 +23,7 @@ if [[ "${1}" = "-h" || "${1}" = '--help' ]]; then
 fi
 
 
-${MY_AWK:-awk} -v N="${1}" '
+${MY_AWK:-gawk} -v N="${1}" '
 BEGIN{
    i = 1
 }
