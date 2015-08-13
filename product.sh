@@ -16,14 +16,11 @@ set -o noclobber
    done
 
    if [[ $# -gt 0 ]]; then
-      echo -n 'echo "'
-      i=0
-      for _ in "$@"
+      echo -n 'echo "$x0'
+      for (( i=1; i<$#; i++ ))
       do
          if [[ "$i" -gt 0 ]]; then
-            echo -ne '\t$x'"$((i++))"
-         else
-            echo -ne '$x'"$((i++))"
+            echo -ne '\t$x'"$((i))"
          fi
       done
       echo -n '"'
