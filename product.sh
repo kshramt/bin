@@ -11,7 +11,7 @@ set -o noclobber
    for xs in "$@"
    do
       echo -n "for x$((i++)) in "
-      echo "$xs" | tr ',' '\t'
+      echo "$xs"
       echo "do"
    done
 
