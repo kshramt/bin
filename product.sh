@@ -20,7 +20,7 @@ set -o noclobber
       for (( i=1; i<$#; i++ ))
       do
          if [[ "$i" -gt 0 ]]; then
-            echo -ne '\t$x'"$((i))"
+            echo -ne '\t$x'"$i"
          fi
       done
       echo -n '"'
