@@ -7,7 +7,19 @@ PYTHON := $(MY_PYTHON)
 export MY_RUBY ?= ruby2
 RUBY := $(MY_RUBY)
 
-TEST_NAMES := median_row linspace each_cons wrap ys_to_xys diff xys_rmean xys_scale xys_cut xys_taper parse_stem
+TEST_NAMES := \
+   diff \
+   each_cons \
+   linspace \
+   median_row \
+   parse_stem \
+   product \
+   wrap \
+   xys_cut \
+   xys_rmean \
+   xys_scale \
+   xys_taper \
+   ys_to_xys
 
 # Configurations
 .SUFFIXES:
