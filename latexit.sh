@@ -42,7 +42,6 @@ opts="$(
 eval set -- "$opts"
 
 
-readonly caller_dir="$(pwd)"
 is_opt_print=false
 is_opt_print_full=false
 latex=lualatex
@@ -61,12 +60,12 @@ do
          bold=true
          ;;
       "-p" | "--print")
-         opt_print_file="$caller_dir/$2"
+         opt_print_file="$(realpath "$2")"
          is_opt_print=true
          break
          ;;
       "-P" | "--print-full")
-         opt_print_full_file="$caller_dir/$2"
+         opt_print_full_file="$(realpath "$2")"
          is_opt_print_full=true
          break
          ;;
@@ -188,4 +187,8 @@ cat "$pdf_file"
 
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
-mv "$equation_file" "${log_dir}"/"$(${0%/*}/iso_8601_time.sh)".tex
+
+readonly dir="${0%/*}"
+name="${log_dir}"/"$("$dir"/iso_8601_time.sh)"
+mv "$equation_file" "$name".tex
+mv "$pdf_file" "$name".pdf
