@@ -38,9 +38,6 @@ cd /var/lib/tomcat7/webapps
 
 readonly new_gitbucket_war=gitbucket.war."$version"
 sudo cp "$tmp_dir"/gitbucket.war "$new_gitbucket_war"
+sudo service tomcat7 stop
 sudo ln -fs "$new_gitbucket_war" repository.war
-
-cat <<EOF
-# sometimes (e.g. 3.0 -> 3.1), you need
-sudo /etc/init.d/tomcat7 restart
-EOF
+sudo service tomcat7 start
