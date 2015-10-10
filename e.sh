@@ -13,15 +13,15 @@ if [[ ${#} -lt 1 ]]; then
     usage_and_exit 1
 fi
 
-opts=$(
-    getopt \
-        --unquoted \
-        --options hm: \
-        --longoptions help,mode: \
-        -- \
-        "$@"
-)
-set -- ${opts} # DO NOT quote.
+opts="$(
+   getopt \
+      --options hm: \
+      --longoptions help,mode: \
+      -- \
+      "$@"
+)"
+eval set -- "$opts"
+
 
 while true
 do
