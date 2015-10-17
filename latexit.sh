@@ -60,12 +60,12 @@ do
          bold=true
          ;;
       "-p" | "--print")
-         opt_print_file="$(realpath "$2")"
+         opt_print_file="$(readlink -f "$2")"
          is_opt_print=true
          break
          ;;
       "-P" | "--print-full")
-         opt_print_full_file="$(realpath "$2")"
+         opt_print_full_file="$(readlink -f "$2")"
          is_opt_print_full=true
          break
          ;;
