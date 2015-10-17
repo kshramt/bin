@@ -21,7 +21,6 @@ ${program_name} --print-full eq1.pdf
 
 [options]:
 -h, --help: Print help message
---bold: Use bold fonts for presentation
 -c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
 -p, --print: Print a LaTeX formula in a PDF file
 -P, --print-full: Print a LaTeX formula in a PDF file as a standalone LaTeX document
@@ -34,7 +33,7 @@ EOF
 opts="$(
    getopt \
       --options hp:P:c: \
-      --longoptions help,bold,print:,print-full:,command: \
+      --longoptions help,print:,print-full:,command: \
       -- \
       "$@"
 )"
@@ -44,15 +43,11 @@ eval set -- "$opts"
 is_opt_print=false
 is_opt_print_full=false
 latex=lualatex
-bold=false
 while true
 do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
-         ;;
-      --bold)
-         bold=true
          ;;
       "-p" | "--print")
          opt_print_file="$(readlink -f "$2")"
@@ -146,11 +141,6 @@ fi
 \embedfile{$tex_file}
 \begin{document}
 \thispagestyle{empty}
-EOF
-if [[ "$bold" = true ]]; then
-   echo '\bfseries \mathversion{bold}'
-fi
-cat <<EOF
 \begin{preview}
   \$\displaystyle
     \begin{aligned}
