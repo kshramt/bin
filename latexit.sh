@@ -131,6 +131,7 @@ fi
 \usepackage[active, tightpage]{preview}
 \setlength\PreviewBorder{1pt}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{newtxtext, newtxmath}
 \usepackage{embedfile}
 
 \usepackage{mathrsfs}
