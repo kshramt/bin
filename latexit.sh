@@ -21,7 +21,6 @@ ${program_name} --print-full eq1.pdf
 
 [options]:
 -h, --help: Print help message
---ja: Allow Japanese (--command=lualatex is automatically set)
 --bold: Use bold fonts for presentation
 -c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
 -p, --print: Print a LaTeX formula in a PDF file
@@ -35,7 +34,7 @@ EOF
 opts="$(
    getopt \
       --options hp:P:c: \
-      --longoptions help,ja,bold,print:,print-full:,command: \
+      --longoptions help,bold,print:,print-full:,command: \
       -- \
       "$@"
 )"
@@ -45,16 +44,12 @@ eval set -- "$opts"
 is_opt_print=false
 is_opt_print_full=false
 latex=lualatex
-ja=false
 bold=false
 while true
 do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
-         ;;
-      --ja)
-         ja=true
          ;;
       --bold)
          bold=true
@@ -131,19 +126,7 @@ fi
 {
    cat <<EOF
 %\RequirePackage[l2tabu, orthodox]{nag}
-EOF
-   if [[ "$ja" = true ]]; then
-      latex=lualatex
-      cat <<EOF
-\documentclass{ltjsarticle}
-\usepackage[ipa, expert]{luatexja-preset}
-EOF
-   else
-      cat <<EOF
 \documentclass{article}
-EOF
-   fi
-cat <<EOF
 \usepackage[a0paper, landscape, margin=10mm]{geometry}
 \usepackage[active, tightpage]{preview}
 \setlength\PreviewBorder{1pt}
