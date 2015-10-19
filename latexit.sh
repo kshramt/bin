@@ -134,6 +134,7 @@ fi
 \usepackage{newtxtext, newtxmath}
 \usepackage{embedfile}
 
+\usepackage{mathdots}
 \usepackage{mathrsfs}
 \usepackage[usenames]{color}
 \usepackage{siunitx}
