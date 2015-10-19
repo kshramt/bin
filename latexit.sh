@@ -143,6 +143,9 @@ fi
 
 \newcommand{\dd}[1]{\,d#1}
 \newcommand{\pr}[1]{\left(#1\right)}
+\newcommand{\tr}[1]{\ensuremath{\,{}^{t}\!#1}}
+\newcommand{\norm}[1]{\ensuremath{\left\lVert#1\right\rVert}}
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
 
 \embedfile{$equation_file}
 \embedfile{$tex_file}
