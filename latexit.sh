@@ -134,6 +134,7 @@ fi
 \usepackage{newtxtext, newtxmath}
 \usepackage{embedfile}
 
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \usepackage{mathdots}
 \usepackage{mathrsfs}
 \usepackage[usenames]{color}
