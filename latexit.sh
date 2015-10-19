@@ -22,6 +22,7 @@ ${program_name} --print-full eq1.pdf
 [options]:
 -h, --help: Print help message
 -c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
+--huge: use Huge font
 -p, --print: Print a LaTeX formula in a PDF file
 -P, --print-full: Print a LaTeX formula in a PDF file as a standalone LaTeX document
 EOF
@@ -33,13 +34,14 @@ EOF
 opts="$(
    getopt \
       --options hp:P:c: \
-      --longoptions help,print:,print-full:,command: \
+      --longoptions help,huge,print:,print-full:,command: \
       -- \
       "$@"
 )"
 eval set -- "$opts"
 
 
+is_huge=false
 is_opt_print=false
 is_opt_print_full=false
 latex=lualatex
@@ -48,6 +50,9 @@ do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
+         ;;
+      "--huge")
+         is_huge=true
          ;;
       "-p" | "--print")
          opt_print_file="$(readlink -f "$2")"
@@ -140,6 +145,11 @@ fi
 \embedfile{$equation_file}
 \embedfile{$tex_file}
 \begin{document}
+EOF
+if [[ "$is_huge" = true ]]; then
+   echo '\Huge'
+fi
+cat <<EOF
 \thispagestyle{empty}
 \begin{preview}
   \$\displaystyle
