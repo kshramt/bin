@@ -21,6 +21,7 @@ ${program_name} --print-full eq1.pdf
 
 [options]:
 -h, --help: Print help message
+--color=<r,g,b>: RGB color in 0 <= x <= 1 [0,0,0]
 -c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
 --huge: use Huge font
 -p, --print: Print a LaTeX formula in a PDF file
@@ -34,13 +35,14 @@ EOF
 opts="$(
    getopt \
       --options hp:P:c: \
-      --longoptions help,huge,print:,print-full:,command: \
+      --longoptions help,color:,huge,print:,print-full:,command: \
       -- \
       "$@"
 )"
 eval set -- "$opts"
 
 
+color='0,0,0'
 is_huge=false
 is_opt_print=false
 is_opt_print_full=false
@@ -50,6 +52,10 @@ do
    case "${1}" in
       "-h" | "--help")
          usage_and_exit 0
+         ;;
+      "--color")
+         color="$2"
+         shift
          ;;
       "--huge")
          is_huge=true
@@ -158,6 +164,7 @@ cat <<EOF
 \thispagestyle{empty}
 \begin{preview}
   \$\displaystyle
+    \color[rgb]{$color}
     \begin{aligned}
 EOF
    cat "$equation_file"
