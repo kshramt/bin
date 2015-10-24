@@ -11,21 +11,21 @@ readonly program_name="${0##*/}"
 usage_and_exit(){
    {
       cat <<EOF
-Make a PDF file:
-${program_name} [options] 'e^{i\pi} + 1 = 0' >| eq1.pdf
+Examples:
+${program_name} [options] --to=svg 'e^{i\pi} + 1 = 0' >| eq1.svg
 ${program_name} [options] < eq1.tex >| eq1.pdf
 
-Extract a LaTeX formula from a PDF file:
 ${program_name} --print eq1.pdf
-${program_name} --print-full eq1.pdf
+${program_name} --print-full eq1.svg
 
 [options]:
 -h, --help: Print help message
 --color=<r,g,b>: RGB color in 0 <= x <= 1 [0,0,0]
 -c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
 --huge: use Huge font
--p, --print: Print a LaTeX formula in a PDF file
--P, --print-full: Print a LaTeX formula in a PDF file as a standalone LaTeX document
+-p, --print: Print a LaTeX formula embedded in a PDF or SVG file
+-P, --print-full: Print a standalone LaTeX document embedded in a PDF or SVG file
+--to=<format>: Output format (one of pdf and svg) [pdf]
 EOF
    } 1>&2
    exit "${1:-1}"
@@ -35,7 +35,7 @@ EOF
 opts="$(
    getopt \
       --options hp:P:c: \
-      --longoptions help,color:,huge,print:,print-full:,command: \
+      --longoptions help,color:,huge,print:,print-full:,to:,command: \
       -- \
       "$@"
 )"
@@ -46,6 +46,7 @@ color='0,0,0'
 is_huge=false
 is_opt_print=false
 is_opt_print_full=false
+to=pdf
 latex=lualatex
 while true
 do
@@ -69,6 +70,10 @@ do
          opt_print_full_file="$(readlink -f "$2")"
          is_opt_print_full=true
          break
+         ;;
+      "--to")
+         to="$2"
+         shift
          ;;
       "-c" | "--command")
          latex="$2"
@@ -99,22 +104,49 @@ readonly tex_file="$base_name".tex
 
 
 if [[ "$is_opt_print" = true ]]; then
-   pdfdetach -saveall "$opt_print_file"
+   case "$opt_print_file" in
+      *.pdf)
+         pdfdetach -saveall "$opt_print_file"
 
-   if [[ -r "$equation_file" ]]; then
-      cat "$equation_file"
-   else
-      pdftk "$opt_print_file" dump_data_utf8 |
-      grep -A1 'InfoKey: '"$program_name" |
-      tail -n1 |
-      sed -e 's/InfoValue: //' |
-      base64 --decode
-   fi
+         if [[ -r "$equation_file" ]]; then
+            cat "$equation_file"
+         else
+            pdftk "$opt_print_file" dump_data_utf8 |
+               grep -A1 'InfoKey: '"$program_name" |
+               tail -n1 |
+               sed -e 's/InfoValue: //' |
+               base64 --decode
+         fi
+         ;;
+      *.svg)
+         tail -n4 "$opt_print_file" |
+            grep latexit_equation: |
+            sed -e 's/latexit_equation://' |
+            base64 -d
+         ;;
+      *)
+         usage_and_exit 1
+         ;;
+   esac
    exit
 fi
+
 if [[ "$is_opt_print_full" = true ]]; then
-   pdfdetach -saveall "$opt_print_full_file"
-   cat "$tex_file"
+   case "$opt_print_full_file" in
+      *.pdf)
+         pdfdetach -saveall "$opt_print_full_file"
+         cat "$tex_file"
+         ;;
+      *.svg)
+         tail -n4 "$opt_print_full_file" |
+            grep latexit_tex: |
+            sed -e 's/latexit_tex://' |
+            base64 -d
+         ;;
+      *)
+         usage_and_exit 1
+         ;;
+   esac
    exit
 fi
 
@@ -179,8 +211,6 @@ EOF
 
 "$latex" "$tex_file" 1>&2
 readonly pdf_file="${base_name}".pdf
-cat "$pdf_file"
-
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
 
@@ -188,3 +218,24 @@ readonly dir="${0%/*}"
 name="${log_dir}"/"$("$dir"/iso_8601_time.sh)"
 mv "$equation_file" "$name".tex
 mv "$pdf_file" "$name".pdf
+
+
+case "$to" in
+   pdf)
+      cat "$name".pdf
+      ;;
+   svg)
+      pdftocairo -svg "$name".pdf -
+      echo '<!--'
+      echo -n 'latexit_equation:'
+      base64 --wrap=0 "$name".tex
+      echo
+      echo -n 'latexit_tex:'
+      base64 --wrap=0 "$tex_file"
+      echo
+      echo '-->'
+      ;;
+   *)
+      usage_and_exit
+      ;;
+esac
