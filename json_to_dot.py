@@ -20,12 +20,7 @@ class Id:
 
 def main(args):
     _parse_args(args)
-    print("""
-digraph G {
-   graph [rankdir=LR]
-   node [shape=plaintext]
-   edge [color="#00000088"]
-    """)
+    print("digraph G {")
     i = Id()
     for graph in json.load(sys.stdin):
         print_single_graph(graph, i)
