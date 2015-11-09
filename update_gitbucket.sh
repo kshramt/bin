@@ -37,7 +37,7 @@ wget https://github.com/takezoe/gitbucket/releases/download/"$version"/gitbucket
 cd /var/lib/tomcat7/webapps
 
 readonly new_gitbucket_war=gitbucket.war."$version"
-sudo cp "$tmp_dir"/gitbucket.war "$new_gitbucket_war"
+sudo cp -f "$tmp_dir"/gitbucket.war "$new_gitbucket_war"
 sudo service tomcat7 stop
 sudo ln -fs "$new_gitbucket_war" repository.war
 sudo service tomcat7 start
