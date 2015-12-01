@@ -20,4 +20,4 @@ if [[ $# -ne 1 ]]; then
    usage_and_exit
 fi
 
-${MY_FC} ${MY_FFLAG_COMMON} ${MY_FFLAG_DEBUG} -c "$1"
+${MY_FC} ${MY_FFLAGS_COMMON} ${MY_FFLAGS_DEBUG} -c "$1"
