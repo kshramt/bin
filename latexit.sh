@@ -176,6 +176,7 @@ fi
 \usepackage{mathdots}
 \usepackage{mathrsfs}
 \usepackage[usenames]{color}
+\usepackage{xcolor}
 \usepackage{siunitx}
 \usepackage{bm}
 
