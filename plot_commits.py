@@ -3,6 +3,8 @@
 import sys
 import dateutil.parser
 
+import matplotlib
+matplotlib.use('pdf')
 import matplotlib.dates
 import pylab
 
