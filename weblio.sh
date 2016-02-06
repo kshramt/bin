@@ -8,4 +8,4 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-${MY_OPEN:-gnome-open} 'http://ejje.weblio.jp/sentence/content/'"$(echo -n "$@" | "${0%/*}"/encode_uri.sh)"
+"${0%/*}"/open_uri.sh 'http://ejje.weblio.jp/sentence/content/' "$@"

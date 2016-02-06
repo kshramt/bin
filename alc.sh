@@ -8,4 +8,5 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-${MY_OPEN:-gnome-open} 'http://eow.alc.co.jp/search?q='"$(echo -n "$@" | "${0%/*}"/encode_uri.sh)"
+"${0%/*}"/open_uri.sh 'http://eow.alc.co.jp/search?q=' "$@"
+
