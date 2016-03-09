@@ -13,7 +13,7 @@ umask u=rwx,g=,o=
 
 dir="${1:-gji_dump}"
 mkdir -p "$dir"
-for year in {2010..2016}
+for year in {1999..2016}
 do
    curl --silent http://gji.oxfordjournals.org/content/by/year/"$year" |
       grep page-range |
