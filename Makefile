@@ -2,10 +2,10 @@
 DIR := $(abspath .)
 DEPS := kshramt_py
 
-export MY_PYTHON ?= python3
-PYTHON := $(MY_PYTHON)
-export MY_RUBY ?= ruby2
-RUBY := $(MY_RUBY)
+export PYTHON ?= python3
+export RUBY ?= ruby2
+export MY_PYTHON := $(PYTHON)
+export MY_RUBY := $(RUBY)
 
 TEST_NAMES := \
    diff \
