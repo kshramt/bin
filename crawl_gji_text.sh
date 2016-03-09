@@ -29,7 +29,7 @@ do
                if [[ ! -s "$f" ]]; then
                   mkdir -p "$(dirname "$f")"
                   w3m -cols 100000000 -dump http://gji.oxfordjournals.org"$cont" >| "$f"
-                  sleep 0.5
+                  sleep 10
                fi
             done
       done
