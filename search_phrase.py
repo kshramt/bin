@@ -27,6 +27,8 @@ def tokenize(fh):
 
 def _tokenize(s):
     return s.lower()\
+            .replace(':', ' : ')\
+            .replace('\;', ' ; ')\
             .replace('!', ' ! ')\
             .replace('?', ' ? ')\
             .replace('"', ' " ')\
