@@ -37,3 +37,4 @@ sed \
    |
    tr '\n\t\r\f' '    ' |
    tr -s ' '
+echo
