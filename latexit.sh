@@ -175,16 +175,18 @@ fi
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \usepackage{mathdots}
 \usepackage{mathrsfs}
+\usepackage{mathtools}
 \usepackage[usenames]{color}
 \usepackage{xcolor}
 \usepackage{siunitx}
 \usepackage{bm}
 
 \newcommand{\dd}[1]{\,d#1}
-\newcommand{\pr}[1]{\left(#1\right)}
 \newcommand{\tr}[1]{\ensuremath{\,{}^{t}\!#1}}
 \newcommand{\norm}[1]{\ensuremath{\left\lVert#1\right\rVert}}
 \newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+
+\DeclarePairedDelimiter{\pr}{(}{)}
 
 \embedfile{$equation_file}
 \embedfile{$tex_file}
