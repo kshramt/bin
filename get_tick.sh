@@ -19,11 +19,6 @@ usage_and_exit(){
 }
 
 
-readonly x1="$1"
-readonly x2="$2"
-readonly lx="$((x2 - x1))"
-[[ "$lx" -ge 0 ]]
-
 if [[ $# -eq 2 ]]; then
    readonly padding=0.1
 elif [[ $# -eq 3 ]]; then
@@ -32,6 +27,11 @@ else
    usage_and_exit
 fi
 [[ "$padding" -ge 0 ]]
+
+readonly x1="$1"
+readonly x2="$2"
+readonly lx="$((x2 - x1))"
+[[ "$lx" -ge 0 ]]
 
 
 zmodload zsh/mathfunc
