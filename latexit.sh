@@ -183,7 +183,7 @@ fi
 \newcommand\bmmax{0}
 \usepackage{bm}
 
-\newcommand{\dd}[1]{\,d#1}
+\newcommand{\dd}[1]{d#1}
 \newcommand{\tr}[1]{\ensuremath{\,{}^{t}\!#1}}
 \newcommand{\norm}[1]{\ensuremath{\left\lVert#1\right\rVert}}
 \newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
