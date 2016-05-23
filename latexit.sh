@@ -169,7 +169,8 @@ fi
 \usepackage[active, tightpage]{preview}
 \setlength\PreviewBorder{1pt}
 \usepackage{amsmath, amssymb, amsthm}
-\usepackage{newtxtext, newtxmath}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
 \usepackage{embedfile}
 
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
@@ -178,6 +179,8 @@ fi
 \usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{siunitx}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
 \usepackage{bm}
 
 \newcommand{\dd}[1]{\,d#1}
