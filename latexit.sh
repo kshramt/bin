@@ -9,8 +9,7 @@ set -o noclobber
 
 readonly program_name="${0##*/}"
 usage_and_exit(){
-   {
-      cat <<EOF
+   local msg="
 Examples:
 ${program_name} [options] --to=svg 'e^{i\pi} + 1 = 0' >| eq1.svg
 ${program_name} [options] < eq1.tex >| eq1.pdf
@@ -26,9 +25,14 @@ ${program_name} --print-full eq1.svg
 -p, --print: Print a LaTeX formula embedded in a PDF or SVG file
 -P, --print-full: Print a standalone LaTeX document embedded in a PDF or SVG file
 --to=<format>: Output format (one of pdf and svg) [pdf]
-EOF
-   } 1>&2
-   exit "${1:-1}"
+"
+   local status="${1:-1}"
+   if [[ $status -eq 0 ]]; then
+      echo "$msg"
+   else
+      echo "$msg" 1>&2
+   fi
+   exit "$status"
 }
 
 
