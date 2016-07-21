@@ -20,7 +20,7 @@ ${program_name} --print-full eq1.svg
 [options]:
 -h, --help: Print help message
 --color=<r,g,b>: RGB color in 0 <= x <= 1 [0,0,0]
--c<latex>, --command=<latex>: Set LaTeX engine [lualatex]
+-c<latex>, --command=<latex>: Set LaTeX engine [pdflatex]
 --huge: use Huge font
 -p, --print: Print a LaTeX formula embedded in a PDF or SVG file
 -P, --print-full: Print a standalone LaTeX document embedded in a PDF or SVG file
@@ -51,7 +51,7 @@ is_huge=false
 is_opt_print=false
 is_opt_print_full=false
 to=pdf
-latex=lualatex
+latex=pdflatex
 while true
 do
    case "${1}" in
