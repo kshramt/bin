@@ -171,7 +171,7 @@ fi
 \documentclass{article}
 \usepackage[a0paper, landscape, margin=10mm]{geometry}
 \usepackage[active, tightpage]{preview}
-\setlength\PreviewBorder{1pt}
+\setlength\PreviewBorder{0.1pt}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{libertine}
 \usepackage[libertine]{newtxmath}
