@@ -22,4 +22,4 @@ fi
 prefix="$1"
 shift
 
-${MY_OPEN:-gnome-open} "${prefix}$(echo -n "$@" | "${0%/*}"/encode_uri.sh)"
+${MY_OPEN:-xdg-open} "${prefix}$(echo -n "$@" | "${0%/*}"/encode_uri.sh)"
