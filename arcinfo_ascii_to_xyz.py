@@ -20,7 +20,7 @@ def main(argv):
     x1 = xllcorner + cellsize/2
     y1 = yllcorner + cellsize/2
 
-    header = '# -lx{} -N{} -r -R{}/{}/{}/{}'.format(
+    header = '# -Ix{} -N{} -r -R{}/{}/{}/{}'.format(
         cellsize,
         nodata_value,
         xllcorner,
