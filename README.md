@@ -1,3 +1,7 @@
+# `arcinfo_ascii_to_xyz.py`
+
+Convert ArcInfo ASCII format to XYZ format.
+
 # `download_jma_hypo.sh`
 
 Download all HYPO files from <http://www.data.jma.go.jp/svd/eqev/data/bulletin/hypo.html>.
