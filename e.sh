@@ -62,7 +62,8 @@ case "${MODE}" in
     gui)
         is_gui_running(){
             local emacsclient_="${1}"
-            [[ "$(${emacsclient_} -e '(window-system)')" = "x" ]]
+            [[ "$(${emacsclient_} -e '(window-system)')" = "x" ]] ||
+               [[ "$(${emacsclient_} -e '(window-system)')" = "ns" ]]
         }
 
         if is_gui_running ${EMACSCLIENT_}; then
