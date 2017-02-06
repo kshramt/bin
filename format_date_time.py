@@ -6,7 +6,7 @@ import unittest
 import argparse
 import signal
 
-import dep.kshramt_py.kshramt as kshramt
+import kshramt
 
 
 __version__ = '0.0.0'

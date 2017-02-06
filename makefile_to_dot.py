@@ -13,7 +13,7 @@ import re
 import argparse
 import unittest
 
-from dep.kshramt_py.kshramt import TestAction, list_2d, flatten
+import kshramt
 
 
 __version__ = '0.0.0'

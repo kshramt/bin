@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from dep.kshramt_py.kshramt import get_tick_configurations
+import kshramt
 
 
 __version__ = '0.0.0'

@@ -3,7 +3,7 @@
 
 import sys
 
-import dep.kshramt_py.kshramt as kshramt
+import kshramt
 
 
 def main(args):
