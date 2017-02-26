@@ -15,5 +15,6 @@ readonly t="$(date +%s)"
 readonly cmd="$1"
 readonly suffix="${2:-png}"
 
-gnuplot -e "set term $suffix; $cmd" > "gp.sh.$t.$suffix"
-"${MY_OPEN:-xdg-open}" "gp.sh.$t.$suffix"
+mkdir -p gp.sh.d
+gnuplot -e "set term $suffix; $cmd" > "gp.sh.d/$t.$suffix"
+"${MY_OPEN:-xdg-open}" "gp.sh.d/$t.$suffix"
