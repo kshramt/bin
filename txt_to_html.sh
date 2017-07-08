@@ -14,6 +14,8 @@
 
    usage_and_exit(){
       {
+         echo '# @i[/path/to/image]'
+         echo '# @l[/path/to/link]'
          echo "${0##*/}" '< <in.txt> > <out.html>'
       } >&2
       exit "${1:-1}"
