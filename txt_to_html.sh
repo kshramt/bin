@@ -27,7 +27,7 @@
 
    "${AWL:-gawk}" '
 BEGIN{
-   printf("%s\n", "<html><pre>");
+   printf("%s\n", "<html><pre style=\"white-space: pre-wrap;\">");
    is_at = 0;
    at_flag = "\0";
    is_link = 0;
