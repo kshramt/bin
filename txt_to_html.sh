@@ -118,7 +118,7 @@ BEGIN{
    printf("%s", "\n")
 }
 END{
-   printf("%s", "</pre></html>");
+   printf("%s\n", "</pre></html>");
 }
 '
    exit
