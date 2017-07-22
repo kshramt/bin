@@ -26,6 +26,30 @@
    fi
 
    "${AWL:-gawk}" '
+function escape(c){
+   ret = c;
+   if(c == "&"){
+      ret = "&amp";
+   }else if(c == "<"){
+      ret = "&lt";
+   }else if(c == ">"){
+      ret = "&gt";
+   }else if(c == "\""){
+      ret = "&quot";
+   }else if(c == "'"'"'"){
+      ret = "&#39";
+   }else if(c == "\t"){
+      ret = "&#9";
+   }
+   return ret;
+}
+
+
+function pr(c){
+   printf("%s", escape(c));
+}
+
+
 BEGIN{
    printf("%s\n", "<html><pre style=\"white-space: pre-wrap;\">");
    is_at = 0;
@@ -45,12 +69,12 @@ BEGIN{
             printf("%s", "\">");
             n = length(path_buf);
             for(j = 1; j <= n; j++){
-               printf("%s", path_buf[j]);
+               pr(path_buf[j]);
             }
             printf("%s", "</a>");
             split("", path_buf);
          }else{
-            printf("%s", c);
+            pr(c);
             path_buf[length(path_buf) + 1] = c;
          }
       }else if(is_image){
@@ -63,7 +87,7 @@ BEGIN{
                printf("%s", "<img width=50% max-width=70ex max-height=70ex src=\"");
             }
             for(j = 1; j <= n; j++){
-               printf("%s", path_buf[j]);
+               pr(path_buf[j]);
             }
             printf("%s", "\" />");
             split("", path_buf);
@@ -76,43 +100,31 @@ BEGIN{
             is_link = 1;
             printf("%s", "<a href=\"");
          }else{
-            printf("%s", "@");
-            printf("%s", "l");
-            printf("%s", c);
+            pr("@");
+            pr("l");
+            pr(c);
          }
       }else if(at_flag == "i"){
          at_flag = "\0";
          if(c == "["){
             is_image = 1;
          }else{
-            printf("%s", "@");
-            printf("%s", "i");
-            printf("%s", c);
+            pr("@");
+            pr("i");
+            pr(c);
          }
       }else if(is_at){
          is_at = 0;
          if((c == "l") || (c == "i")){
             at_flag = c;
          }else{
-            printf("%s", "@");
-            printf("%s", c);
+            pr("@");
+            pr(c);
          }
-      }else if(c == "&"){
-         printf("%s", "&amp");
-      }else if(c == "<"){
-         printf("%s", "&lt");
-      }else if(c == ">"){
-         printf("%s", "&gt");
-      }else if(c == "\""){
-         printf("%s", "&quot");
-      }else if(c == "'"'"'"){
-         printf("%s", "&#39");
-      }else if(c == "\t"){
-         printf("%s", "&#9");
       }else if(c == "@"){
          is_at = 1;
       }else{
-         printf("%s", c);
+         pr(c);
       }
    }
    printf("%s", "\n")
