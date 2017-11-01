@@ -10,7 +10,7 @@ if [[ ${#} -eq 0 ]]; then
 fi
 
 readonly my_trash_dir="${MY_TRASH_DIR:-"${HOME}"/d/trash}"
-readonly base_dir="${my_trash_dir}"/"$(date +'%FT%T.%N%z')"
+readonly base_dir="${my_trash_dir}"/"$(date +'%y%m%d%H%M%S%N')"
 
 mkdir -p "$base_dir"
 mv --backup=numbered -- "$@" "$base_dir"
