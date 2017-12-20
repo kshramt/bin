@@ -11,7 +11,7 @@ export LANG=en_US.UTF-8
 umask u=rwx,g=,o=
 
 
-readonly t="$(date +%s)"
+readonly t="$(date +'%y%m%d%H%M%S')"
 readonly cmd="$1"
 readonly suffix="${2:-png}"
 
