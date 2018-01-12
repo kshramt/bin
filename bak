@@ -10,7 +10,7 @@ if [[ ${#} -eq 0 ]]; then
 fi
 
 my_backup_dir=${MY_BACKUP_DIR:-${HOME}/d/backup}
-root_dir=${my_backup_dir}/"$(date +'%FT%T.%N%z')"
+root_dir=${my_backup_dir}/"$(date +'%y%m%d%H%M%S%N')"
 exit_status=0
 
 for f in "$@"
