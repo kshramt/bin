@@ -1,11 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 IFS=$' \t\n'
 
 # set -xv
 set -o nounset
 set -o errexit
-set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
@@ -16,8 +15,8 @@ usage_and_exit(){
 }
 
 
-if [[ $# -ne 1 ]] || [[ $1 = -h ]] || [[ $1 = --help ]]; then
+if [ "$#" -ne 1 ] || [ "$1" = -h ] || [ "$1" = --help ]; then
    usage_and_exit
 fi
 
-echo "$(dirname "$1")"/"$("$(cd "${0%/*}"; pwd -P)"/ymdhms.sh)"_"${1##*/}"
+echo "$(dirname -- "$1")"/"$(date +'%y%m%d%H%M%S')"_"${1##*/}"

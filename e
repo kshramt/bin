@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
 set -o nounset
 set -o errexit
-set -o pipefail
 
-"${0%/*}"/e.sh --mode=gui "$@"
+"${0%/*}"/e.sh gui "$@"

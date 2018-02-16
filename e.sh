@@ -1,50 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 
 set -o nounset
 set -o errexit
-set -o pipefail
 
 usage_and_exit(){
-    echo ${0} '--mode=[gui|cui] FILES' 1>&2
-    exit ${1:-1}
+    echo "${0}" '<gui|cui> <file>...' 1>&2
+    exit "${1:-1}"
 }
 
-if [[ ${#} -lt 1 ]]; then
+if [ "$#" -lt 1 ]; then
     usage_and_exit 1
 fi
 
-opts="$(
-   getopt \
-      --options hm: \
-      --longoptions help,mode: \
-      -- \
-      "$@"
-)"
-eval set -- "$opts"
+if [ "$1" = gui ] || [ "$1" = cui ]; then
+   readonly MODE="$1"
+   shift
+else
+   usage_and_exit 1
+fi
 
-
-while true
-do
-    case "${1}" in
-        -h | --help)
-            usage_and_exit 0
-            ;;
-        -m | --mode)
-            opt_mode="${2}"
-            shift
-            ;;
-        --)
-            shift
-            break
-            ;;
-        *)
-            break
-            ;;
-    esac
-    shift
-done
-
-readonly MODE=${opt_mode:-undefined}
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
 readonly SIGNALS_TO_TRAP='SIGHUP SIGTERM'
@@ -62,8 +36,8 @@ case "${MODE}" in
     gui)
         is_gui_running(){
             local emacsclient_="${1}"
-            [[ "$(${emacsclient_} -e '(window-system)')" = "x" ]] ||
-               [[ "$(${emacsclient_} -e '(window-system)')" = "ns" ]]
+            [ "$(${emacsclient_} -e '(window-system)')" = "x" ] ||
+               [ "$(${emacsclient_} -e '(window-system)')" = "ns" ]
         }
 
         if is_gui_running ${EMACSCLIENT_}; then
@@ -81,7 +55,7 @@ case "${MODE}" in
             if is_gui_running ${EMACSCLIENT_}; then
                 :
             else
-                "${0%/*}"/e.sh --mode=cui "$@"
+                "${0%/*}"/e.sh cui "$@"
             fi
         fi
         "${EMACSCLIENT_}" -e '(raise-frame)' > /dev/null
