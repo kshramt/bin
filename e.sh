@@ -59,7 +59,7 @@ case "${MODE}" in
             fi
         fi
         "${EMACSCLIENT_}" -e '(raise-frame)' > /dev/null
-        if which wmctrl &> /dev/null; then
+        if which wmctrl 2>&1 /dev/null; then
            wmctrl -a :ACTIVE:
         fi
         ;;
