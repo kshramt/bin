@@ -21,7 +21,7 @@ fi
 
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
-readonly SIGNALS_TO_TRAP='SIGHUP SIGTERM'
+readonly SIGNALS_TO_TRAP='HUP TERM'
 
 if ${EMACSCLIENT_} -e '()' > /dev/null 2>&1 ; then
     :
