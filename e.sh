@@ -21,15 +21,11 @@ fi
 
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
-readonly SIGNALS_TO_TRAP='HUP TERM'
 
 if ${EMACSCLIENT_} -e '()' > /dev/null 2>&1 ; then
     :
 else
-    (
-        trap '' ${SIGNALS_TO_TRAP}
-        exec ${EMACS_} --daemon
-    )
+    ${EMACS_} --daemon
 fi
 
 case "${MODE}" in
@@ -41,15 +37,9 @@ case "${MODE}" in
         }
 
         if is_gui_running ${EMACSCLIENT_}; then
-            (
-                trap '' ${SIGNALS_TO_TRAP}
-                exec ${EMACSCLIENT_} -n -- "$@"
-            )
+            ${EMACSCLIENT_} -n -- "$@"
         else
-            (
-                trap '' ${SIGNALS_TO_TRAP}
-                exec ${EMACSCLIENT_} -c -n -- "$@"
-            )
+            ${EMACSCLIENT_} -c -n -- "$@"
 
             # Run within terminal when X is not supported.
             if is_gui_running ${EMACSCLIENT_}; then
@@ -64,10 +54,7 @@ case "${MODE}" in
         fi
         ;;
     cui)
-        (
-            trap '' ${SIGNALS_TO_TRAP}
-            exec ${EMACSCLIENT_} -t -- "$@"
-        )
+        ${EMACSCLIENT_} -t -- "$@"
         ;;
     *)
         usage_and_exit 1
