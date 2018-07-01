@@ -31,4 +31,4 @@ done
 awk_expr="${awk_expr%,}"'}'
 
 
-${MY_AWK:-gawk} -v OFS=$'\t' "$awk_expr"
+${MY_AWK:-awk} -v OFS=$'\t' "$awk_expr"

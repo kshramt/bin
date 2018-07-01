@@ -37,7 +37,7 @@ EOF
 }
 
 readonly dir="${0%/*}"
-readonly awk="${MY_AWK:-gawk}"
+readonly awk="${MY_AWK:-awk}"
 
 
 if [[ $# -lt 1 ]]; then

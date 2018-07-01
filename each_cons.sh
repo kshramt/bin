@@ -30,7 +30,7 @@ fi
 if [[ "$1" = 1 ]]; then
    cat
 else
-   ${MY_AWK:-gawk} -v n="$1" '
+   ${MY_AWK:-awk} -v n="$1" '
 BEGIN{
    split("", fs)
    i_now = 0
