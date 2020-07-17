@@ -22,7 +22,7 @@ fi
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
 
-if ${EMACSCLIENT_} -e '()' > /dev/null 2>&1 ; then
+if "${EMACSCLIENT_}" -e '()' > /dev/null 2>&1 ; then
     :
 else
     ${EMACS_} --daemon
@@ -36,13 +36,13 @@ case "${MODE}" in
                [ "$(${emacsclient_} -e '(window-system)')" = "ns" ]
         }
 
-        if is_gui_running ${EMACSCLIENT_}; then
-            ${EMACSCLIENT_} -n -- "$@"
+        if is_gui_running "${EMACSCLIENT_}"; then
+            "${EMACSCLIENT_}" -n -- "$@"
         else
-            ${EMACSCLIENT_} -c -n -- "$@"
+            "${EMACSCLIENT_}" -c -n -- "$@"
 
             # Run within terminal when X is not supported.
-            if is_gui_running ${EMACSCLIENT_}; then
+            if is_gui_running "${EMACSCLIENT_}"; then
                 :
             else
                 "${0%/*}"/e.sh cui "$@"
@@ -54,7 +54,7 @@ case "${MODE}" in
         fi
         ;;
     cui)
-        ${EMACSCLIENT_} -t -- "$@"
+        "${EMACSCLIENT_}" -t -- "$@"
         ;;
     *)
         usage_and_exit 1
