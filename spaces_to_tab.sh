@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
 sed -e 's/ \+/\t/g' "$@"

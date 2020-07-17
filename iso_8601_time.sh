@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 date +'%FT%T.%N%z'
