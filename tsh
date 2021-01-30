@@ -18,5 +18,5 @@ do
    do
       tmp__="$tmp__"_
    done
-   mv -- "$f" "$tmp__"
+   mv -- "$f" "$tmp__" || :
 done
