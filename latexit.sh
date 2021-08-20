@@ -218,7 +218,7 @@ EOF
 } > "$tex_file"
 
 
-"$latex" "$tex_file" 1>&2
+texliveonfly --compiler="$latex" "$tex_file" 1>&2
 readonly pdf_file="${base_name}".pdf
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
