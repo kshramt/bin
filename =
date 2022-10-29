@@ -40,5 +40,6 @@ do
 done
 
 
-readonly dir="$(cd "${0%/*}"; pwd -P)"
+dir="$(cd "${0%/*}"; pwd -P)"
+readonly dir
 "${dir}"/dawk.sh "BEGIN{${body}}"

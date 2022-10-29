@@ -14,12 +14,12 @@ usage_and_exit(){
    {
       echo "${0##*/}" '<columns...>'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
 if [[ $# -lt 1 ]] || [[ "$1" = -h ]] || [[ "$1" = --help ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 
