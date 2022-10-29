@@ -12,11 +12,11 @@ usage_and_exit(){
       echo '# Nothing is printed if the field is not defined or exist.'
       echo "${0##*/}" FILE FIELD
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 2 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

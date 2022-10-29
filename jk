@@ -12,7 +12,7 @@ usage_and_exit(){
    {
       echo "${0##*/}" '[<prefix>] [<suffix>]'
    } > /dev/stderr
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 readonly base_name=delete_me

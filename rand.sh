@@ -11,7 +11,7 @@ usage_and_exit(){
       echo '# generate uniform random numbers [0, 1)'
       echo "${0##*/}" '[SEED]'
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 opts=$(
@@ -28,7 +28,7 @@ while true
 do
    case "$1" in
       -h | --help)
-         usage_and_exit
+         usage_and_exit 1
          ;;
       --)
          shift

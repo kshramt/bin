@@ -12,12 +12,12 @@ usage_and_exit(){
    {
       echo "${0##*/}" 't0 dt < YS >| XYS'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
 if [[ $# -ne 2 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

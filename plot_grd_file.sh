@@ -8,7 +8,7 @@ set -o noclobber
 
 usage_and_exit(){
     echo "${0}" '-f GRD_FILE -n [N_CONTOUR]' 1>&2
-    exit "${1:-1}"
+    exit "${1}"
 }
 
 if [[ "${#}" -lt 2 ]]; then

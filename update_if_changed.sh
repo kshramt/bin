@@ -14,12 +14,12 @@ usage_and_exit(){
       echo '# <file1>/<file2> should not be a stream'
       echo "${0##*/}" '<file1> <file2>'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
 if [[ $# -ne 2 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

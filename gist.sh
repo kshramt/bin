@@ -14,7 +14,7 @@ usage_and_exit(){
       echo "$0" FILE1 FILE2 ...
    } > /dev/stderr
 
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 if [[ $# -eq 0 ]] || [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then

@@ -15,7 +15,7 @@ usage_and_exit(){
       echo "${0##*/}" 'days@60!n_iter@1024!is_logs@t,t,t,f,f'
       echo "${0##*/}" 'days@60!n_iter@1024!is_logs@t,t,t,f,f' "'declare -rx'"
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 if [[ $# -eq 1 ]]; then

@@ -13,7 +13,7 @@ usage_and_exit(){
       echo '# `chnhdr` a binary format SAC file.'
       echo "${0##*/}" '<in_file> <field> <value> [<out_file>]'
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -eq 3 ]]; then
@@ -21,7 +21,7 @@ if [[ $# -eq 3 ]]; then
 elif [[ $# -eq 4 ]]; then
    readonly out_file="$4"
 else
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 readonly in_file="$1"

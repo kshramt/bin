@@ -15,7 +15,7 @@ usage_and_exit(){
    {
       echo "${0##*/}" '<x1> <x2> [<padding>]'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
@@ -24,7 +24,7 @@ if [[ $# -eq 2 ]]; then
 elif [[ $# -eq 3 ]]; then
    readonly padding="$3"
 else
-   usage_and_exit
+   usage_and_exit 1
 fi
 [[ "$padding" -ge 0 ]]
 

@@ -13,11 +13,11 @@ usage_and_exit(){
       echo '# eval Fortran statements'
       echo "${0##*/}" STATEMENTS
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ge 1 ]] && ([[ $1 = -h ]] || [[ $1 = --help ]]); then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 readonly TMP_DIR="$(mktemp -d)"

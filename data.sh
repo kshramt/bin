@@ -33,7 +33,7 @@ ${prog} grep <arg> [<args>...]
 # grep meta data
 EOF
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 readonly dir="${0%/*}"
@@ -41,7 +41,7 @@ readonly awk="${MY_AWK:-awk}"
 
 
 if [[ $# -lt 1 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 
@@ -52,7 +52,7 @@ readonly hash_dir="${data_dir}"/hash
 
 raise(){
    echo "$@" >&2
-   exit 1
+   exit "${1}"
 }
 
 
@@ -73,7 +73,7 @@ prepare_tmp_dir(){
 
 
 _add(){
-   [[ $# -ne 2 ]] && usage_and_exit
+   [[ $# -ne 2 ]] && usage_and_exit 1
    uri="$1"
    file="$2"
    [[ ! -r "${file}" ]] && raise "${file}" unreadable
@@ -97,7 +97,7 @@ _add(){
 
 
 _check(){
-   [[ $# -ne 0 ]] && usage_and_exit
+   [[ $# -ne 0 ]] && usage_and_exit 1
    cd "${hash_dir}"
    ls -U -1 |
       ${awk} '{print $1 "  " $1 "/data"}' |
@@ -106,7 +106,7 @@ _check(){
 
 
 _fetch(){
-   [[ $# -ne 1 ]] && usage_and_exit
+   [[ $# -ne 1 ]] && usage_and_exit 1
    prepare_tmp_dir
    cd "${tmp_dir}"
    uri="$1"
@@ -119,7 +119,7 @@ _fetch(){
 
 
 _search(){
-   [[ $# -ne 2 ]] && usage_and_exit
+   [[ $# -ne 2 ]] && usage_and_exit 1
    uri="$1"
    file="$2"
    file_base="$(basename "${file}")"
@@ -132,7 +132,7 @@ _search(){
 
 
 _get(){
-   [[ $# -ne 2 ]] && usage_and_exit
+   [[ $# -ne 2 ]] && usage_and_exit 1
    uri="$1"
    file="$2"
    file_base="$(basename "${file}")"
@@ -178,6 +178,6 @@ case "$1" in
       _grep "$@"
       ;;
    *)
-      usage_and_exit
+      usage_and_exit 1
       ;;
 esac

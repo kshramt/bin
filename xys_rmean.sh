@@ -14,7 +14,7 @@ usage_and_exit(){
       echo "${0##*/}" 'XYS X1 X2'
       echo "${0##*/}" 'X1 X2 < XYS'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
@@ -42,5 +42,5 @@ elif [[ $# -eq 2 ]]; then
    cat >| "${tmp_dir}"/input.xy
    "$0" "${tmp_dir}"/input.xy "$1" "$2"
 else
-   usage_and_exit
+   usage_and_exit 1
 fi

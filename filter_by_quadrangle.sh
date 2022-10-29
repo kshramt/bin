@@ -14,11 +14,11 @@ usage_and_exit(){
       echo "# Convexity is not checked."
       echo "${0##*/}" 'ROW_X ROW_Y X1 Y1 X2 Y2 X3 Y3 X4 Y4 < POINTS'
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 10 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

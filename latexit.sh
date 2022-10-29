@@ -26,7 +26,7 @@ ${program_name} --print-full eq1.svg
 -P, --print-full: Print a standalone LaTeX document embedded in a PDF or SVG file
 --to=<format>: Output format (one of pdf and svg) [pdf]
 "
-   local status="${1:-1}"
+   local status="${1}"
    if [[ ${status} -eq 0 ]]; then
       echo "${msg}"
    else
@@ -245,6 +245,6 @@ case "${to}" in
       echo '-->'
       ;;
    *)
-      usage_and_exit
+      usage_and_exit 1
       ;;
 esac

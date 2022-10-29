@@ -16,7 +16,7 @@ usage_and_exit(){
       echo "${0##*/}" '[options] <path/to/file.mdc>'
       echo '--self-contained: write self contained HTML to standard output'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
@@ -60,7 +60,7 @@ done
 
 
 if [[ $# -ne 1 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

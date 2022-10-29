@@ -8,11 +8,11 @@ set -o noclobber
 
 usage_and_exit(){
    echo "${0##*/}" "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -gt 1 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 echo -e 'time\taddition\tdeletion\ttotal'

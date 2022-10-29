@@ -5,7 +5,7 @@ set -o errexit
 
 usage_and_exit(){
     echo "${0}" '<gui|cui> <file>...' 1>&2
-    exit "${1:-1}"
+    exit "${1}"
 }
 
 if [[ "$#" -lt 1 ]]; then

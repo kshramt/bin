@@ -12,7 +12,7 @@ usage_and_exit(){
    {
       echo "${0##*/}" '< FILE'
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 

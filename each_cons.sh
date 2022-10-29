@@ -13,17 +13,17 @@ usage_and_exit(){
       echo '# n >= 1'
       echo "${0##*/}" N
    } > /dev/stderr
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
 if [[ $# -ne 1 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 
 if [[ "$1" =~ '^[1-9]+$' ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

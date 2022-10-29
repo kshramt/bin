@@ -8,11 +8,11 @@ set -o noclobber
 
 usage_and_exit(){
    echo "${0##*/} | rake_p_to_dot.sh | dot -Tpdf >| _.pdf"
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 0 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 cd "${HOME}"/.julia/v0.4/METADATA/

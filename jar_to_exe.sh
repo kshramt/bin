@@ -12,11 +12,11 @@ usage_and_exit(){
    {
       echo "${0##*/}" '< JAR > EXE && chmod u+x EXE'
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 0 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 echo 'exec java -jar "$0" "$@"'

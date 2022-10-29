@@ -15,12 +15,12 @@ usage_and_exit(){
    {
       echo "${0##*/}" "< <english.txt> | grep -i --only-matching --extended-regexp '([^ ]+ ){5}in order to be able to( [^ ]+){5}'"
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
 if [[ $# -ne 0 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 

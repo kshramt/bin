@@ -13,11 +13,11 @@ usage_and_exit(){
       echo "# return 0 if some of <dep>s are newer than <target>, otherwise 1"
       echo "${0##*/}" '<target>' '[<dep> ...]'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 
-[[ $# -eq 0 ]] && usage_and_exit
+[[ $# -eq 0 ]] && usage_and_exit 1
 
 
 readonly target="$1"

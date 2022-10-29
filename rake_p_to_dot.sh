@@ -8,11 +8,11 @@ set -o noclobber
 
 usage_and_exit(){
    echo 'rake -P |' "${0##*/}" '| dot -Tpdf > workflow.pdf'
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 0 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 quote(){

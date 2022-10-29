@@ -16,7 +16,7 @@ finalize(){
 
 usage_and_exit(){
    echo "${0##*/} INPUT.pdf > OUTPUT.svg"
-   exit 1
+   exit "${1}"
 }
 
 is_odd(){
@@ -24,7 +24,7 @@ is_odd(){
 }
 
 if [[ $# -ne 1 ]] || [[ $1 = '-h' ]] || [[ $1 = '--help' ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 input="$1"

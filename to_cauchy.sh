@@ -11,11 +11,11 @@ usage_and_exit(){
       echo '# convert uniform random numbers [0, 1) to cauchy random numbers'
       echo 'rand.sh |' "${0##*/}"
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 0 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 readonly THIS_DIR="${0%/*}"

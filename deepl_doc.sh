@@ -15,7 +15,7 @@ usage_and_exit(){
    {
       echo "${0##*/}" '<input> <output>'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 readonly dir="$(dirname "$0")"
@@ -29,7 +29,7 @@ trap finalize EXIT
 
 
 if [[ $# -ne 2 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 readonly input="$1"

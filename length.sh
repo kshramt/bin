@@ -12,11 +12,11 @@ usage_and_exit(){
    {
       echo "${0##*/}" WORD
    } > /dev/stderr
-   exit 1
+   exit "${1}"
 }
 
 if [[ $# -ne 1 ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 echo "${#1}"

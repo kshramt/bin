@@ -13,11 +13,11 @@ usage_and_exit(){
       echo '# update GitBucket to <version>'
       echo "${0##*/}" '<version>'
    } >&2
-   exit "${1:-1}"
+   exit "${1}"
 }
 
 if [[ $# -ne 1 ]] || [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]]; then
-   usage_and_exit
+   usage_and_exit 1
 fi
 
 
