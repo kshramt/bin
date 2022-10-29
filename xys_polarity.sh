@@ -24,11 +24,11 @@ fi
 readonly dir="${0%/*}"
 
 
-"$dir"/xys_cut.sh "$1" "$2" |
+"${dir}"/xys_cut.sh "$1" "$2" |
    cut -f2 |
    sum.sh | (
       read sum
-      "$dir"/dawk.sh -v sum="$sum" '
+      "${dir}"/dawk.sh -v sum="${sum}" '
 BEGIN{
    if(sum >= 0){
       print 1

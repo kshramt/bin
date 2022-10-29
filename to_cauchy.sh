@@ -9,7 +9,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# convert uniform random numbers [0, 1) to cauchy random numbers'
-      echo 'rand.sh |' ${0##*/}
+      echo 'rand.sh |' "${0##*/}"
    } > /dev/stderr
    exit 1
 }

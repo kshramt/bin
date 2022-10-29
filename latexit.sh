@@ -27,12 +27,12 @@ ${program_name} --print-full eq1.svg
 --to=<format>: Output format (one of pdf and svg) [pdf]
 "
    local status="${1:-1}"
-   if [[ $status -eq 0 ]]; then
-      echo "$msg"
+   if [[ ${status} -eq 0 ]]; then
+      echo "${msg}"
    else
-      echo "$msg" 1>&2
+      echo "${msg}" 1>&2
    fi
-   exit "$status"
+   exit "${status}"
 }
 
 
@@ -43,7 +43,7 @@ opts="$(
       -- \
       "$@"
 )"
-eval set -- "$opts"
+eval set -- "${opts}"
 
 
 color='0,0,0'
@@ -99,31 +99,31 @@ trap finalize EXIT
 finalize(){
    rm -fr "${tmp_dir}"
 }
-cd "$tmp_dir"
+cd "${tmp_dir}"
 
 
 readonly equation_file=equation.tex
 readonly base_name=main
-readonly tex_file="$base_name".tex
+readonly tex_file="${base_name}".tex
 
 
-if [[ "$is_opt_print" = true ]]; then
-   case "$opt_print_file" in
+if [[ "${is_opt_print}" = true ]]; then
+   case "${opt_print_file}" in
       *.pdf)
-         pdfdetach -saveall "$opt_print_file"
+         pdfdetach -saveall "${opt_print_file}"
 
-         if [[ -r "$equation_file" ]]; then
-            cat "$equation_file"
+         if [[ -r "${equation_file}" ]]; then
+            cat "${equation_file}"
          else
-            pdftk "$opt_print_file" dump_data_utf8 |
-               grep -A1 'InfoKey: '"$program_name" |
+            pdftk "${opt_print_file}" dump_data_utf8 |
+               grep -A1 'InfoKey: '"${program_name}" |
                tail -n1 |
                sed -e 's/InfoValue: //' |
                base64 --decode
          fi
          ;;
       *.svg)
-         tail -n4 "$opt_print_file" |
+         tail -n4 "${opt_print_file}" |
             grep latexit_equation: |
             sed -e 's/latexit_equation://' |
             base64 -d
@@ -135,14 +135,14 @@ if [[ "$is_opt_print" = true ]]; then
    exit
 fi
 
-if [[ "$is_opt_print_full" = true ]]; then
-   case "$opt_print_full_file" in
+if [[ "${is_opt_print_full}" = true ]]; then
+   case "${opt_print_full_file}" in
       *.pdf)
-         pdfdetach -saveall "$opt_print_full_file"
-         cat "$tex_file"
+         pdfdetach -saveall "${opt_print_full_file}"
+         cat "${tex_file}"
          ;;
       *.svg)
-         tail -n4 "$opt_print_full_file" |
+         tail -n4 "${opt_print_full_file}" |
             grep latexit_tex: |
             sed -e 's/latexit_tex://' |
             base64 -d
@@ -161,7 +161,7 @@ fi
    else
       cat
    fi
-} > "$equation_file"
+} > "${equation_file}"
 
 
 
@@ -194,53 +194,53 @@ fi
 
 \DeclarePairedDelimiter{\pr}{(}{)}
 
-\embedfile{$equation_file}
-\embedfile{$tex_file}
+\embedfile{${equation_file}}
+\embedfile{${tex_file}}
 \begin{document}
 EOF
-if [[ "$is_huge" = true ]]; then
+if [[ "${is_huge}" = true ]]; then
    echo '\Huge'
 fi
 cat <<EOF
 \thispagestyle{empty}
 \begin{preview}
   \$\displaystyle
-    \color[rgb]{$color}
+    \color[rgb]{${color}}
     \begin{aligned}
 EOF
-   cat "$equation_file"
+   cat "${equation_file}"
    cat <<EOF
     \end{aligned}
   \$
 \end{preview}
 \end{document}
 EOF
-} > "$tex_file"
+} > "${tex_file}"
 
 
-texliveonfly --compiler="$latex" "$tex_file" 1>&2
+texliveonfly --compiler="${latex}" "${tex_file}" 1>&2
 readonly pdf_file="${base_name}".pdf
 readonly log_dir="${HOME}"/d/log/"${program_name}"
 mkdir -p "${log_dir}"
 
 readonly dir="${0%/*}"
-name="${log_dir}"/"$("$dir"/iso_8601_time.sh)"
-mv "$equation_file" "$name".tex
-mv "$pdf_file" "$name".pdf
+name="${log_dir}"/"$("${dir}"/iso_8601_time.sh)"
+mv "${equation_file}" "${name}".tex
+mv "${pdf_file}" "${name}".pdf
 
 
-case "$to" in
+case "${to}" in
    pdf)
-      cat "$name".pdf
+      cat "${name}".pdf
       ;;
    svg)
-      pdftocairo -svg "$name".pdf -
+      pdftocairo -svg "${name}".pdf -
       echo '<!--'
       echo -n 'latexit_equation:'
-      base64 --wrap=0 "$name".tex
+      base64 --wrap=0 "${name}".tex
       echo
       echo -n 'latexit_tex:'
-      base64 --wrap=0 "$tex_file"
+      base64 --wrap=0 "${tex_file}"
       echo
       echo '-->'
       ;;

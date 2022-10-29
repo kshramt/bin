@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# Fortran REPL'
-      echo ${0##*/} STATEMENTS
+      echo "${0##*/}" STATEMENTS
    } > /dev/stderr
    exit 1
 }

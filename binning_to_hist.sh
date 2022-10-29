@@ -11,7 +11,7 @@ set -o noclobber
 readonly dir="${0%/*}"
 
 
-"$dir"/dawk.sh '
+"${dir}"/dawk.sh '
 NR == 1{
    print $1, 0
    print $1, $6

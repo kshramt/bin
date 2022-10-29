@@ -1,5 +1,5 @@
 unless ARGV.empty?
-  puts "#{$PROGRAM_NAME} | dot -Tpdf >| _.pdf"
+  puts "#{${PROGRAM_NAME}} | dot -Tpdf >| _.pdf"
   exit
 end
 

@@ -9,7 +9,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# convert [0, 1) -> (-1, 1)'
-      echo 'rand.sh |' ${0##*/}
+      echo 'rand.sh |' "${0##*/}"
    } > /dev/stderr
    exit 1
 }

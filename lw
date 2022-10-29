@@ -15,7 +15,7 @@ usage_and_exit(){
    exit 1
 }
 
-if [ "$#" -ne 1 ]; then
+if [[ "$#" -ne 1 ]]; then
    usage_and_exit
 fi
 

@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo ${0##*/} "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
+   echo "${0##*/}" "[FILE_OR_DIR:-.] | tail -n +2 | plot_commits.py.sh >| commits.pdf" > /dev/stderr
    exit 1
 }
 
@@ -21,7 +21,7 @@ git log \
    --pretty=tformat:'TIME %ai' \
    --reverse \
    "${1:-.}" \
-   | gawk '
+   | "${awk:-gawk}" '
 BEGIN{
    addition = 0; deletion = 0; total = 0; OFS="\t"
 }

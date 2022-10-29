@@ -9,7 +9,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo ${0##*/} NAME
+      echo "${0##*/}" NAME
    } > /dev/stderr
    exit 1
 }
@@ -23,7 +23,7 @@ F90="${NAME}".F90
 MOD="${NAME}".mod
 OBJ="${NAME}".o
 EXE="${NAME}".exe
-DEPS="$(fort_deps_recursive.sh < ${F90} | tac)"
+DEPS="$(fort_deps_recursive.sh < "${F90}" | tac)"
 MODS=$(echo "${DEPS}" | sed -e '/^$/d' -e 's/$/.mod/' | tr '\n' ' ')
 OBJS=$(echo "${DEPS}" | sed -e '/^$/d' -e 's/$/.o/' | tr '\n' ' ')
 

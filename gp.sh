@@ -16,7 +16,7 @@ readonly cmd="$1"
 readonly suffix="${2:-png}"
 
 mkdir -p gp.sh.d
-readonly src="set term $suffix; $cmd"
-echo "$src" > "gp.sh.d/$t.plt"
-gnuplot -e "$src" > "gp.sh.d/$t.$suffix"
-"${MY_OPEN:-xdg-open}" "gp.sh.d/$t.$suffix"
+readonly src="set term ${suffix}; ${cmd}"
+echo "${src}" > "gp.sh.d/${t}.plt"
+gnuplot -e "${src}" > "gp.sh.d/${t}.${suffix}"
+"${MY_OPEN:-xdg-open}" "gp.sh.d/${t}.${suffix}"

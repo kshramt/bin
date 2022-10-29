@@ -22,7 +22,7 @@ readonly dir="$(dirname "$0")"
 readonly tmp_dir="$(mktemp -d)"
 
 finalize(){
-   rm -fr "$tmp_dir"
+   rm -fr "${tmp_dir}"
 }
 
 trap finalize EXIT
@@ -53,14 +53,14 @@ do
 	  -d document_key="${document_key}" \
         >| "${tmp_dir}/status.json"
    status="$(jq --raw-output .status "${tmp_dir}/status.json")"
-   if [[ "$status" == error ]]; then
+   if [[ "${status}" == error ]]; then
       {
          cat "${tmp_dir}/job.json"
          cat "${tmp_dir}/status.json"
       } > /dev/stderr
       exit 1
    fi
-   if [[ "$status" == done ]]; then
+   if [[ "${status}" == done ]]; then
       break
    fi
    cat "${tmp_dir}/status.json"; echo
@@ -72,4 +72,4 @@ mkdir -p "$(dirname "${output}")"
 curl https://"${deepl_domain}"/v2/document/"${document_id}"/result \
 	-d auth_key="${MY_DEEPL_API_KEY}" \
 	-d document_key="${document_key}" \
-      >| "$output"
+      >| "${output}"

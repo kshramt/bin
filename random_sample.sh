@@ -10,7 +10,7 @@ usage_and_exit(){
    exit 1
 }
 
-if [ "$#" -ne 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+if [[ "$#" -ne 1 ]] || [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
    usage_and_exit
 fi
 

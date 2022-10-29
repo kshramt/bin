@@ -11,7 +11,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# eval Fortran statements'
-      echo ${0##*/} STATEMENTS
+      echo "${0##*/}" STATEMENTS
    } > /dev/stderr
    exit 1
 }
@@ -33,6 +33,7 @@ SRC="${TMP_DIR}"/main.F90
    echo program main
    echo   use, intrinsic:: iso_fortran_env
    echo   use, intrinsic:: iso_c_binding
+   echo   use, intrinsic:: ieee_arithmetic
    echo   ! implicit none
    if [[ $# -eq 0 ]]; then
       cat

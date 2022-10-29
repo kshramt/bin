@@ -22,12 +22,12 @@ readonly dir="${0%/*}"
 
 
 if [[ $# -eq 3 ]]; then
-   "$dir"/xys_cut.sh "$2" "$3" < "$1" |
+   "${dir}"/xys_cut.sh "$2" "$3" < "$1" |
       gawk '{print $2}' |
-      "$dir"/mean.sh |
+      "${dir}"/mean.sh |
       (
          read offset
-         "$dir"/dawk.sh -v offset="$offset" '
+         "${dir}"/dawk.sh -v offset="${offset}" '
 {
    print $1, $2 - offset
 }
@@ -39,8 +39,8 @@ elif [[ $# -eq 2 ]]; then
       rm -fr "${tmp_dir}"
    }
    trap finalize EXIT
-   cat >| "$tmp_dir"/input.xy
-   "$0" "$tmp_dir"/input.xy "$1" "$2"
+   cat >| "${tmp_dir}"/input.xy
+   "$0" "${tmp_dir}"/input.xy "$1" "$2"
 else
    usage_and_exit
 fi

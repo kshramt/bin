@@ -26,9 +26,9 @@ fi
 awk_expr='{print '
 for arg in "$@"
 do
-   awk_expr="$awk_expr"'$'"$arg"','
+   awk_expr="${awk_expr}"'$'"${arg}"','
 done
 awk_expr="${awk_expr%,}"'}'
 
 
-${MY_AWK:-awk} -v OFS=$'\t' "$awk_expr"
+${MY_AWK:-awk} -v OFS=$'\t' "${awk_expr}"

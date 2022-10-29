@@ -31,17 +31,17 @@ else
    usage_and_exit 1
 fi
 
-if [[ -z "$decl" ]]; then
+if [[ -z "${decl}" ]]; then
    while read l
    do
-      echo "$l"'"'
+      echo "${l}"'"'
    done
 else
    while read l
    do
-      echo "$decl" "$l"'"'
+      echo "${decl}" "${l}"'"'
    done
 fi < <(
-   echo "$stem" |
+   echo "${stem}" |
       sed -e 's/@/="/g' -e 's/!/\n/g'
 )

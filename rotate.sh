@@ -25,7 +25,7 @@ fi
 readonly dir="${0%/*}"
 
 
-"$dir"/dawk.sh -v th="$1" '
+"${dir}"/dawk.sh -v th="$1" '
 BEGIN{
    th = th*atan2(1, 0)/90
    c = cos(th)

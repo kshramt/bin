@@ -14,8 +14,8 @@ if [[ $# -ne 2 ]]; then
     exit 1
 fi
 
-exe=$(readlink -f ${1})
+exe=$(readlink -f "${1}")
 comp=${2}
 if [[ "${exe}" -nt "${comp}" ]]; then
-    ${exe} && touch ${comp}
+    ${exe} && touch "${comp}"
 fi

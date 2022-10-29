@@ -14,5 +14,5 @@ readonly command="$1"
 shift
 for f in "$@"
 do
-   "$command" "$f"
+   "${command}" "${f}"
 done

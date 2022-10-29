@@ -8,11 +8,11 @@ usage_and_exit(){
     exit "${1:-1}"
 }
 
-if [ "$#" -lt 1 ]; then
+if [[ "$#" -lt 1 ]]; then
     usage_and_exit 1
 fi
 
-if [ "$1" = gui ] || [ "$1" = cui ]; then
+if [[ "$1" = gui ]] || [[ "$1" = cui ]]; then
    readonly MODE="$1"
    shift
 else
@@ -32,8 +32,8 @@ case "${MODE}" in
     gui)
         is_gui_running(){
             local emacsclient_="${1}"
-            [ "$(${emacsclient_} -e '(window-system)')" = "x" ] ||
-               [ "$(${emacsclient_} -e '(window-system)')" = "ns" ]
+            [[ "$(${emacsclient_} -e '(window-system)')" = "x" ]] ||
+               [[ "$(${emacsclient_} -e '(window-system)')" = "ns" ]]
         }
 
         if is_gui_running "${EMACSCLIENT_}"; then

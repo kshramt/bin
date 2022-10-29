@@ -10,7 +10,7 @@ set -o noclobber
 
 source "${0%/*}"/util.sh
 
-readonly ret="$(seq 10 | "$target" 3)"
+readonly ret="$(seq 10 | "${target}" 3)"
 readonly expected="1	2	3
 2	3	4
 3	4	5
@@ -20,4 +20,4 @@ readonly expected="1	2	3
 7	8	9
 8	9	10"
 
-[[ "$ret" = "$expected" ]]
+[[ "${ret}" = "${expected}" ]]

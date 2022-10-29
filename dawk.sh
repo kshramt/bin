@@ -9,7 +9,7 @@ set -o noclobber
 usage_and_exit(){
    {
       echo '# double precision AWK'
-      echo ${0##*/}
+      echo "${0##*/}"
    } > /dev/stderr
    exit 1
 }

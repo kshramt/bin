@@ -31,14 +31,14 @@ trap finalize EXIT
 
 readonly version="$1"
 
-cd "$tmp_dir"
-wget https://github.com/takezoe/gitbucket/releases/download/"$version"/gitbucket.war
+cd "${tmp_dir}"
+wget https://github.com/takezoe/gitbucket/releases/download/"${version}"/gitbucket.war
 
 cd /var/lib/tomcat7/webapps
 
-readonly new_gitbucket_war=gitbucket.war."$version"
-sudo cp -f "$tmp_dir"/gitbucket.war "$new_gitbucket_war"
+readonly new_gitbucket_war=gitbucket.war."${version}"
+sudo cp -f "${tmp_dir}"/gitbucket.war "${new_gitbucket_war}"
 sudo service tomcat7 stop
-sudo ln -fs "$new_gitbucket_war" repository.war
+sudo ln -fs "${new_gitbucket_war}" repository.war
 sudo rm -fr repository
 sudo service tomcat7 start

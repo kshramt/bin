@@ -15,9 +15,9 @@ usage_and_exit(){
    exit 1
 }
 
-if [ "$#" -eq 0 ]; then
+if [[ "$#" -eq 0 ]]; then
    usage_and_exit
 fi
 
 
-grep --color=auto "$@" "${HISTFILE:-"$HOME"/.bash_history}"
+grep --color=auto "$@" "${HISTFILE:-"${HOME}"/.bash_history}"

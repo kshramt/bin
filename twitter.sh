@@ -8,4 +8,4 @@ set -o errexit
 set -o pipefail
 set -o noclobber
 
-"${0%/*}"/open_uri.sh 'https://twitter.com/search?q=' "$@"
+"${0%/*}"/open_uri.sh 'https://twitter.com/search?src=typed_query&f=top&q=' "$@"

@@ -29,7 +29,7 @@ opts="$(
       -- \
       "$@"
 )"
-eval set -- "$opts"
+eval set -- "${opts}"
 
 
 self_contained=false
@@ -69,11 +69,11 @@ readonly mdc="$1"
 
 : ${PANDOC_FLAGS:=--mathml --standalone --to=html5}
 output=index.html
-if [[ "$self_contained" = "true" ]]; then
+if [[ "${self_contained}" = "true" ]]; then
    PANDOC_FLAGS="${PANDOC_FLAGS} --self-contained"
    output=/dev/stdout
 fi
 
 
-cd "$mdc"
-${PANDOC:-pandoc} ${PANDOC_FLAGS} index.md >| "$output"
+cd "${mdc}"
+${PANDOC:-pandoc} "${PANDOC_FLAGS}" index.md >| "${output}"

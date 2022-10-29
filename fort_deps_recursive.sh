@@ -24,10 +24,10 @@ fi
 
 
 main(){
-   for m in $("$dir"/fort_deps.sh)
+   for m in $("${dir}"/fort_deps.sh)
    do
-      echo "$m"
-      main < "$m".f90
+      echo "${m}"
+      main < "${m}".f90
    done
 }
 

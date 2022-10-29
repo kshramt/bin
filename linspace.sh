@@ -8,7 +8,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo ${0##*/} X1 X2 NX
+      echo "${0##*/}" X1 X2 NX
    } > /dev/stderr
    exit 1
 }

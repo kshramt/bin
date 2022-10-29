@@ -26,7 +26,7 @@ opts=$(
         -- \
         "$@"
 )
-set -- ${opts} # DO NOT quote.
+set -- "${opts}" # DO NOT quote.
 
 while true
 do

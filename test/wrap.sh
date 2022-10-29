@@ -10,16 +10,16 @@ set -o noclobber
 
 source "${0%/*}"/util.sh
 
-ret="$(seq 10 | "$target" 5; printf x)"
+ret="$(seq 10 | "${target}" 5; printf x)"
 expected="1	2	3	4	5
 6	7	8	9	10
 x"
 
-[[ "$ret" = "$expected" ]]
+[[ "${ret}" = "${expected}" ]]
 
-ret="$(seq 7 | "$target" 5; printf x)"
+ret="$(seq 7 | "${target}" 5; printf x)"
 expected="1	2	3	4	5
 6	7
 x"
 
-[[ "$ret" = "$expected" ]]
+[[ "${ret}" = "${expected}" ]]

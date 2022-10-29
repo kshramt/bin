@@ -22,8 +22,8 @@ readonly dir="${0%/*}"
 
 
 if [[ $# -eq 3 ]]; then
-   "$dir"/xys_cut.sh "$2" "$3" < "$1" |
-      "$dir"/dawk.sh '
+   "${dir}"/xys_cut.sh "$2" "$3" < "$1" |
+      "${dir}"/dawk.sh '
 function abs(x){
    if(x < 0){
       return -x
@@ -45,7 +45,7 @@ END{
 }
 ' | (
       read a
-      "$dir"/dawk.sh -v a="$a" '
+      "${dir}"/dawk.sh -v a="${a}" '
 {
    print $1, $2/a
 }
@@ -57,8 +57,8 @@ elif [[ $# -eq 2 ]]; then
          rm -fr "${tmp_dir}"
       }
       trap finalize EXIT
-      cat >| "$tmp_dir"/input.xy
-      "$0" "$tmp_dir"/input.xy "$1" "$2"
+      cat >| "${tmp_dir}"/input.xy
+      "$0" "${tmp_dir}"/input.xy "$1" "$2"
 else
    usage_and_exit
 fi

@@ -14,7 +14,7 @@ usage_and_exit(){
       echo "$0" FILE1 FILE2 ...
    } > /dev/stderr
 
-   exit ${1:-1}
+   exit "${1:-1}"
 }
 
 if [[ $# -eq 0 ]] || [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
@@ -33,13 +33,13 @@ fi
 
 for f in "$@"
 do
-   \cp -a -i "${f}" "${GIST_DIR}/$(basename ${f})"
+   \cp -a -i "${f}" "${GIST_DIR}/$(basename "${f}")"
 done
 
 pushd "${GIST_DIR}"
 for f in "$@"
 do
-   git add "$(basename ${f})"
+   git add "$(basename "${f}")"
 done
 git commit -am "Update"
 popd

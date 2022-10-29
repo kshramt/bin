@@ -22,7 +22,7 @@ opts=$(
       -- \
       "$@"
 )
-set -- ${opts}
+set -- "${opts}"
 
 while true
 do

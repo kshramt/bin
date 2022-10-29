@@ -10,7 +10,7 @@ set -o noclobber
 
 source "${0%/*}"/util.sh
 
-ret="$("$target" "p q" "$(seq -s\  3)" "{a..c}")"
+ret="$("${target}" "p q" "$(seq -s\  3)" "{a..c}")"
 expected="p	1	a
 p	1	b
 p	1	c
@@ -30,4 +30,4 @@ q	3	a
 q	3	b
 q	3	c"
 
-[[ "$ret" = "$expected" ]]
+[[ "${ret}" = "${expected}" ]]

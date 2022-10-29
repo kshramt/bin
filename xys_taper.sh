@@ -23,7 +23,7 @@ readonly dir="${0%/*}"
 
 
 if [[ $# -eq 3 ]]; then
-   "$dir"/dawk.sh -v r="$3" '
+   "${dir}"/dawk.sh -v r="$3" '
 BEGIN{
    if(r <= 0 || 0.5 < r){
       print "0 < r <= 0.5 not satisfied: " r > "/dev/stderr"
@@ -32,10 +32,10 @@ BEGIN{
 }
 '
 
-   x1="$(head -n1 "$1" | "$dir"/dawk.sh '{print $1}')"
-   x2="$(tail -n1 "$1" | "$dir"/dawk.sh '{print $1}')"
+   x1="$(head -n1 "$1" | "${dir}"/dawk.sh '{print $1}')"
+   x2="$(tail -n1 "$1" | "${dir}"/dawk.sh '{print $1}')"
    if [[ "$2" = cos ]]; then
-      "$dir"/dawk.sh -v x1="$x1" -v x2="$x2" -v r="$3" '
+      "${dir}"/dawk.sh -v x1="${x1}" -v x2="${x2}" -v r="$3" '
 BEGIN{
    dx = r*(x2 - x1)
    xl = x1 + dx
@@ -63,8 +63,8 @@ elif [[ $# -eq 2 ]]; then
       rm -fr "${tmp_dir}"
    }
    trap finalize EXIT
-   cat >| "$tmp_dir"/input.xy
-   "$0" "$tmp_dir"/input.xy "$1" "$2"
+   cat >| "${tmp_dir}"/input.xy
+   "$0" "${tmp_dir}"/input.xy "$1" "$2"
 else
    usage_and_exit
 fi

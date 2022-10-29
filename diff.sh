@@ -23,7 +23,7 @@ fi
 readonly dir="$(cd "${0%/*}"; pwd -P)"
 
 
-AWKPATH="$dir":"${AWKPATH:-}" "$dir"/dawk.sh -v OFS=$'\t' '
+AWKPATH="${dir}":"${AWKPATH:-}" "${dir}"/dawk.sh -v OFS=$'\t' '
 NR == 1{
    x = $1
    y = $2

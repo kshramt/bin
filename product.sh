@@ -11,7 +11,7 @@ set -o noclobber
    for xs in "$@"
    do
       echo -n "for x$((i++)) in "
-      echo "$xs"
+      echo "${xs}"
       echo "do"
    done
 
@@ -19,8 +19,8 @@ set -o noclobber
       echo -n 'echo "$x0'
       for (( i=1; i<$#; i++ ))
       do
-         if [[ "$i" -gt 0 ]]; then
-            echo -ne '\t$x'"$i"
+         if [[ "${i}" -gt 0 ]]; then
+            echo -ne '\t$x'"${i}"
          fi
       done
       echo -n '"'

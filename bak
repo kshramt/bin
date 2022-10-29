@@ -3,7 +3,7 @@
 set -o nounset
 set -o errexit
 
-if [ "$#" -eq 0 ]; then
+if [[ "$#" -eq 0 ]]; then
     echo "$0" '[<file>...]' 1>&2
     exit 1
 fi
@@ -17,8 +17,8 @@ do
     full_path="$(readlink -f -- "${f}")"
     dir="${root_dir}"/"$(dirname -- "${full_path}")"
     mkdir -p -- "${dir}"
-    if [ -e "${full_path}" ]; then
-        if [ ! -e "${root_dir}/${full_path}" ]; then
+    if [[ -e "${full_path}" ]]; then
+        if [[ ! -e "${root_dir}/${full_path}" ]]; then
             cp -a -- "${full_path}" "${dir}"
         fi
     else

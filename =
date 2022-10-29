@@ -29,10 +29,10 @@ do
          ;;
       *)
          if [[ $# -eq 1 ]]; then
-            body="$body; print $1"
+            body="${body}; print $1"
             break
          else
-            body="$body; $1"
+            body="${body}; $1"
          fi
          ;;
    esac
@@ -41,4 +41,4 @@ done
 
 
 readonly dir="$(cd "${0%/*}"; pwd -P)"
-"$dir"/dawk.sh "BEGIN{$body}"
+"${dir}"/dawk.sh "BEGIN{${body}}"

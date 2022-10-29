@@ -7,7 +7,7 @@ set -o pipefail
 set -o noclobber
 
 usage_and_exit(){
-   echo 'rake -P |' ${0##*/} '| dot -Tpdf > workflow.pdf'
+   echo 'rake -P |' "${0##*/}" '| dot -Tpdf > workflow.pdf'
    exit 1
 }
 
@@ -23,22 +23,22 @@ decorate(){
    local node="$1"
    case "${node}" in
       *bin/*)
-	 echo "$(quote ${node}) [fillcolor=pink]"
+	 echo "$(quote "${node}") [fillcolor=pink]"
 	 ;;
       *data/*)
-	 echo "$(quote ${node}) [fillcolor=orange]"
+	 echo "$(quote "${node}") [fillcolor=orange]"
 	 ;;
       *template/*)
-	 echo "$(quote ${node}) [fillcolor=orange]"
+	 echo "$(quote "${node}") [fillcolor=orange]"
 	 ;;
       *work/*)
-	 echo "$(quote ${node}) [fillcolor=yellow]"
+	 echo "$(quote "${node}") [fillcolor=yellow]"
 	 ;;
       *report/*)
-	 echo "$(quote ${node}) [fillcolor=\"#aaffaa\"]"
+	 echo "$(quote "${node}") [fillcolor=\"#aaffaa\"]"
 	 ;;
       *doc/*)
-	 echo "$(quote ${node}) [fillcolor=\"#aaffaa\"]"
+	 echo "$(quote "${node}") [fillcolor=\"#aaffaa\"]"
 	 ;;
       *)
 	 quote "${node}"
@@ -57,10 +57,10 @@ while read line
 do
    if [[ "${line}" =~ ^rake\  ]]; then
       current_node="${line:5}"
-      echo "   $(decorate ${current_node})"
+      echo "   $(decorate "${current_node}")"
    else
-      echo "   $(decorate ${line})"
-      echo "   $(quote ${current_node}) -> $(quote ${line})"
+      echo "   $(decorate "${line}")"
+      echo "   $(quote "${current_node}") -> $(quote "${line}")"
    fi
 done
 

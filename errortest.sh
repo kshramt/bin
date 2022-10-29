@@ -4,12 +4,12 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-if [ ! -x "${1}" ]; then
+if [[ ! -x "${1}" ]]; then
     echo FILE_NOT_EXIST: "${1}" 1>&2
     exit 1
 fi
 
-if [[ "$@" ]]; then
+if [[ -n "$@" ]]; then
     echo FAIL: "${1}" 1>&2
     exit 1
 else

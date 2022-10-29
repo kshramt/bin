@@ -8,7 +8,7 @@ set -o noclobber
 
 usage_and_exit(){
    {
-      echo ${0##*/} FUNCTION
+      echo "${0##*/}" FUNCTION
    } > /dev/stderr
    exit 1
 }

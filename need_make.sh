@@ -21,11 +21,11 @@ usage_and_exit(){
 
 
 readonly target="$1"
-[[ -e "$target" ]] || exit 0
+[[ -e "${target}" ]] || exit 0
 shift
 while [[ $# -gt 0 ]]
 do
-   [[ "$1" -nt "$target" ]] && exit 0
+   [[ "$1" -nt "${target}" ]] && exit 0
    shift
 done
 exit 1
