@@ -13,4 +13,10 @@ jobs:
         set -o noclobber
         sudo apt update
         sudo apt install shellcheck git
-        shellcheck -o all $(git ls-files | grep -v Makefile | grep -v README.md)
+    - run: |
+        set -xv
+        set -o nounset
+        set -o errexit
+        set -o pipefail
+        set -o noclobber
+        shellcheck -o all $(git grep -l '#!/bin/.*sh' | grep -v .github/)
