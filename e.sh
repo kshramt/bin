@@ -21,7 +21,7 @@ fi
 
 os="$(uname -s)"
 readonly os
-if [[ "$os" == Darwin ]]; then
+if [[ "${os}" == Darwin ]]; then
    exec open -a Emacs.app "$@"
 fi
 
@@ -38,10 +38,12 @@ case "${MODE}" in
     gui)
         is_gui_running(){
             local emacsclient_="${1}"
-            [[ "$(${emacsclient_} -e '(window-system)')" = "x" ]] ||
-               [[ "$(${emacsclient_} -e '(window-system)')" = "ns" ]]
+            local window_system
+            window_system="$(${emacsclient_} -e '(window-system)')"
+            readonly window_system
+            [[ "${window_system}" = "x" ]] ||
+               [[ "${window_system}" = "ns" ]]
         }
-
         if is_gui_running "${EMACSCLIENT_}"; then
             "${EMACSCLIENT_}" -n -- "$@"
         else
@@ -55,7 +57,7 @@ case "${MODE}" in
             fi
         fi
         "${EMACSCLIENT_}" -e '(raise-frame)' > /dev/null
-        if which wmctrl 2>&1 /dev/null; then
+        if command -v wmctrl 2>&1 /dev/null; then
            wmctrl -a :ACTIVE:
         fi
         ;;
