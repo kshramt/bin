@@ -19,6 +19,12 @@ else
    usage_and_exit 1
 fi
 
+os="$(uname -s)"
+readonly os
+if [[ "$os" == Darwin ]]; then
+   exec open -a Emacs.app "$@"
+fi
+
 readonly EMACS_=${MY_EMACS:-emacs}
 readonly EMACSCLIENT_=${MY_EMACSCLIENT:-emacsclient}
 
