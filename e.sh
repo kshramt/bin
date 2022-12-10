@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# set -xv
 set -o nounset
 set -o errexit
 
@@ -17,6 +18,20 @@ if [[ "$1" = gui ]] || [[ "$1" = cui ]]; then
    shift
 else
    usage_and_exit 1
+fi
+
+uname_o="$(uname -o)"
+readonly uname_o
+if [[ "$uname_o" = "Darwin" ]]; then
+   for f in "$@"
+   do
+      if [[ ! -e "$f" ]]; then
+         mkdir -p "$(dirname "$f")"
+         touch "$f"
+      fi
+      open -a Emacs.app "$f"
+   done
+   exit
 fi
 
 readonly EMACS_=${MY_EMACS:-emacs}
