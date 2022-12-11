@@ -32,12 +32,12 @@ else
 fi
 
 if [[ -z "${decl}" ]]; then
-   while read l
+   while read -r l
    do
       echo "${l}"'"'
    done
 else
-   while read l
+   while read -r l
    do
       echo "${decl}" "${l}"'"'
    done

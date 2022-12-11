@@ -53,7 +53,7 @@ digraph G {
    edge [color=gray]
 EOF
 
-while read line
+while read -r line
 do
    if [[ "${line}" =~ ^rake\  ]]; then
       current_node="${line:5}"

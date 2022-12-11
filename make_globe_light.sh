@@ -25,13 +25,13 @@ fi
 readonly dir="${0%/*}"
 readonly scale="$1"
 
-while read line
+while read -r line
 do
    if [[ "${line}" =~ [A-Za-z] ]]; then
       echo "${line}"
    else
       if [[ "${line}" =~ / ]]; then
-         echo "${line}" | while read a1 rgb1 a2 rgb2 # a: altitude
+         echo "${line}" | while read -r a1 rgb1 a2 rgb2 # a: altitude
                         do
                            r1="$(echo "${rgb1}" | cut -f1 -d/)"
                            g1="$(echo "${rgb1}" | cut -f2 -d/)"

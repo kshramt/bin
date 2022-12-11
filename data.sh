@@ -77,7 +77,7 @@ _add(){
    uri="$1"
    file="$2"
    [[ ! -r "${file}" ]] && raise "${file}" unreadable
-   read hash _ < <(${hash_command} "${file}")
+   read -r hash _ < <(${hash_command} "${file}")
 
    d="${hash_dir}"/"${hash}"
    mkdir -p "${d}"
@@ -111,7 +111,7 @@ _fetch(){
    cd "${tmp_dir}"
    uri="$1"
    wget "${uri}"
-   while read file
+   while read -r file
    do
       _add "${uri}" "${file}"
    done < <(find . -maxdepth 1 -type f)

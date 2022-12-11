@@ -11,7 +11,7 @@ set -o noclobber
 readonly dir="$(pwd)"
 curl -s http://www.data.jma.go.jp/svd/eqev/data/bulletin/hypo.html |
 ${MY_RUBY:-ruby} -e 'puts STDIN.read.scan(/a href="?([^"]+?\.zip)/)' |
-while read uri
+while read -r uri
 do
    wget -q --timestamping http://www.data.jma.go.jp/svd/eqev/data/bulletin/"${uri}"
    echo "${dir}"/"$(basename "${uri}")"

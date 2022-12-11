@@ -44,7 +44,7 @@ END{
    print max
 }
 ' | (
-      read a
+      read -r a
       "${dir}"/dawk.sh -v a="${a}" '
 {
    print $1, $2/a

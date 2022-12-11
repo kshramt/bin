@@ -18,12 +18,12 @@ do
    curl --silent http://gji.oxfordjournals.org/content/by/year/"${year}" |
       grep page-range |
       ruby -e 'puts $stdin.read.scan(/href="([^"]*)"/)' |
-      while read toc
+      while read -r toc
       do
          curl --silent --location http://gji.oxfordjournals.org"${toc}" |
             grep 'Full Text (HTML)' |
             ruby -e 'puts $stdin.read.scan(/href="([^"]*)"/)' |
-            while read cont
+            while read -r cont
             do
                f="${dir}/${cont}"
                if [[ ! -s "${f}" ]]; then

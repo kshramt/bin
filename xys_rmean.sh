@@ -26,7 +26,7 @@ if [[ $# -eq 3 ]]; then
       gawk '{print $2}' |
       "${dir}"/mean.sh |
       (
-         read offset
+         read -r offset
          "${dir}"/dawk.sh -v offset="${offset}" '
 {
    print $1, $2 - offset
