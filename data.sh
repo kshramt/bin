@@ -36,7 +36,6 @@ EOF
    exit "${1}"
 }
 
-readonly dir="${0%/*}"
 readonly awk="${MY_AWK:-awk}"
 
 
@@ -63,7 +62,8 @@ metas(){
 
 prepare_tmp_dir(){
    if [[ -z "${tmp_dir:-}" ]]; then
-      readonly tmp_dir="$(mktemp -d)"
+      tmp_dir="$(mktemp -d)"
+      readonly tmp_dir
       finalize_tmp_dir(){
          rm -fr "${tmp_dir}"
       }

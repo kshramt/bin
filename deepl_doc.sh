@@ -43,8 +43,10 @@ curl https://"${deepl_domain}/v2/document" \
      -F "target_lang=${TARGET_LANG:-JA}" \
      > "${tmp_dir}/job.json"
 
-readonly document_id="$(jq --raw-output .document_id "${tmp_dir}/job.json")"
-readonly document_key="$(jq --raw-output .document_key "${tmp_dir}/job.json")"
+document_id="$(jq --raw-output .document_id "${tmp_dir}/job.json")"
+readonly document_id
+document_key="$(jq --raw-output .document_key "${tmp_dir}/job.json")"
+readonly document_key
 
 while true
 do

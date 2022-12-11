@@ -22,14 +22,14 @@ fi
 
 uname_o="$(uname -o)"
 readonly uname_o
-if [[ "$uname_o" = "Darwin" ]]; then
+if [[ "${uname_o}" = "Darwin" ]]; then
    for f in "$@"
    do
-      if [[ ! -e "$f" ]]; then
-         mkdir -p "$(dirname "$f")"
-         touch "$f"
+      if [[ ! -e "${f}" ]]; then
+         mkdir -p "$(dirname "${f}")"
+         touch "${f}"
       fi
-      open -a Emacs.app "$f"
+      open -a Emacs.app "${f}"
    done
    exit
 fi
