@@ -11,12 +11,14 @@ readonly my_trash_dir="${MY_TRASH_DIR:-"${HOME}"/d/trash}"
 readonly base_dir="${my_trash_dir}"/"$(date +'%y%m%d%H%M%S%N')"
 
 mkdir -p -- "${base_dir}"
+i__=0
 for f in "$@"
 do
    tmp__="${base_dir}/$(basename -- "${f}")"
-   while [[ -e "${tmp__}" ]]
+   ((++i__))
+   while [[ -e "${tmp__}.${i__}" ]]
    do
-      tmp__="${tmp__}"_
+      ((++i__))
    done
-   mv -- "${f}" "${tmp__}" || :
+   mv -- "${f}" "${tmp__}.${i__}" || :
 done
